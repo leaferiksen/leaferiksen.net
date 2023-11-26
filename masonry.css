@@ -1,0 +1,42 @@
+.masonry {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  grid-template-rows: masonry;
+  grid-gap: 1rem;
+}
+
+/*
+
+
+
+Presentational styles
+*/
+
+body {
+  padding: 2rem 0;
+}
+
+.masonry {
+  padding: 0;
+}
+
+.masonry li {
+  margin: 0;
+}
+
+img {
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+  max-width: 100%;
+}
+
+.wrapper {
+  width: 90vw;
+  width: clamp(16rem, 90vw, 80rem);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ul {
+  list-style-type: none
+}
