@@ -1,6 +1,6 @@
 .masonry {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
   grid-template-rows: masonry;
   grid-gap: 1rem;
 }
@@ -11,6 +11,10 @@
 
 Presentational styles
 */
+
+* {
+  font-family: monospace;
+}
 
 body {
   padding: 2rem 0;
@@ -40,3 +44,4 @@ img {
 ul {
   list-style-type: none
 }
+
