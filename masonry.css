@@ -12,14 +12,8 @@
 Presentational styles
 */
 
-@font-face {
-  font-family: 'Monaspace Radon';
-  src: url('MonaspaceRadon-Regular.woff') format('woff');
-}
-
 body {
   padding: 2rem 0;
-  font-family: Monaspace Radon;
 }
 
 .masonry {
