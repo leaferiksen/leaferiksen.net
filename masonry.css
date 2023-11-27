@@ -1,6 +1,6 @@
 .masonry {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
   grid-template-rows: masonry;
   grid-gap: 1rem;
 }
@@ -12,12 +12,14 @@
 Presentational styles
 */
 
-* {
-  font-family: monospace;
+@font-face {
+  font-family: 'Monaspace Radon';
+  src: url('MonaspaceRadon-Regular.woff') format('woff');
 }
 
 body {
   padding: 2rem 0;
+  font-family: Monaspace Radon;
 }
 
 .masonry {
@@ -26,6 +28,7 @@ body {
 
 .masonry li {
   margin: 0;
+  list-style-type: none
 }
 
 img {
@@ -39,9 +42,5 @@ img {
   width: clamp(16rem, 90vw, 80rem);
   margin-left: auto;
   margin-right: auto;
-}
-
-ul {
-  list-style-type: none
 }
 
