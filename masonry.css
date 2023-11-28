@@ -1,8 +1,8 @@
 .masonry {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%/3, max(14rem, 100%/6)), 1fr));
   grid-template-rows: masonry;
-  grid-gap: 1rem;
+  grid-gap: 2rem;
 }
 
 /*
@@ -37,4 +37,5 @@ img {
   margin-left: auto;
   margin-right: auto;
 }
+
 
