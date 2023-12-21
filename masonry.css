@@ -5,12 +5,7 @@
   grid-gap: 2rem;
 }
 
-/*
-
-
-
-Presentational styles
-*/
+/* Presentational styles */
 
 body {
   padding: 2rem 0;
@@ -18,11 +13,6 @@ body {
 
 .masonry {
   padding: 0;
-}
-
-.masonry li {
-  margin: 0;
-  list-style-type: none
 }
 
 img {
