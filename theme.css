@@ -1,11 +1,13 @@
 body {
-  background-color: White;
+  font-size: 14px;
+  font-family: sans-serif;
+  background-color: WhiteSmoke;
   color: Black;
 }
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: DarkSlateGray;
-    color: White;
+    background-color: Black;
+    color: Gainsboro;
   }  
   img {
     opacity: .75;
