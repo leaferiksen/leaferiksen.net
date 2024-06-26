@@ -1,14 +1,30 @@
 body {
-  font-size: 14px;
-  font-family: sans-serif;
-  background-color: WhiteSmoke;
-  color: Black;
+  font-size: 18px;
+  background-color: #fafafa;
+  color: #555;
 }
+	/* link */
+	a {
+		color: #222;
+	}
+	/* mouse over link */
+	a:hover {
+		color: #000;
+	}
+
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: Black;
-    color: Gainsboro;
-  }  
+    background-color: #212529;
+    color: #6c757d;
+  }
+	/* link */
+	a {
+		color: #dee2e6;
+	}
+	/* mouse over link */
+	a:hover {
+		color: #fff;
+	}
   img {
     opacity: .75;
     transition: opacity .5s ease-in-out;
