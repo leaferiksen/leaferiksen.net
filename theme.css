@@ -4,13 +4,13 @@ body {
   color: #555;
 }
 	/* link */
-	a {
-		color: #222;
-	}
-	/* mouse over link */
-	a:hover {
-		color: #000;
-	}
+a {
+	color: #222;
+}
+/* mouse over link */
+a:hover {
+	color: #000;
+}
 
 @media (prefers-color-scheme: dark) {
   body {
