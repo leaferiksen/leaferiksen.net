@@ -1,10 +1,17 @@
 body {
-  background-color: black;
-  color: white;
+  background-color: White;
+  color: Black;
 }
-@media screen and (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   body {
-    background-color: white;
-    color: black;
+    background-color: DarkSlateGray;
+    color: White;
+  }  
+  img {
+    opacity: .75;
+    transition: opacity .5s ease-in-out;
+  }
+  img:hover {
+    opacity: 1;
   }
 }
