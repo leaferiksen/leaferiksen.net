@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @theme {
     --default-font-family: "Atkinson Hyperlegible", var(--font-family-sans);
-    --shadow-nice: 0 0 2rem;
+    --shadow-round: 0 0 2rem #00000080;
+    --shadow-boxxy: -1rem 1rem 0 #00000080;
 }
