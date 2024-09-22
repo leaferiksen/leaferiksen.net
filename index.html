@@ -14,12 +14,11 @@
         rel="stylesheet" />
 </head>
 
-
 <body class="text-xl text-teal-800 bg-teal-100 dark:text-teal-200 dark:bg-teal-800 lg:bg-teal-300 lg:dark:bg-teal-950">
     <!-- centers child on desktop -->
     <div class="h-dvh grid items-center justify-items-center">
         <!-- card padding, max width, desktop bg color (synced with parent change), desktop box shadow -->
-        <div class="p-6 max-w-3xl lg:bg-teal-100 lg:dark:bg-teal-800 
+        <div class="p-6 max-w-2xl lg:bg-teal-100 lg:dark:bg-teal-800 
                     shadow-square shadow-transparent lg:shadow-teal-500 lg:dark:shadow-teal-900">
             <!--  title and pfp side by side -->
             <div class="grid justify-items-center sm:flex sm:items-center">
@@ -31,8 +30,6 @@
                         <p>(he/him)</p>
                         <!-- link list -->
                         <p>
-                            <a class="underline text-teal-700 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
-                            target="_self" href="design.html">design</a> &nbsp;
                             <a class="underline text-teal-700 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
                                 rel="me" href="https://mastodon.social/@leaferiksen">social</a> &nbsp;
                             <a class="underline text-teal-700 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
@@ -47,15 +44,38 @@
                 <img class="[width:_160px] rounded-full mx-auto shadow-round shadow-teal-500 dark:shadow-teal-950"
                     src="assets/Leaf.jpg" alt="a young man with long hair and glasses" />
             </div>
-            <p class="mt-6 text-justify">
+            <input class="mt-6 md:mt-0" type="checkbox" id="toggle-media" />
+            <label for="toggle-media">Show my work</label>
+            <p id="body" class="text-justify">
                 Hello, netizen! I'm an 18 year old Graphic Designer studying at the University of San Francisco. I am
-                passionate about
-                writing pleasant, accessible web experiences in html and tailwindcss, and making vector and raster art
-                in
-                Adobe Illustrator and Procreate, respectively.<br />
+                passionate about writing pleasant, accessible web experiences in html and tailwindcss, and making vector
+                and raster art in Adobe Illustrator and Procreate, respectively.<br />
                 In my free time I enjoy playing Osu! and Cyberpunk 2077, reading visual novels and manga, and watching
                 Gundam. If you are in SF and think we might be friends, let's meet up for coffee or tea sometime!
             </p>
+            <!-- style the media to be hidden by default, show only when the checkbox is checked -->
+            <style>
+                #media {
+                    display: none;
+                }
+
+                #toggle-media:checked~#media {
+                    display: grid;
+                }
+
+                #toggle-media:checked~#body {
+                    display: none;
+                }
+            </style>
+            <div id="media" class="grid grid-cols-2 max-w-md sm:grid-cols-3 sm:max-w-2xl gap-4">
+                <img src="assets/Crow.jpg" alt="drawing of a crow" />
+                <img src="assets/Minerva.jpg" alt="cat in a shoebox" />
+                <img src="assets/Cherry Blossoms.jpg" alt="cherry blossoms growing from a knot in a tree" />
+                <img src="assets/Winter Scene.jpg" alt="drawing of a path leading into a snowy forest" />
+                <img src="assets/Snowy Path.jpg"
+                    alt="drawing of a horse-drawn carraige going through a snow filled town" />
+                <img src="assets/Sea Shell.jpeg" alt="drawing of a shell" />
+            </div>
             <p class="text-base text-right">
                 <a class="underline text-teal-700 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
                     href="https://koilwood.neocities.org/">inspiration</a>
