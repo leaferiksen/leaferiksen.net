@@ -22,12 +22,12 @@
         <div class="h-dvh grid items-center justify-items-center">
             <!-- card padding, max width, desktop bg color (synced with parent change), desktop box shadow -->
             <div
-                class="p-8 max-w-2xl lg:bg-teal-100 lg:dark:bg-teal-800 shadow-square shadow-transparent lg:shadow-teal-500 lg:dark:shadow-teal-900"
+                class="p-6 max-w-2xl lg:bg-teal-100 lg:dark:bg-teal-800 shadow-square shadow-transparent lg:shadow-teal-500 lg:dark:shadow-teal-900"
             >
                 <!--  title and pfp side by side -->
                 <div class="grid justify-items-center sm:flex sm:items-center">
-                    <!-- title card edge offset, mobile pfp top margin -->
-                    <div class="mb-6 md:mb-0 flex flex-col mx-auto">
+                    <!-- title card edge offset -->
+                    <div class="flex flex-col mx-auto">
                         <!-- Vertical title stack -->
                         <div class="flex flex-col items-center">
                             <p class="text-2xl">Leaf Eriksen</p>
@@ -55,15 +55,15 @@
                             </p>
                         </div>
                     </div>
-                    <!-- pfp -->
+                    <!-- pfp image, shadow, mobile y margin -->
                     <img
-                        class="[width:_160px] rounded-full mx-auto shadow-round shadow-teal-500 dark:shadow-teal-950"
+                        class="w-[160px] my-6 md:my-0 rounded-full mx-auto shadow-round shadow-teal-500 dark:shadow-teal-950"
                         src="assets/Leaf.jpg"
                         alt="a young man with long hair and glasses"
                     />
                 </div>
-                <!-- toggle, moblie pfp bottom margin -->
-                <input id="toggle" class="peer/toggle mt-6 md:mt-0" type="checkbox" />
+                <!-- toggle -->
+                <input id="toggle" class="peer/toggle" type="checkbox" />
                 <label id="toggle-label" for="toggle">Show my work</label>
                 <div class="peer-checked/toggle:hidden">
                     <p id="body" class="text-justify mt-4">
