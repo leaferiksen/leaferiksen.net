@@ -11,7 +11,7 @@
 }
 
 .glow {
-    animation: glow .5s infinite alternate;
+    animation: glow 0.5s infinite alternate;
 }
 
 @keyframes glow {
@@ -24,10 +24,10 @@
     display: none;
 }
 
-#toggle-media:checked~#media {
+#toggle:checked ~ #media {
     display: grid;
 }
 
-#toggle-media:checked~#body {
+#toggle:checked ~ #body {
     display: none;
 }
