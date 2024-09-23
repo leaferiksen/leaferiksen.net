@@ -63,9 +63,9 @@
                     />
                 </div>
                 <div class="lg:mx-8">
-                    <input id="toggle" class="mt-6 md:mt-0" type="checkbox" />
+                    <input id="toggle" class="peer/toggle mt-6 md:mt-0" type="checkbox" />
                     <label id="toggle-label" for="toggle">Show my work</label>
-                    <p id="body" class="text-justify mt-6">
+                    <p id="body" class="text-justify mt-6 peer-checked/toggle:hidden">
                         Hello, netizen! I'm an 18 year old Web and Graphics Designer studying at the University of San
                         Francisco. I am passionate about writing pleasant, accessible web experiences in html and
                         tailwindcss, and making vector and raster art in Adobe Illustrator and Procreate,
@@ -74,7 +74,7 @@
                         watching Gundam. If you are in SF and think we might be friends, let's meet up for coffee or tea
                         sometime!
                     </p>
-                    <div id="media" class="grid grid-cols-2 max-w-md sm:grid-cols-3 sm:max-w-2xl gap-4">
+                    <div id="media" class="hidden peer-checked/toggle:grid grid-cols-2 max-w-md sm:grid-cols-3 sm:max-w-2xl gap-4">
                         <img src="assets/Crow.jpg" alt="drawing of a crow" />
                         <img src="assets/Minerva.jpg" alt="cat in a shoebox" />
                         <img src="assets/Cherry Blossoms.jpg" alt="cherry blossoms growing from a knot in a tree" />

@@ -19,15 +19,3 @@
         text-shadow: 0 0 10px light-dark(#065f46, #f0fdfa);
     }
 }
-
-#media {
-    display: none;
-}
-
-#toggle:checked ~ #media {
-    display: grid;
-}
-
-#toggle:checked ~ #body {
-    display: none;
-}
