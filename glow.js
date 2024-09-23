@@ -4,7 +4,7 @@ window.onload = function () {
 function glowStart() {
   var toggleLabel = document.getElementById("toggle-label");
   toggleLabel.classList += "glow";
-  setTimeout(glowEnd, 2000);
+  setTimeout(glowEnd, 3000);
 }
 function glowEnd() {
   var toggleLabel = document.getElementById("toggle-label");
