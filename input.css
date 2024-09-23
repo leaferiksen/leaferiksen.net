@@ -1,6 +1,33 @@
 @import "tailwindcss";
+
 @theme {
     --default-font-family: "Atkinson Hyperlegible", var(--font-family-sans);
     --shadow-round: 0 0 2rem;
     --shadow-square: -1rem 1rem;
+}
+
+:root {
+    color-scheme: light dark;
+}
+
+.glow {
+    animation: glow .5s infinite alternate;
+}
+
+@keyframes glow {
+    to {
+        text-shadow: 0 0 10px light-dark(#065f46, #f0fdfa);
+    }
+}
+
+#media {
+    display: none;
+}
+
+#toggle-media:checked~#media {
+    display: grid;
+}
+
+#toggle-media:checked~#body {
+    display: none;
 }
