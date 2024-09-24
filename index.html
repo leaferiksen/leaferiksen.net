@@ -4,8 +4,7 @@
         <title>About Leaf</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link href="./output.css" rel="stylesheet" />
-        <base target="_blank" />
+        <link href="assets/output.css" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -17,7 +16,7 @@
     <body
         class="text-lg text-teal-800 bg-teal-100 dark:text-teal-200 dark:bg-teal-800 lg:bg-teal-300 lg:dark:bg-teal-950"
     >
-        <script src="glow.js"></script>
+        <script src="assets/glow.js"></script>
         <!-- centers child on desktop -->
         <div class="h-dvh grid items-center justify-items-center">
             <!-- card padding, max width, desktop bg color (synced with parent change), desktop box shadow -->
@@ -34,12 +33,13 @@
                         <p>
                             <a
                                 class="underline text-teal-700 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
-                                href="blog.html"
+                                href="blog/blog.html"
                                 >blog</a
                             >
                             &nbsp;
                             <a
                                 class="underline text-teal-700 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
+                                target="_blank"
                                 rel="me"
                                 href="https://mastodon.social/@leaferiksen"
                                 >social</a
@@ -47,12 +47,14 @@
                             &nbsp;
                             <a
                                 class="underline text-teal-700 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
-                                href="Leaf Eriksen - Resume.pdf"
+                                target="_blank"
+                                href="assets/Leaf Eriksen - Resume.pdf"
                                 >resume</a
                             >
                             &nbsp;
                             <a
                                 class="underline text-teal-700 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
+                                target="_blank"
                                 href="mailto:lweriksen@dons.usfca.edu"
                                 >email</a
                             >
@@ -92,11 +94,12 @@
                         >
                     </p>
                 </div>
+                <p class="hidden peer-checked/toggle:grid">recent portfolio entries are clickable for more info!</p>
                 <div
                     id="media"
                     class="hidden peer-checked/toggle:grid md:h-[24rem] overflow-auto gap-4 grid-cols-2 sm:grid-cols-3 sm:max-w-2xl"
                 >
-                    <a class="h-full py-6 bg-teal-800 dark:bg-teal-100" target="_self" href="i voted.html">
+                    <a class="h-full py-6 bg-teal-800 dark:bg-teal-100" href="portfolio/i voted.html">
                         <img src="assets/Light Rail.png" alt="a train bursting out of the fog" />
                     </a>
                     <img src="assets/Crow.jpg" alt="drawing of a crow" />
