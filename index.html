@@ -15,45 +15,42 @@
     </head>
 
     <body
-        class="text-xl text-teal-800 bg-teal-100 dark:text-teal-200 dark:bg-teal-800 lg:bg-teal-300 lg:dark:bg-teal-950"
+        class="text-lg text-teal-800 bg-teal-100 dark:text-teal-200 dark:bg-teal-800 lg:bg-teal-300 lg:dark:bg-teal-950"
     >
         <script src="glow.js"></script>
         <!-- centers child on desktop -->
         <div class="h-dvh grid items-center justify-items-center">
             <!-- card padding, max width, desktop bg color (synced with parent change), desktop box shadow -->
             <div
-                class="p-6 max-w-2xl lg:bg-teal-100 lg:dark:bg-teal-800 shadow-square shadow-transparent lg:shadow-teal-500 lg:dark:shadow-teal-900"
+                class="p-6 max-w-3xl lg:bg-teal-100 lg:dark:bg-teal-800 shadow-square shadow-transparent lg:shadow-teal-500 lg:dark:shadow-teal-900"
             >
                 <!--  title and pfp side by side -->
-                <div class="grid justify-items-center sm:flex sm:items-center">
-                    <!-- title card edge offset -->
-                    <div class="flex flex-col mx-auto">
-                        <!-- Vertical title stack -->
-                        <div class="flex flex-col items-center">
-                            <p class="text-2xl">Leaf Eriksen</p>
-                            <p>(he/him)</p>
-                            <!-- link list -->
-                            <p>
-                                <a
-                                    class="underline text-teal-700 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
-                                    rel="me"
-                                    href="https://mastodon.social/@leaferiksen"
-                                    >social</a
-                                >
-                                &nbsp;
-                                <a
-                                    class="underline text-teal-700 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
-                                    href="Leaf Eriksen - Resume.pdf"
-                                    >resume</a
-                                >
-                                &nbsp;
-                                <a
-                                    class="underline text-teal-700 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
-                                    href="mailto:lweriksen@dons.usfca.edu"
-                                    >email</a
-                                >
-                            </p>
-                        </div>
+                <div class="h-full grid sm:grid-cols-2">
+                    <!-- Vertical title stack -->
+                    <div class="m-auto flex flex-col items-center">
+                        <p class="text-2xl">Leaf Eriksen</p>
+                        <p class="text-xl">(he/him)</p>
+                        <!-- link list -->
+                        <p>
+                            <a
+                                class="underline text-teal-700 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
+                                rel="me"
+                                href="https://mastodon.social/@leaferiksen"
+                                >social</a
+                            >
+                            &nbsp;
+                            <a
+                                class="underline text-teal-700 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
+                                href="Leaf Eriksen - Resume.pdf"
+                                >resume</a
+                            >
+                            &nbsp;
+                            <a
+                                class="underline text-teal-700 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
+                                href="mailto:lweriksen@dons.usfca.edu"
+                                >email</a
+                            >
+                        </p>
                     </div>
                     <!-- pfp image, shadow, mobile y margin -->
                     <img
@@ -89,7 +86,13 @@
                         >
                     </p>
                 </div>
-                <div id="media" class="hidden peer-checked/toggle:grid gap-4 grid-cols-2 sm:grid-cols-3 sm:max-w-2xl">
+                <div
+                    id="media"
+                    class="hidden peer-checked/toggle:grid gap-4 grid-cols-2 sm:grid-cols-3 sm:max-w-2xl md:grid-cols-4 md:max-w-4xl"
+                >
+                    <a class="h-full py-6 bg-teal-800 dark:bg-teal-100" target="_self" href="iVoted.html">
+                        <img src="assets/Light Rail.png" alt="a train bursting out of the fog" />
+                    </a>
                     <img src="assets/Crow.jpg" alt="drawing of a crow" />
                     <img src="assets/Minerva.jpg" alt="cat in a shoebox" />
                     <img src="assets/Cherry Blossoms.jpg" alt="cherry blossoms growing from a knot in a tree" />
