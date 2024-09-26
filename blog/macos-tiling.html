@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>About Leaf</title>
+        <title>Fixing macOS Window Tiling Keyboard Shortcuts</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="../assets/output.css" rel="stylesheet" />
@@ -20,7 +20,7 @@
         <div class="h-dvh grid items-center justify-items-center">
             <!-- card padding, max width, desktop bg color (synced with parent change), desktop box shadow -->
             <div
-                class="p-6 max-w-2xl lg:bg-teal-100 lg:dark:bg-teal-800 shadow-square shadow-transparent lg:shadow-teal-500 lg:dark:shadow-teal-900 lg:h-4/5 lg:overflow-auto"
+                class="p-6 max-w-2xl lg:bg-teal-100 lg:dark:bg-teal-800 shadow-square shadow-transparent lg:shadow-teal-500 lg:dark:shadow-teal-900 lg:h-5/6 lg:overflow-auto"
             >
                 <!-- link list -->
                 <p>
@@ -36,18 +36,17 @@
                         >other&nbsp;blog&nbsp;posts</a
                     >
                 </p>
-                <p class="text-2xl">Fixing the Keyboard Shortcuts macOS Window Tiling</p>
+                <p class="text-2xl">Fixing macOS Window Tiling Keyboard Shortcuts</p>
                 <p class="pb-4 mb-4 border-b-2">By Leaf Eriksen - September 25th, 2024</p>
                 <p class="text-justify">
-                    The shortcuts for the native window tiling in macOS use the globe key, so they don't
-                    work with third party keyboards.<br />
-                    The fix can be found in System Settings -> Keyboard -> Keyboard Shortcuts -> App Shortcuts -> +, where you can enter the names of each tiling function (which can be found in the "Window" section of the menu bar). <br />
-                    That's all a big pain the ass, so I spent over an hour figuring out a script to set this up from the terminal. This uses the key keycodes cmd(@) + opt(~) + ctrl(^) + arrows(obscure unicode). I map the caps lock all three modifiers using
+                    The keyboard shortcuts in macOS for window tiling use the globe key, so they don't
+                    work with third party keyboards. The fix can be found in System Settings -> Keyboard -> Keyboard Shortcuts -> App Shortcuts. You can enter the names of each tiling function (which can be found in the "Window" section of the menu bar) and map them to you own shortcuts.<br />
+                    That's pretty complicated, so I figured out how to automate this from the terminal. The command below maps the keycodes cmd(@) + opt(~) + ctrl(^) + arrows(obscure unicode) for tiling to halves, adding shift($) for quarter tiling. I map caps lock key to all three modifiers using
                     <a
                         class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
                         href="https://hyperkey.app/"
                         >Hyperkey</a
-                    >.
+                    >. You could also just choose simpler shortcuts if you don't want that.
                     <pre class="whitespace-pre-wrap lg:whitespace-pre">
                         <code>
 defaults write -g "NSUserKeyEquivalents" '{
