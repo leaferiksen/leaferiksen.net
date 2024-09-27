@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Leaf Eriksen's Blog</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="assets/output.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body
+        class="text-lg text-teal-900 bg-teal-100 dark:text-teal-100 dark:bg-teal-800 lg:bg-teal-300 lg:dark:bg-teal-950"
+    >
+        <script src="assets/blog.js"></script>
+        <!-- centers child on desktop -->
+        <div class="h-dvh grid items-center justify-items-center">
+            <!-- card padding, max width, desktop bg color (synced with parent change), desktop box shadow -->
+            <div
+                class="p-6 lg:w-3xl lg:bg-teal-100 lg:dark:bg-teal-800 shadow-square shadow-transparent lg:shadow-teal-500 lg:dark:shadow-teal-900 lg:h-5/6 lg:overflow-auto"
+            >
+                <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="index.html"
+                    >about me</a
+                >
+                <p class="text-2xl py-4 mb-4 border-b-2">Leaf Eriksen's Blog</p>
+                <details id="macos-tiling" onclick="addurl('macos-tiling')" class="py-2">
+                    <summary
+                        class="cursor-pointer text-xl text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
+                    >
+                        (2024-09-26) — Fixing macOS Window Tiling Keyboard Shortcuts
+                    </summary>
+                    <p class="text-justify">
+                        The keyboard shortcuts in macOS for window tiling use the globe key, so they don't work with
+                        third party keyboards. The fix can be found in System Settings -> Keyboard -> Keyboard Shortcuts
+                        -> App Shortcuts. You can enter the names of each tiling function (which can be found in the
+                        "Window" section of the menu bar) and map them to you own shortcuts.<br />
+                        That's pretty complicated, so I figured out how to automate this from the terminal. The command
+                        below maps the keycodes cmd(@) + opt(~) + ctrl(^) + arrows(obscure unicode) for tiling to
+                        halves, adding shift($) for quarter tiling. I map caps lock key to all three modifiers using
+                        <a
+                            class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
+                            href="https://hyperkey.app/"
+                            >Hyperkey</a
+                        >. You could also just choose simpler shortcuts if you don't want that.
+                    </p>
+                    <pre class="whitespace-pre-wrap lg:whitespace-pre">
+                        <code>
+defaults write -g "NSUserKeyEquivalents" '{
+    Fill = "@~^f";
+    Left = "@~^\U0090";
+    Right = "@~^\U0092";
+    Top = "@~^\U0091";
+    Bottom = "@~^\U0093";
+    "Bottom Left" = "@~^$\U2190";
+    "Top Left" = "@~^$\U2191";
+    "Top Right" = "@~^$\U2192";
+    "Bottom Right" = "@~^$\U2193";
+    "Return to Previous Size" = "@~^r";
+}'
+                        </code>
+                    </pre>
+                </details>
+                <details id="testing" onclick="addurl('testing')" class="py-2">
+                    <summary
+                        class="cursor-pointer text-xl text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
+                    >
+                        (2024-09-26) — Something
+                    </summary>
+                    <p>hello world</p>
+                </details>
+            </div>
+        </div>
+    </body>
+</html>
