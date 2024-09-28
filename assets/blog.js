@@ -20,5 +20,5 @@ function addurl(newhash) {
     }
   });
   // add the hash to the url
-  location.href = "blog.html#" + newhash;
+  location.href = "blog#" + newhash;
 }
