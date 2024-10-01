@@ -2,9 +2,9 @@
 window.onload = function openAccordion() {
   const hash = window.location.hash;
   if (hash) {
-    const accord = document.querySelector(`details${hash}`);
-    if (accord) {
-      accord.open = true;
+    const accordion = document.querySelector(`details${hash}`);
+    if (accordion) {
+      accordion.open = true;
     }
   } else {
     return; // Exit the function when there's an empty hash
@@ -12,13 +12,17 @@ window.onload = function openAccordion() {
 };
 
 function addurl(newhash) {
-  // Close all currently open <details> elements except the one we want to open.
-  const details = document.querySelectorAll("details");
-  details.forEach((detail) => {
-    if (detail.id !== newhash && detail.open === true) {
-      detail.open = false;
+  // When client opens an accordion close any other open accordions.
+  const allAccordions = document.querySelectorAll("details");
+  allAccordions.forEach((accordion) => {
+    if (accordion.id !== newhash && accordion.open === true) {
+      accordion.open = false;
     }
   });
-  // add the hash to the url
-  location.href = "blog#" + newhash;
+  // Is client local? If so, include html file extension when adding the hash to the url
+  if (window.location.protocol === "file:") {
+    location.href = "blog.html#" + newhash;
+  } else {
+    location.href = "blog#" + newhash;
+  }
 }
