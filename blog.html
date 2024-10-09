@@ -19,6 +19,28 @@
                 <!-- header links -->
                 <p class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"><a href="/">About Me</a>&nbsp; &nbsp; <a target="_blank" rel="me" href="https://mastodon.social/@leaferiksen">Mastodon</a>&nbsp; &nbsp;<a target="_blank" href="assets/Leaf Eriksen - Resume.pdf">Resume</a></p>
                 <p class="text-2xl py-4 border-b-2">Leaf's Blog</p>
+                <!-- articles -->
+                <details id="homebrew">
+                    <summary onclick="addurl('homebrew')" class="pt-4 cursor-pointer text-xl text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">(2024-10-07) Installing and updating homebrew packages without admin privileges</summary>
+                    <p class="text-justify">By default, homebrew doesn’t work when run as a normal, non-admin user. This is what I do to fix that. This guide assumes:</p>
+                    <ol class="list-decimal ml-8">
+                        <li><a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="https://brew.sh/">Homebrew is installed</a></li>
+                        <li>You have at least one admin and one normal user.</li>
+                        <li>You know the normal user's name. If you don't, run <code>whoami</code> in the terminal to check.</li>
+                    </ol>
+                    <br />
+                    <p>Run this as admin, but replace <code>leaf</code> with your normal user’s name.</p>
+                    <pre class="whitespace-pre-wrap"><code>
+sudo chown -R leaf /opt/homebrew/
+                    </code></pre>
+                    <p>Put this in your normal user's <code>~/.zshrc</code>, so that brew commands work. You can get to the file by typing <code>nano .zshrc</code> in the terminal.</p>
+                    <pre class="whitespace-pre-wrap"><code>
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+                    </code></pre>
+                    <p>Just the first two lines are is enough to install command-line tools (formulae). If you also want homebrew to handle graphical apps (casks), include the third line to tell homebrew to install to the normal user's Applications/ instead of the system-wide Applications/.</p>
+                </details>
                 <details id="macos-tiling">
                     <summary onclick="addurl('macos-tiling')" class="pt-4 cursor-pointer text-xl text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">(2024-09-27) Fixing macOS Window Tiling Keyboard Shortcuts</summary>
                     <p class="text-justify">
@@ -28,8 +50,7 @@
                         or
                         <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="https://karabiner-elements.pqrs.org/">Karabiner-Elements</a>.
                     </p>
-                    <pre class="whitespace-pre-wrap lg:whitespace-pre">
-                        <code>
+                    <pre class="whitespace-pre-wrap"><code>
 defaults write -g "NSUserKeyEquivalents" '{
     Fill = "@~^f";
     Left = "@~^\U0090";
@@ -42,12 +63,7 @@ defaults write -g "NSUserKeyEquivalents" '{
     "Bottom Right" = "@~^$\U2193";
     "Return to Previous Size" = "@~^r";
 }'
-                        </code>
-                    </pre>
-                </details>
-                <details id="testing">
-                    <summary onclick="addurl('testing')" class="pt-4 cursor-pointer text-xl text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">(2024-09-26) Who's that Pokémon?</summary>
-                    <p>It's a wild test entry!</p>
+                    </code></pre>
                 </details>
             </div>
         </div>
