@@ -15,7 +15,7 @@
         <!-- centers child on desktop -->
         <div class="h-dvh grid items-center justify-items-center">
             <!-- card padding, max width, desktop bg color (synced with parent change), desktop box shadow -->
-            <div class="p-8 max-w-2xl lg:h-5/6 lg:overflow-auto lg:bg-teal-100 lg:dark:bg-teal-800 shadow-square shadow-transparent lg:shadow-teal-500 lg:dark:shadow-teal-900">
+            <div class="p-8 max-w-2xl lg:h-5/6 lg:overflow-y-auto lg:bg-teal-100 lg:dark:bg-teal-800 shadow-square shadow-transparent lg:shadow-teal-500 lg:dark:shadow-teal-900">
                 <!--  title and pfp side by side -->
                 <div class="mb-4 gap-4 grid sm:gap-0 sm:justify-between sm:grid-flow-col">
                     <!-- header links -->
@@ -34,24 +34,26 @@
                 <div class="pt-4 gap-4 grid">
                     <details id="homebrew">
                         <summary onclick="addurl('homebrew')" class="cursor-pointer text-xl text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"><strong>(2024-10-07) Using Homebrew Without Admin Privileges</strong></summary>
-                        <p class="text-justify">By default, installing and updating Homebrew packages doesn’t work when run as a normal, non-admin user. This is what I do to fix that. This guide assumes:</p>
-                        <ol class="list-decimal ml-8">
-                            <li><a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="https://brew.sh/">Homebrew is installed</a></li>
-                            <li>You have at least one admin and one normal user.</li>
-                            <li>You know the normal user's name. If you don't, run <code>whoami</code> in the terminal to check.</li>
-                        </ol>
-                        <br />
-                        <p>Run this as admin, but replace <code>leaf</code> with your normal user’s name.</p>
-                        <pre class="whitespace-pre-wrap"><code>
+                        <p class="text-justify">
+                            By default, installing and updating Homebrew packages doesn’t work when run as a normal, non-admin user. This is what I do to fix that. This guide assumes:
+                            <ol class="list-decimal ml-8">
+                                <li><a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="https://brew.sh/">Homebrew is installed</a></li>
+                                <li>You have at least one admin and one normal user.</li>
+                                <li>You know the normal user's name. If you don't, run <code>whoami</code> in the terminal to check.</li>
+                            </ol>
+                            <br />
+                            Run this as admin, but replace <code>leaf</code> with your normal user’s name.
+                            <pre><code>
 sudo chown -R leaf /opt/homebrew/
-                    </code></pre>
-                        <p>Put the following in your normal user's <code>.zshrc</code> file. You can get to the file by typing <code>nano ~/.zshrc</code> in the terminal (while signed in as that user).</p>
-                        <pre class="whitespace-pre-wrap"><code>
+                            </code></pre>
+                            Put the following in your normal user's <code>.zshrc</code> file. You can get to the file by typing <code>nano ~/.zshrc</code> in the terminal (while signed in as that user).
+                            <pre><code>
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-                    </code></pre>
-                        <p>Just the first two lines are is enough to install command-line tools (formulae). If you want Homebrew to handle graphical apps (casks), include the third line to tell Homebrew to install to the normal user's Applications/ instead of the system-wide Applications/.</p>
+                            </code></pre>
+                            Just the first two lines are is enough to install command-line tools (formulae). If you want Homebrew to handle graphical apps (casks), include the third line to tell Homebrew to install to the normal user's Applications/ instead of the system-wide Applications/.
+                        </p>
                     </details>
                     <details id="macos-tiling">
                         <summary onclick="addurl('macos-tiling')" class="cursor-pointer text-xl text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"><strong>(2024-09-27) Fixing macOS Window Tiling Keyboard Shortcuts</strong></summary>
@@ -61,8 +63,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
                             <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="https://hyperkey.app/">Hyperkey</a>
                             or
                             <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="https://karabiner-elements.pqrs.org/">Karabiner-Elements</a>.
-                        </p>
-                        <pre class="whitespace-pre-wrap"><code>
+                            <pre><code>
 defaults write -g "NSUserKeyEquivalents" '{
     Fill = "@~^f";
     Left = "@~^\U0090";
@@ -75,7 +76,8 @@ defaults write -g "NSUserKeyEquivalents" '{
     "Bottom Right" = "@~^$\U2193";
     "Return to Previous Size" = "@~^r";
 }'
-                    </code></pre>
+                            </code></pre>
+                        </p>
                     </details>
                 </div>
             </div>
