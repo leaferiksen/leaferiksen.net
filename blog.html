@@ -15,7 +15,7 @@
         <!-- centers child on desktop -->
         <div class="h-dvh grid place-items-center">
             <!-- card padding, max width, desktop bg color (synced with parent change), desktop box shadow -->
-            <div class="grid gap-4 content-start p-8 w-full max-w-2xl md:h-5/6 md:overflow-y-scroll md:bg-teal-100 md:dark:bg-teal-800 shadow-square shadow-transparent md:shadow-teal-500 md:dark:shadow-teal-900">
+            <div class="grid gap-4 content-start p-8 max-w-2xl md:h-5/6 md:overflow-y-scroll md:bg-teal-100 md:dark:bg-teal-800 shadow-square shadow-transparent md:shadow-teal-500 md:dark:shadow-teal-900">
                 <!--  title and pfp side by side -->
                 <div class="grid gap-4 sm:gap-0 sm:justify-between sm:grid-flow-col">
                     <!-- header links -->
@@ -42,15 +42,19 @@
                         </ol>
                         <br />
                         Run this as admin, but replace <code>leaf</code> with your normal user’s name.
-                        <pre class="w-full overflow-x-auto"><code>
+                    </p>
+                    <code class="whitespace-break-spaces">
 sudo chown -R leaf /opt/homebrew/
-                        </code></pre>
+                    </code>
+                    <p>
                         Put the following in your normal user's <code>.zshrc</code> file. You can get to the file by typing <code>nano ~/.zshrc</code> in the terminal (while signed in as that user).
-                        <pre class="w-full overflow-x-auto"><code>
+                    </p>
+                    <code class="whitespace-break-spaces">
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-                        </code></pre>
+export HOMEBREW_CASK_OPTS="--appdir=/Applications" the is a test, this only a test
+                    </code>
+                    <p>
                         Just the first two lines are is enough to install command-line tools (formulae). If you want Homebrew to handle graphical apps (casks), include the third line to tell Homebrew to install to the normal user's Applications/ instead of the system-wide Applications/.
                     </p>
                 </details>
@@ -62,7 +66,8 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
                         <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="https://hyperkey.app/">Hyperkey</a>
                         or
                         <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="https://karabiner-elements.pqrs.org/">Karabiner-Elements</a>.
-                        <pre class="w-full overflow-x-auto"><code>
+                    </p>
+                    <code class="whitespace-break-spaces">
 defaults write -g "NSUserKeyEquivalents" '{
     Fill = "@~^f";
     Left = "@~^\U0090";
@@ -75,8 +80,7 @@ defaults write -g "NSUserKeyEquivalents" '{
     "Bottom Right" = "@~^$\U2193";
     "Return to Previous Size" = "@~^r";
 }'
-                        </code></pre>
-                    </p>
+                    </code>
                 </details>
             </div>
         </div>
