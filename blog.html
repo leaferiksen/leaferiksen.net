@@ -14,7 +14,7 @@
     <body class="h-dvh grid place-items-center text-lg text-teal-900 bg-teal-100 dark:text-teal-100 dark:bg-teal-800 md:bg-teal-300 md:dark:bg-teal-950">
         <script src="assets/blog.js"></script>
         <!-- card padding, max width, desktop bg color (synced with parent change), desktop box shadow -->
-        <div class="grid gap-4 content-start p-8 max-w-2xl md:h-5/6 md:overflow-y-scroll md:bg-teal-100 md:dark:bg-teal-800 shadow-square shadow-transparent md:shadow-teal-500 md:dark:shadow-teal-900">
+        <div class="content-start p-8 max-w-2xl md:h-5/6 md:overflow-y-scroll md:bg-teal-100 md:dark:bg-teal-800 shadow-square shadow-transparent md:shadow-teal-500 md:dark:shadow-teal-900">
             <!--  title and pfp side by side -->
             <div class="grid gap-4 sm:gap-0 sm:justify-between sm:grid-flow-col">
                 <!-- header links -->
@@ -30,7 +30,7 @@
                 <img class="row-span-2 w-[160px] rounded-full shadow-round shadow-teal-500 dark:shadow-teal-950" src="assets/leaf.jpg" alt="a young man with long hair and glasses" />
             </div>
             <!-- articles -->
-            <details id="homebrew">
+            <details id="homebrew" class="pt-4">
                 <summary onclick="addurl('homebrew')" class="cursor-pointer text-xl text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"><strong>(2024-10-07) Using Homebrew Without Admin Privileges</strong></summary>
                 <p class="text-justify">
                     By default, installing and updating Homebrew packages doesn’t work when run as a normal, non-admin user. This is what I do to fix that. This guide assumes:
@@ -42,12 +42,12 @@
                     <br />
                     Run this as admin, but replace <code>leaf</code> with your normal user’s name.
                 </p>
-                <pre class="whitespace-break-spaces">
+                <pre class="py-4 whitespace-break-spaces">
 sudo chown -R leaf /opt/homebrew/</pre>
                 <p>
                     Put the following in your normal user's <code>.zshrc</code> file. You can get to the file by typing <code>nano ~/.zshrc</code> in the terminal (while signed in as that user).
                 </p>
-                <pre class="whitespace-break-spaces">
+                <pre class="py-4 whitespace-break-spaces">
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"</pre>
@@ -55,7 +55,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"</pre>
                     Just the first two lines are is enough to install command-line tools (formulae). If you want Homebrew to handle graphical apps (casks), include the third line to tell Homebrew to install to the normal user's Applications/ instead of the system-wide Applications/.
                 </p>
             </details>
-            <details id="macos-tiling">
+            <details id="macos-tiling" class="pt-4">
                 <summary onclick="addurl('macos-tiling')" class="cursor-pointer text-xl text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"><strong>(2024-09-27) Fixing macOS Window Tiling Keyboard Shortcuts</strong></summary>
                 <p class="text-justify">
                     Keyboard shortcuts for macOS window tiling use the Apple's globe key, so they don't work with third party keyboards. You can change the keyboard shortcuts in System Settings -> Keyboard -> Keyboard Shortcuts -> App Shortcuts. Click the +, pick a shortcut, and enter the name of a tiling action (all of them can be found in the menu bar -> Window -> Move & Resize).<br />
@@ -64,7 +64,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"</pre>
                     or
                     <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="https://karabiner-elements.pqrs.org/">Karabiner-Elements</a>.
                 </p>
-                <pre class="whitespace-break-spaces">
+                <pre class="py-4 whitespace-break-spaces">
 defaults write -g "NSUserKeyEquivalents" '{
     Fill = "@~^f";
     Left = "@~^\U0090";
