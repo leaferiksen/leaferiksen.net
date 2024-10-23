@@ -32,7 +32,7 @@
             <!-- articles -->
             <details id="homebrew" class="pt-4">
                 <summary onclick="addurl('homebrew')" class="cursor-pointer text-xl text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"><strong>(2024-10-07) Using Homebrew Without Admin Privileges</strong></summary>
-                <p class="text-justify">
+                <p>
                     By default, installing and updating Homebrew packages doesn’t work when run as a normal, non-admin user. This is what I do to fix that. This guide assumes:
                     <ol class="list-decimal ml-8">
                         <li><a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="https://brew.sh/">Homebrew is installed</a></li>
@@ -57,7 +57,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"</pre>
             </details>
             <details id="macos-tiling" class="pt-4">
                 <summary onclick="addurl('macos-tiling')" class="cursor-pointer text-xl text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"><strong>(2024-09-27) Fixing macOS Window Tiling Keyboard Shortcuts</strong></summary>
-                <p class="text-justify">
+                <p>
                     Keyboard shortcuts for macOS window tiling use the Apple's globe key, so they don't work with third party keyboards. You can change the keyboard shortcuts in System Settings -> Keyboard -> Keyboard Shortcuts -> App Shortcuts. Click the +, pick a shortcut, and enter the name of a tiling action (all of them can be found in the menu bar -> Window -> Move & Resize).<br />
                     That's pretty complicated, so I figured out how to automate everything from the terminal. The command below uses the keycodes cmd(@) + opt(~) + ctrl(^) + arrows(obscure unicode) for tiling to halves, adding shift($) for quarter tiling. Those modifiers probably sound like terrible hand gymnastics, but I just map all three keys to caps lock using
                     <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="https://hyperkey.app/">Hyperkey</a>
