@@ -42,12 +42,12 @@
                     <br />
                     Run this as admin, but replace <code>leaf</code> with your normal user’s name.
                 </p>
-                <pre class="py-4 whitespace-break-spaces">
+                <pre class="text-base py-4 whitespace-break-spaces">
 sudo chown -R leaf /opt/homebrew/</pre>
                 <p>
                     Put the following in your normal user's <code>.zshrc</code> file. You can get to the file by typing <code>nano ~/.zshrc</code> in the terminal (while signed in as that user).
                 </p>
-                <pre class="py-4 whitespace-break-spaces">
+                <pre class="text-base py-4 whitespace-break-spaces">
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"</pre>
@@ -64,7 +64,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"</pre>
                     or
                     <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="https://karabiner-elements.pqrs.org/">Karabiner-Elements</a>.
                 </p>
-                <pre class="py-4 whitespace-break-spaces">
+                <pre class="text-base py-4 whitespace-break-spaces">
 defaults write -g "NSUserKeyEquivalents" '{
     Fill = "@~^f";
     Left = "@~^\U0090";
