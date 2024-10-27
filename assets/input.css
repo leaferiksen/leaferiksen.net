@@ -6,10 +6,6 @@
     --shadow-square: -1rem 1rem;
 }
 
-:root {
-    color-scheme: light dark;
-}
-
 /*
 .glow {
     animation: glow 0.5s infinite alternate;
