@@ -1,93 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Leaf Eriksen</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="light dark" />
-  <link href="output.css" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-          href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-          rel="stylesheet"
-  />
+    <title>Leaf Eriksen</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"/>
+    <link href="output.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet"
+    />
 </head>
 
 <!-- centers child on desktop -->
-<body
-        class="h-dvh grid place-items-center text-lg text-teal-900 bg-teal-100 dark:text-teal-100 dark:bg-teal-800 lg:bg-teal-300 lg:dark:bg-teal-950"
->
+<body class="h-dvh grid place-items-center text-lg text-teal-900 bg-teal-100 dark:text-teal-100 dark:bg-teal-800 lg:bg-teal-300 lg:dark:bg-teal-950">
 <!-- filler -->
 <!-- card padding, max width, desktop bg color (synced with parent change), desktop box shadow -->
-<div
-        class="p-8 max-w-4xl lg:h-5/6 lg:overflow-y-scroll lg:bg-teal-100 lg:dark:bg-teal-800 shadow-square shadow-transparent lg:shadow-teal-500 lg:dark:shadow-teal-900"
->
-  <!--  title and pfp side by side -->
-  <div class="grid gap-4 sm:gap-0 sm:justify-between sm:grid-flow-col">
-    <!-- header links -->
-    <nav class="text-2xl">
-      <a
-              class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
-              href="about"
-      >About</a>
-      &nbsp;
-      <a
-              class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
-              href="blog"
-      >Blog</a>
-      &nbsp;
-      <a
-              class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
-              target="_blank"
-              href="assets/Leaf Eriksen - Resume.pdf"
-      >Resume</a>
-    </nav>
-    <p class="text-4xl sm:content-center sm:border-b-2">
-      <strong>Leaf Eriksen</strong>
+<div class="p-8 max-w-4xl lg:h-5/6 lg:overflow-y-scroll lg:bg-teal-100 lg:dark:bg-teal-800 shadow-square shadow-transparent lg:shadow-teal-500 lg:dark:shadow-teal-900">
+    <!--  title and pfp side by side -->
+    <div class="grid gap-4 sm:gap-0 sm:justify-between sm:grid-flow-col">
+        <!-- header links -->
+        <nav class="text-2xl">
+            <a
+                    class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
+                    href="about"
+            >About</a>
+            &nbsp;
+            <a
+                    class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
+                    href="blog"
+            >Blog</a>
+            &nbsp;
+            <a
+                    class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
+                    target="_blank"
+                    href="assets/Leaf Eriksen - Resume.pdf"
+            >Resume</a>
+        </nav>
+        <p class="text-4xl sm:content-center sm:border-b-2">
+            <strong>Leaf Eriksen</strong>
+        </p>
+        <!-- pfp image, shadow, margin -->
+        <img
+                class="row-span-2 w-[160px] rounded-full shadow-round shadow-teal-500 dark:shadow-teal-950"
+                src="assets/leaf.jpg"
+                alt="a young man with long hair and glasses"
+        />
+    </div>
+    <p class="pt-4">
+        Welcome, netizen! My recent art is clickable for more info.
     </p>
-    <!-- pfp image, shadow, margin -->
-    <img
-            class="row-span-2 w-[160px] rounded-full shadow-round shadow-teal-500 dark:shadow-teal-950"
-            src="assets/leaf.jpg"
-            alt="a young man with long hair and glasses"
-    />
-  </div>
-  <p class="pt-4">
-    Welcome, netizen! My recent art is clickable for more info.
-  </p>
-  <div id="media" class="grid gap-2 grid-cols-2 sm:grid-cols-3">
-    <a class="col-span-2 row-span-2" href="portfolio/usf-architecture">
-      <img
-              src="assets/usf-architecture-small.png"
-              alt="a grid of vector art illustations of various buildings"
-      />
-    </a>
-    <a
-            class="px-2 py-2 md:py-10 bg-teal-800 dark:bg-teal-100"
-            href="portfolio/i-voted"
-    >
-      <img
-              src="assets/light-rail.png"
-              alt="a train bursting out of the fog"
-      />
-    </a>
-    <img
-            src="assets/winter-scene.jpg"
-            alt="drawing of a path leading into a snowy forest"
-    />
-    <img src="assets/crow.jpg" alt="drawing of a crow" />
-    <img src="assets/minerva.jpg" alt="cat in a shoebox" />
-    <img
-            src="assets/cherry-blossoms.jpg"
-            alt="cherry blossoms growing from a knot in a tree"
-    />
-    <img
-            src="assets/snowy-path.jpg"
-            alt="drawing of a horse-drawn carraige going through a snow filled town"
-    />
-    <img src="assets/sea-shell.jpeg" alt="drawing of a shell" />
-  </div>
+    <div id="media" class="grid gap-2 grid-cols-2 sm:grid-cols-3">
+        <a class="col-span-2 row-span-2" href="portfolio/usf-architecture">
+            <img
+                    src="assets/usf-architecture-small.png"
+                    alt="a grid of vector art illustations of various buildings"
+            />
+        </a>
+        <a
+                class="px-2 py-2 md:py-10 bg-teal-800 dark:bg-teal-100"
+                href="portfolio/i-voted"
+        >
+            <img
+                    src="assets/light-rail.png"
+                    alt="a train bursting out of the fog"
+            />
+        </a>
+        <img
+                src="assets/winter-scene.jpg"
+                alt="drawing of a path leading into a snowy forest"
+        />
+        <img src="assets/crow.jpg" alt="drawing of a crow"/>
+        <img src="assets/minerva.jpg" alt="cat in a shoebox"/>
+        <img
+                src="assets/cherry-blossoms.jpg"
+                alt="cherry blossoms growing from a knot in a tree"
+        />
+        <img
+                src="assets/snowy-path.jpg"
+                alt="drawing of a horse-drawn carraige going through a snow filled town"
+        />
+        <img src="assets/sea-shell.jpeg" alt="drawing of a shell"/>
+    </div>
 </div>
 </body>
 </html>
