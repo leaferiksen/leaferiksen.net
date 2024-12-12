@@ -1,3 +1,3 @@
 #!/bin/sh
 
-../tailwindcss -i ./assets/input.css -o ./assets/output.css --watch
+../tailwindcss -i input.css -o output.css --watch

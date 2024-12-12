@@ -1,3 +1,3 @@
 #!/bin/sh
 
-../tailwindcss -i ./assets/input.css -o ./assets/output.css --minify
+../tailwindcss -i input.css -o output.css
