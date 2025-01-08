@@ -564,12 +564,6 @@
   .row-span-2 {
     grid-row: span 2 / span 2;
   }
-  .m-auto {
-    margin: auto;
-  }
-  .ml-8 {
-    margin-left: calc(var(--spacing) * 8);
-  }
   .block {
     display: block;
   }
@@ -594,17 +588,11 @@
   .w-\[160px\] {
     width: 160px;
   }
-  .w-full {
-    width: 100%;
-  }
   .max-w-2xl {
     max-width: var(--container-2xl);
   }
   .max-w-4xl {
     max-width: var(--container-4xl);
-  }
-  .max-w-80 {
-    max-width: calc(var(--spacing) * 80);
   }
   .border-collapse {
     border-collapse: collapse;
@@ -612,14 +600,8 @@
   .transform {
     transform: var(--tw-rotate-x) var(--tw-rotate-y) var(--tw-rotate-z) var(--tw-skew-x) var(--tw-skew-y);
   }
-  .cursor-pointer {
-    cursor: pointer;
-  }
   .resize {
     resize: both;
-  }
-  .list-decimal {
-    list-style-type: decimal;
   }
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -632,9 +614,6 @@
   }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
-  }
-  .gap-8 {
-    gap: calc(var(--spacing) * 8);
   }
   .rounded-full {
     border-radius: calc(infinity * 1px);
@@ -658,14 +637,8 @@
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
   }
-  .py-4 {
-    padding-block: calc(var(--spacing) * 4);
-  }
   .pt-4 {
     padding-top: calc(var(--spacing) * 4);
-  }
-  .text-justify {
-    text-align: justify;
   }
   .text-right {
     text-align: right;
@@ -685,13 +658,6 @@
   .text-lg {
     font-size: var(--text-lg);
     line-height: var(--tw-leading, var(--text-lg--line-height));
-  }
-  .text-xl {
-    font-size: var(--text-xl);
-    line-height: var(--tw-leading, var(--text-xl--line-height));
-  }
-  .whitespace-break-spaces {
-    white-space: break-spaces;
   }
   .text-sky-700 {
     color: var(--color-sky-700);
@@ -736,11 +702,6 @@
       grid-auto-flow: column;
     }
   }
-  .sm\:grid-cols-2 {
-    @media (width >= 40rem) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
   .sm\:grid-cols-3 {
     @media (width >= 40rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -767,24 +728,9 @@
       border-bottom-width: 2px;
     }
   }
-  .sm\:text-right {
-    @media (width >= 40rem) {
-      text-align: right;
-    }
-  }
-  .md\:h-5\/6 {
-    @media (width >= 48rem) {
-      height: calc(5/6 * 100%);
-    }
-  }
   .md\:h-fit {
     @media (width >= 48rem) {
       height: fit-content;
-    }
-  }
-  .md\:overflow-y-scroll {
-    @media (width >= 48rem) {
-      overflow-y: scroll;
     }
   }
   .md\:bg-teal-100 {
