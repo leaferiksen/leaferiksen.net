@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@source "./";
 
 @theme {
     --default-font-family: "Atkinson Hyperlegible", var(--font-sans);
