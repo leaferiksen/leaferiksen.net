@@ -4,7 +4,6 @@
         <title>Leaf Eriksen</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="color-scheme" content="light dark" />
         <link href="dist.css" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,7 +11,7 @@
     </head>
 
     <!-- centers child on desktop -->
-    <body class="h-dvh grid place-items-center text-lg text-teal-900 bg-teal-100 dark:text-teal-100 dark:bg-teal-800 lg:bg-teal-300 lg:dark:bg-teal-950">
+    <body class="scheme-light-dark h-dvh grid place-items-center text-lg text-teal-900 bg-teal-100 dark:text-teal-100 dark:bg-teal-800 lg:bg-teal-300 lg:dark:bg-teal-950">
         <!-- filler -->
         <!-- card padding, max width, desktop bg color (synced with parent change), desktop box shadow -->
         <div class="p-8 max-w-4xl lg:h-5/6 lg:overflow-y-scroll lg:bg-teal-100 lg:dark:bg-teal-800 shadow-square shadow-transparent lg:shadow-teal-500 lg:dark:shadow-teal-900">
@@ -40,10 +39,14 @@
                 <a class="px-2 py-2 md:py-10 bg-teal-800 dark:bg-teal-100" href="portfolio/i-voted">
                     <img src="assets/light-rail.png" alt="a train bursting out of the fog" />
                 </a>
-                <img src="assets/winter-scene.jpg" alt="drawing of a path leading into a snowy forest" />
+                <a href="https://github.com/leaferiksen/SpatialFolders">
+                    <img class="dark:hidden" src="assets/spatialfolders-light.png" alt="screenshot of a third-party macos file manager" />
+                    <img class="hidden dark:block" src="assets/spatialfolders-dark.png" alt="screenshot of a third-party macos file manager" />
+                </a>
                 <img src="assets/crow.jpg" alt="drawing of a crow" />
                 <img src="assets/minerva.jpg" alt="cat in a shoebox" />
                 <img src="assets/cherry-blossoms.jpg" alt="cherry blossoms growing from a knot in a tree" />
+                <img src="assets/winter-scene.jpg" alt="drawing of a path leading into a snowy forest" />
                 <img src="assets/snowy-path.jpg" alt="drawing of a horse-drawn carraige going through a snow filled town" />
                 <img src="assets/sea-shell.jpeg" alt="drawing of a shell" />
             </div>
