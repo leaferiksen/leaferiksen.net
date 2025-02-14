@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 
-<head>
+  <head>
     <title>Leaf's Blog</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,98 +9,98 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-        rel="stylesheet" />
-</head>
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet" />
+  </head>
 
-<!-- centers child on desktop -->
+  <!-- centers child on desktop -->
 
-<body
+  <body
     class="scheme-light-dark h-dvh grid place-items-center text-lg text-teal-900 bg-teal-100 dark:text-teal-100 dark:bg-teal-800 md:bg-teal-300 md:dark:bg-teal-950">
     <script src="assets/blog.js"></script>
     <!-- card padding, max width, desktop bg color (synced with parent change), desktop box shadow -->
     <div
-        class="p-8 max-w-2xl md:h-5/6 md:overflow-y-scroll md:bg-teal-100 md:dark:bg-teal-800 shadow-square shadow-transparent md:shadow-teal-500 md:dark:shadow-teal-900">
-        <!--  title and pfp side by side -->
-        <div class="grid gap-4 sm:gap-0 sm:justify-between sm:grid-flow-col">
-            <!-- header links -->
-            <nav class="text-2xl">
-                <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="/">Back</a>
-                &nbsp;
-                <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
-                    href="about">About</a>
-                &nbsp;
-                <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" target="_blank"
-                    href="assets/Leaf Eriksen - Resume.pdf">Resume</a>
-            </nav>
-            <p class="text-4xl sm:content-center sm:border-b-2">
-                <strong>Leaf's Blog</strong>
-            </p>
-            <!-- pfp image, shadow, margin -->
-            <img class="row-span-2 w-[160px] rounded-full shadow-round shadow-teal-500 dark:shadow-teal-950"
-                src="assets/leaf.jpg" alt="a young man with long hair and glasses" />
-        </div>
-        <!-- articles -->
-        <details id="homebrew" class="pt-4">
-            <summary onclick="addurl('homebrew')"
-                class="cursor-pointer text-xl text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">
-                <strong>(2024-10-07) Using Homebrew Without Admin Privileges</strong>
-            </summary>
-            <p>
-                By default, installing and updating Homebrew packages doesn’t work when run as a normal, non-admin user.
-                This is what I do to fix that. This guide assumes:
-                <br />
-                Run this as admin, but replace <code>leaf</code> with your normal user’s name.
-            </p>
+      class="p-8 max-w-2xl md:h-5/6 md:overflow-y-scroll md:bg-teal-100 md:dark:bg-teal-800 shadow-square shadow-transparent md:shadow-teal-500 md:dark:shadow-teal-900">
+      <!--  title and pfp side by side -->
+      <div class="grid gap-4 sm:gap-0 sm:justify-between sm:grid-flow-col">
+        <!-- header links -->
+        <nav class="text-2xl">
+          <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="/">Back</a>
+          &nbsp;
+          <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
+             href="about">About</a>
+          &nbsp;
+          <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" target="_blank"
+             href="assets/Leaf Eriksen - Resume.pdf">Resume</a>
+        </nav>
+        <p class="text-4xl sm:content-center sm:border-b-2">
+          <strong>Leaf's Blog</strong>
+        </p>
+        <!-- pfp image, shadow, margin -->
+        <img class="row-span-2 w-[160px] rounded-full shadow-round shadow-teal-500 dark:shadow-teal-950"
+             src="assets/leaf.jpg" alt="a young man with long hair and glasses" />
+      </div>
+      <!-- articles -->
+      <details id="homebrew" class="pt-4">
+        <summary onclick="addurl('homebrew')"
+                 class="cursor-pointer text-xl text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">
+          <strong>(2024-10-07) Using Homebrew Without Admin Privileges</strong>
+        </summary>
+        <p>
+          By default, installing and updating Homebrew packages doesn’t work when run as a normal, non-admin user.
+          This is what I do to fix that. This guide assumes:
+          <br />
+          Run this as admin, but replace <code>leaf</code> with your normal user’s name.
+        </p>
 
-            <pre class="text-base py-4 whitespace-break-spaces">sudo chown -R leaf /opt/homebrew/</pre>
-            <p>Put the following in your normal user's <code>.zshrc</code> file. You can get to the file by typing
-                <code>nano ~/.zshrc</code> in the terminal (while signed in as that user).</p>
-            <pre class="text-base py-4 whitespace-break-spaces">
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/sbin:$PATH"
-export HOMEBREW_CASK_OPTS="--appdir=~/Applications"</pre>
-            <p>Just the first two lines are is enough to install command-line tools (formulae). If you want Homebrew to
-                handle graphical apps (casks), include the third line to tell Homebrew to install to the normal user's
-                Applications/ instead of the system-wide Applications/.</p>
-        </details>
-        <details id="macos-tiling" class="pt-4">
-            <summary onclick="addurl('macos-tiling')"
-                class="cursor-pointer text-xl text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">
-                <strong>(2024-09-27) Fixing macOS Window Tiling Keyboard Shortcuts</strong>
-            </summary>
-            <p>
-                Keyboard shortcuts for macOS window tiling use the Apple's globe key, so they don't work with third
-                party keyboards. You can change the keyboard shortcuts in System Settings -> Keyboard -> Keyboard
-                Shortcuts -> App Shortcuts. Click the +, pick a shortcut, and enter the name of a tiling action (all of
-                them can be found in the menu bar -> Window -> Move & Resize).<br />
-                That's pretty complicated, so I figured out how to automate everything from the terminal. The command
-                below uses the keycodes cmd(@) + opt(~) + ctrl(^) + arrows(obscure unicode) for tiling to halves, adding
-                shift($) for quarter tiling. Those modifiers probably sound like terrible hand gymnastics, but I just
-                map all three keys to caps lock using
-                <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
-                    href="https://hyperkey.app/">Hyperkey</a>
-                or
-                <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
-                    href="https://karabiner-elements.pqrs.org/">Karabiner-Elements</a>.
-            </p>
+        <pre class="text-base py-4 whitespace-break-spaces">sudo chown -R leaf /opt/homebrew/</pre>
+        <p>Put the following in your normal user's <code>.zshrc</code> file. You can get to the file by typing
+          <code>nano ~/.zshrc</code> in the terminal (while signed in as that user).</p>
+        <pre class="text-base py-4 whitespace-break-spaces">
+	  export PATH="/opt/homebrew/bin:$PATH"
+	  export PATH="/opt/homebrew/sbin:$PATH"
+	  export HOMEBREW_CASK_OPTS="--appdir=~/Applications"</pre>
+        <p>Just the first two lines are is enough to install command-line tools (formulae). If you want Homebrew to
+          handle graphical apps (casks), include the third line to tell Homebrew to install to the normal user's
+          Applications/ instead of the system-wide Applications/.</p>
+      </details>
+      <details id="macos-tiling" class="pt-4">
+        <summary onclick="addurl('macos-tiling')"
+                 class="cursor-pointer text-xl text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">
+          <strong>(2024-09-27) Fixing macOS Window Tiling Keyboard Shortcuts</strong>
+        </summary>
+        <p>
+          Keyboard shortcuts for macOS window tiling use the Apple's globe key, so they don't work with third
+          party keyboards. You can change the keyboard shortcuts in System Settings -> Keyboard -> Keyboard
+          Shortcuts -> App Shortcuts. Click the +, pick a shortcut, and enter the name of a tiling action (all of
+          them can be found in the menu bar -> Window -> Move & Resize).<br />
+          That's pretty complicated, so I figured out how to automate everything from the terminal. The command
+          below uses the keycodes cmd(@) + opt(~) + ctrl(^) + arrows(obscure unicode) for tiling to halves, adding
+          shift($) for quarter tiling. Those modifiers probably sound like terrible hand gymnastics, but I just
+          map all three keys to caps lock using
+          <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
+             href="https://hyperkey.app/">Hyperkey</a>
+          or
+          <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200"
+             href="https://karabiner-elements.pqrs.org/">Karabiner-Elements</a>.
+        </p>
 
-            <pre class="text-base py-4 whitespace-break-spaces">
-defaults write -g "NSUserKeyEquivalents" '{
-    Fill = "@~^f";
-    Left = "@~^\U0090";
-    Right = "@~^\U0092";
-    Top = "@~^\U0091";
-    Bottom = "@~^\U0093";
-    "Bottom Left" = "@~^$\U2190";
-    "Top Left" = "@~^$\U2191";
-    "Top Right" = "@~^$\U2192";
-    "Bottom Right" = "@~^$\U2193";
-    "Return to Previous Size" = "@~^r";
-}'
-                </pre>
-        </details>
+        <pre class="text-base py-4 whitespace-break-spaces">
+	  defaults write -g "NSUserKeyEquivalents" '{
+	  Fill = "@~^f";
+	  Left = "@~^\U0090";
+	  Right = "@~^\U0092";
+	  Top = "@~^\U0091";
+	  Bottom = "@~^\U0093";
+	  "Bottom Left" = "@~^$\U2190";
+	  "Top Left" = "@~^$\U2191";
+	  "Top Right" = "@~^$\U2192";
+	  "Bottom Right" = "@~^$\U2193";
+	  "Return to Previous Size" = "@~^r";
+	  }'
+        </pre>
+      </details>
     </div>
-</body>
+  </body>
 
 </html>
