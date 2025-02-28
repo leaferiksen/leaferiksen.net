@@ -1,94 +1,49 @@
-# Sourced from https://www.nytimes.com/robots.txt
+https://github.com/ai-robots-txt/ai.robots.txt/blob/main/robots.txt
 
+User-agent: AI2Bot
+User-agent: Ai2Bot-Dolma
 User-agent: Amazonbot
-Disallow: /
-
 User-agent: anthropic-ai
-Disallow: /
-
+User-agent: Applebot
 User-agent: Applebot-Extended
-Disallow: /
-
-User-agent: AwarioRssBot
-User-agent: AwarioSmartBot
-Disallow: /
-
+User-agent: Brightbot 1.0
 User-agent: Bytespider
-Disallow: /
-
 User-agent: CCBot
-Disallow: /
-
 User-agent: ChatGPT-User
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
-
 User-agent: Claude-Web
-Disallow: /
-
+User-agent: ClaudeBot
 User-agent: cohere-ai
-Disallow: /
-
-User-agent: DataForSeoBot
-Disallow: /
-
+User-agent: cohere-training-data-crawler
+User-agent: Crawlspace
 User-agent: Diffbot
-Disallow: /
-
+User-agent: DuckAssistBot
 User-agent: FacebookBot
-Disallow: /
-
 User-agent: FriendlyCrawler
-Disallow: /
-
-User-agent: Google-CloudVertexBot
-Disallow: /
-
 User-agent: Google-Extended
-Disallow: /
-
+User-agent: GoogleOther
+User-agent: GoogleOther-Image
+User-agent: GoogleOther-Video
 User-agent: GPTBot
-Disallow: /
-
+User-agent: iaskspider/2.0
+User-agent: ICC-Crawler
 User-agent: ImagesiftBot
-Disallow: /
-
-User-agent: magpie-crawler
-Disallow: /
-
+User-agent: img2dataset
+User-agent: ISSCyberRiskCrawler
+User-agent: Kangaroo Bot
 User-agent: Meta-ExternalAgent
-User-agent: meta-externalagent
-Disallow: /
-
-User-agent: NewsNow
-Disallow: /
-
-User-agent: news-please
-Disallow: /
-
+User-agent: Meta-ExternalFetcher
 User-agent: OAI-SearchBot
-Disallow: /
-
 User-agent: omgili
-Disallow: /
-
 User-agent: omgilibot
-Disallow: /
-
-User-agent: peer39_crawler
-User-agent: peer39_crawler/1.0
-Disallow: /
-
+User-agent: PanguBot
 User-agent: PerplexityBot
-Disallow: /
-
-User-agent: Quora-Bot
-Disallow: /
-
+User-agent: PetalBot
 User-agent: Scrapy
-Disallow: /
-
-User-agent: TurnitinBot
+User-agent: SemrushBot-OCOB
+User-agent: SemrushBot-SWA
+User-agent: Sidetrade indexer bot
+User-agent: Timpibot
+User-agent: VelenPublicWebCrawler
+User-agent: Webzio-Extended
+User-agent: YouBot
 Disallow: /
