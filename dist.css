@@ -38,7 +38,6 @@
       --font-mono--font-variation-settings
     );
     --color-paper: #FFFCF0;
-    --color-base-50: #F2F0E5;
     --color-base-200: #CECDC3;
   }
 }
@@ -184,15 +183,6 @@
   }
 }
 @layer utilities {
-  .collapse {
-    visibility: collapse;
-  }
-  .fixed {
-    position: fixed;
-  }
-  .relative {
-    position: relative;
-  }
   .order-first {
     order: -9999;
   }
@@ -434,9 +424,6 @@
   .ml-2 {
     margin-left: calc(var(--spacing) * 2);
   }
-  .block {
-    display: block;
-  }
   .flex {
     display: flex;
   }
@@ -449,32 +436,14 @@
   .inline-flex {
     display: inline-flex;
   }
-  .list-item {
-    display: list-item;
-  }
-  .table {
-    display: table;
-  }
   .h-4 {
     height: calc(var(--spacing) * 4);
   }
   .h-dvh {
     height: 100dvh;
   }
-  .max-h-1 {
-    max-height: calc(var(--spacing) * 1);
-  }
-  .max-h-10 {
-    max-height: calc(var(--spacing) * 10);
-  }
-  .max-h-20 {
-    max-height: calc(var(--spacing) * 20);
-  }
   .w-4 {
     width: calc(var(--spacing) * 4);
-  }
-  .w-5 {
-    width: calc(var(--spacing) * 5);
   }
   .w-5\/6 {
     width: calc(5/6 * 100%);
@@ -485,17 +454,8 @@
   .max-w-2xl {
     max-width: var(--container-2xl);
   }
-  .max-w-5 {
-    max-width: calc(var(--spacing) * 5);
-  }
-  .max-w-5\/6 {
-    max-width: calc(5/6 * 100%);
-  }
   .max-w-none {
     max-width: none;
-  }
-  .flex-shrink {
-    flex-shrink: 1;
   }
   .flex-shrink-0 {
     flex-shrink: 0;
@@ -503,14 +463,8 @@
   .flex-grow {
     flex-grow: 1;
   }
-  .border-collapse {
-    border-collapse: collapse;
-  }
   .cursor-pointer {
     cursor: pointer;
-  }
-  .resize {
-    resize: both;
   }
   .grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -536,10 +490,6 @@
   .rounded-full {
     border-radius: calc(infinity * 1px);
   }
-  .border {
-    border-style: var(--tw-border-style);
-    border-width: 1px;
-  }
   .border-t {
     border-top-style: var(--tw-border-style);
     border-top-width: 1px;
@@ -549,9 +499,6 @@
   }
   .bg-light-bg {
     background-color: var(--color-paper);
-  }
-  .bg-light-bg-2 {
-    background-color: var(--color-base-50);
   }
   .p-8 {
     padding: calc(var(--spacing) * 8);
@@ -605,9 +552,6 @@
   .text-light-tx {
     color: var(--color-black);
   }
-  .underline {
-    text-decoration-line: underline;
-  }
   .scheme-light-dark {
     color-scheme: light dark;
   }
@@ -625,10 +569,6 @@
   }
   .shadow-transparent {
     --tw-shadow-color: transparent;
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
   }
   .sm\:order-none {
     @media (width >= 40rem) {
@@ -665,26 +605,6 @@
       display: none;
     }
   }
-  .sm\:h-0 {
-    @media (width >= 40rem) {
-      height: calc(var(--spacing) * 0);
-    }
-  }
-  .sm\:h-1 {
-    @media (width >= 40rem) {
-      height: calc(var(--spacing) * 1);
-    }
-  }
-  .sm\:h-1\! {
-    @media (width >= 40rem) {
-      height: calc(var(--spacing) * 1) !important;
-    }
-  }
-  .sm\:max-h-1 {
-    @media (width >= 40rem) {
-      max-height: calc(var(--spacing) * 1);
-    }
-  }
   .sm\:w-1\/2 {
     @media (width >= 40rem) {
       width: calc(1/2 * 100%);
@@ -698,11 +618,6 @@
   .sm\:w-2\/3 {
     @media (width >= 40rem) {
       width: calc(2/3 * 100%);
-    }
-  }
-  .sm\:max-w-1\/2 {
-    @media (width >= 40rem) {
-      max-width: calc(1/2 * 100%);
     }
   }
   .sm\:grid-flow-col {
@@ -951,9 +866,4 @@
   syntax: "*";
   inherits: false;
   initial-value: 0 0 #0000;
-}
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
 }
