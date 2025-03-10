@@ -1,53 +1,59 @@
-<!Doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Leaf Eriksen</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="dist.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
-    <link rel="me" href="https://mastodon.social/@leaferiksen">
-  </head>
-  <!-- centers child on desktop -->
-  <body class="scheme-light-dark h-dvh grid place-items-center text-lg text-teal-900 bg-teal-100 dark:text-teal-100 dark:bg-teal-800 lg:bg-teal-300 lg:dark:bg-teal-950">
-    <!-- filler -->
-    <!-- card padding, max width, desktop bg color (synced with parent change), desktop box shadow -->
-    <div class="p-8 max-w-4xl lg:h-5/6 lg:overflow-y-scroll lg:bg-teal-100 lg:dark:bg-teal-800 shadow-square shadow-transparent lg:shadow-teal-500 lg:dark:shadow-teal-900">
-      <!--  title and pfp side by side -->
-      <div class="grid gap-4 sm:gap-0 sm:justify-between sm:grid-flow-col">
-	<!-- header links -->
-	<nav class="text-2xl">
-	  <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="about">About</a>
-	  <a class="px-2 text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" href="blog">Blog</a>
-	  <a class="text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200" target="_blank" href="assets/resume.pdf">Resume</a>
-	</nav>
-	<p class="text-4xl sm:content-center sm:border-b-2">
-	  <strong>Leaf Eriksen</strong>
-	</p>
-	<!-- pfp image, shadow, margin -->
-	<img class="row-span-2 w-[160px] rounded-full shadow-round shadow-teal-500 dark:shadow-teal-950" src="assets/leaf.jpg" alt="a young man with long hair and glasses" />
-      </div>
-      <p class="pt-4">Welcome, netizen! My recent art is clickable for more info.</p>
-      <div id="media" class="grid gap-2 grid-cols-2 sm:grid-cols-3">
-	<a class="col-span-2 row-span-2" href="portfolio/usf-architecture">
-	  <img src="assets/usf-architecture-small.png" alt="a grid of vector art illustations of various buildings" />
-	</a>
-	<a class="px-2 py-2 md:py-9 bg-teal-400 dark:bg-teal-600" href="portfolio/i-voted">
-	  <img src="assets/light-rail.png" alt="a train bursting out of the fog" />
-	</a>
-	<a href="https://github.com/leaferiksen/SpatialFolders">
-	  <img class="dark:hidden" src="assets/spatialfolders-light.png" alt="screenshot of a third-party macos file manager" />
-	  <img class="hidden dark:block" src="assets/spatialfolders-dark.png" alt="screenshot of a third-party macos file manager" />
-	</a>
-	<img src="assets/crow.jpg" alt="drawing of a crow" />
-	<img src="assets/minerva.jpg" alt="cat in a shoebox" />
-	<img src="assets/cherry-blossoms.jpg" alt="cherry blossoms growing from a knot in a tree" />
-	<img src="assets/winter-scene.jpg" alt="drawing of a path leading into a snowy forest" />
-	<img src="assets/snowy-path.jpg" alt="drawing of a horse-drawn carraige going through a snow filled town" />
-	<img src="assets/sea-shell.jpeg" alt="drawing of a shell" />
-      </div>
-    </div>
-  </body>
+    <head>
+	<title>Leaf Eriksen
+	</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="dist.css" rel="stylesheet" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+	<link rel="me" href="https://mastodon.social/@leaferiksen">
+    </head>
+    <body class="max-w-none bg-light-bg prose-lg prose-headings:dark:text-dark-re prose-p:text-light-tx prose-p:dark:text-dark-tx prose-a:text-light-gr prose-a:dark:text-dark-gr prose-a:dark:hover:text-light-gr prose-a:hover:text-dark-gr prose-headings:text-light-re dark:bg-dark-bg">
+	<div class="container flex flex-col py-24 px-5 mx-auto">
+	    <div class="mx-auto lg:w-5/6">
+		<div class="flex flex-col sm:flex-row sm:mt-10">
+		    <div class="text-center sm:py-12 sm:pr-8 sm:pl-8 sm:w-1/3">
+			<div class="flex flex-col justify-center items-center text-center">
+			    <img class="rounded-full not-prose w-[160px]" src="assets/leaf.jpg" alt="a young man with long hair and glasses">
+			    <h2>
+				Leaf Eriksen
+			    </h2>
+			    <p>
+				he/him
+			    </p>
+			</div>
+		    </div>
+		    <div class="pt-4 mt-4 text-center border-t sm:py-8 sm:pl-8 sm:mt-0 sm:w-2/3 sm:text-left sm:border-t-0 sm:border-l border-dark-bg dark:border-light-bg">
+			<p>
+			    Hello netizen! I am a young UI/UX Designer studying at the University of San Francisco. I like writing in HTML, Tailwind CSS, JS and SwiftUI, and designing in Adobe and Affinity suites.
+			</p>
+			<p>
+			    In my free time I enjoy playing Osu!, reading visual novels, and watching mecha anime. If you are in SF and think we might be friends, let's meet up for coffee or tea sometime! You can reach me at <a href="mailto:lweriksen@dons.usfca.edu">my email</a> or <a target="_blank" rel="me" href="https://mastodon.social/@leaferiksen">wherever you get your fediverse</a>.
+			</p>
+			<a class="inline-flex items-center pr-2" href="projects">
+			    My Projects
+			    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="ml-2 w-4 h-4" viewBox="0 0 24 24">
+				<path d="M5 12h14M12 5l7 7-7 7"/>
+			    </svg>
+			</a>
+			<a class="inline-flex items-center pr-2" href="blog">
+			    My Blog
+			    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="ml-2 w-4 h-4" viewBox="0 0 24 24">
+				<path d="M5 12h14M12 5l7 7-7 7"/>
+			    </svg>
+			</a>
+			<a class="inline-flex items-center text-light-cy dark:text-dark-cy dark:hover:text-light-cy hover:text-dark-cy" href="assets/resume.pdf">
+			    My Resume
+			    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="ml-2 w-4 h-4" viewBox="0 0 24 24">
+				<path d="M5 12h14M12 5l7 7-7 7"/>
+			    </svg>
+			</a>
+		    </div>
+		</div>
+	    </div>
+	</div>
+    </body>
 </html>
