@@ -203,11 +203,10 @@
     .text-dark-neon {
 	color: var(--color-red-50);
 	text-shadow:
-	    /* White glow */
+	    /* Inner glow */
 	    0 0 7px var(--color-red-50),
 	    0 0 10px var(--color-red-50),
-	    0 0 21px var(--color-red-50),
-	    /* Green glow */
+	    /* Outer glow */
 	    0 0 42px var(--color-red-600),
 	    0 0 82px var(--color-red-600),
 	    0 0 92px var(--color-red-600),
