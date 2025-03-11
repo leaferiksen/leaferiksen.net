@@ -201,16 +201,16 @@
 
 @media (prefers-color-scheme: dark) {
     .text-dark-neon {
-	color: #fff;
+	color: var(--color-red-50);
 	text-shadow:
 	    /* White glow */
-	    0 0 7px #fff,
-	    0 0 10px #fff,
-	    0 0 21px #fff,
+	    0 0 7px var(--color-red-50),
+	    0 0 10px var(--color-red-50),
+	    0 0 21px var(--color-red-50),
 	    /* Green glow */
-	    0 0 42px var(--color-red-400),
-	    0 0 82px var(--color-red-400),
-	    0 0 92px var(--color-red-400),
-	    0 0 102px var(--color-red-400);
+	    0 0 42px var(--color-red-600),
+	    0 0 82px var(--color-red-600),
+	    0 0 92px var(--color-red-600),
+	    0 0 102px var(--color-red-600);
     }   
 }
