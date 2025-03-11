@@ -1,4 +1,4 @@
-/*! tailwindcss v4.0.9 | MIT License | https://tailwindcss.com */
+/*! tailwindcss v4.0.12 | MIT License | https://tailwindcss.com */
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -37,6 +37,7 @@
     --default-mono-font-variation-settings: var(
       --font-mono--font-variation-settings
     );
+    --font-neon: "Vibur", var(--font-sans);
     --color-paper: #FFFCF0;
     --color-base-200: #CECDC3;
   }
@@ -509,8 +510,8 @@
   .px-8 {
     padding-inline: calc(var(--spacing) * 8);
   }
-  .py-8 {
-    padding-block: calc(var(--spacing) * 8);
+  .py-16 {
+    padding-block: calc(var(--spacing) * 16);
   }
   .pt-4 {
     padding-top: calc(var(--spacing) * 4);
@@ -532,6 +533,9 @@
   }
   .text-start {
     text-align: start;
+  }
+  .font-neon {
+    font-family: var(--font-neon);
   }
   .text-2xl {
     font-size: var(--text-2xl);
@@ -668,6 +672,11 @@
       border-left-width: 1px;
     }
   }
+  .sm\:px-0 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 0);
+    }
+  }
   .sm\:py-8 {
     @media (width >= 40rem) {
       padding-block: calc(var(--spacing) * 8);
@@ -738,37 +747,37 @@
       color: var(--color-base-200);
     }
   }
-  .prose-h2\:text-light-re {
-    & :is(:where(h2):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+  .prose-h1\:text-light-re {
+    & :is(:where(h1):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
       color: var(--color-red-600);
     }
   }
-  .prose-h2\:dark\:text-dark-re {
-    & :is(:where(h2):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+  .prose-h1\:dark\:text-dark-re {
+    & :is(:where(h1):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
       @media (prefers-color-scheme: dark) {
         color: var(--color-red-400);
       }
     }
   }
-  .prose-h3\:text-light-or {
-    & :is(:where(h3):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+  .prose-h2\:text-light-or {
+    & :is(:where(h2):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
       color: var(--color-orange-600);
     }
   }
-  .prose-h3\:dark\:text-dark-or {
-    & :is(:where(h3):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+  .prose-h2\:dark\:text-dark-or {
+    & :is(:where(h2):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
       @media (prefers-color-scheme: dark) {
         color: var(--color-orange-400);
       }
     }
   }
-  .prose-h4\:text-light-ye {
-    & :is(:where(h4):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+  .prose-h3\:text-light-ye {
+    & :is(:where(h3):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
       color: var(--color-yellow-600);
     }
   }
-  .prose-h4\:dark\:text-dark-ye {
-    & :is(:where(h4):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+  .prose-h3\:dark\:text-dark-ye {
+    & :is(:where(h3):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
       @media (prefers-color-scheme: dark) {
         color: var(--color-yellow-400);
       }
@@ -805,6 +814,12 @@
         }
       }
     }
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .text-dark-neon {
+    color: #fff;
+    text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff,  0 0 42px var(--color-red-400), 0 0 82px var(--color-red-400), 0 0 92px var(--color-red-400), 0 0 102px var(--color-red-400);
   }
 }
 @property --tw-border-style {
