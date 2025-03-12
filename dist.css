@@ -865,8 +865,8 @@
 }
 @media (prefers-color-scheme: dark) {
   .text-dark-neon {
-    color: var(--color-red-50);
-    text-shadow: 0 0 10px var(--color-red-50),  0 0 42px var(--color-red-600), 0 0 82px var(--color-red-600), 0 0 92px var(--color-red-600), 0 0 102px var(--color-red-600);
+    color: var(--color-paper);
+    text-shadow: 0 0 7px var(--color-red-50), 0 0 10px var(--color-red-50),  0 0 42px var(--color-red-600), 0 0 82px var(--color-red-600), 0 0 92px var(--color-red-600), 0 0 102px var(--color-red-600);
   }
 }
 @property --tw-border-style {

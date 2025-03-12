@@ -201,9 +201,10 @@
 
 @media (prefers-color-scheme: dark) {
     .text-dark-neon {
-	color: var(--color-red-50);
+	color: var(--color-paper);
 	text-shadow:
 	    /* Inner glow */
+	    0 0 7px var(--color-red-50),
 	    0 0 10px var(--color-red-50),
 	    /* Outer glow */
 	    0 0 42px var(--color-red-600),
