@@ -6,7 +6,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-red-50: #FFE1D5;
     --color-red-400: #D14D41;
     --color-red-600: #AF3029;
     --color-orange-400: #DA702C;
@@ -187,6 +186,9 @@
   }
 }
 @layer utilities {
+  .fixed {
+    position: fixed;
+  }
   .order-first {
     order: -9999;
   }
@@ -437,6 +439,9 @@
   .inline-flex {
     display: inline-flex;
   }
+  .table {
+    display: table;
+  }
   .h-4 {
     height: calc(var(--spacing) * 4);
   }
@@ -445,6 +450,9 @@
   }
   .w-4 {
     width: calc(var(--spacing) * 4);
+  }
+  .w-5 {
+    width: calc(var(--spacing) * 5);
   }
   .w-5\/6 {
     width: calc(5/6 * 100%);
@@ -458,14 +466,23 @@
   .max-w-none {
     max-width: none;
   }
+  .flex-shrink {
+    flex-shrink: 1;
+  }
   .flex-shrink-0 {
     flex-shrink: 0;
   }
   .flex-grow {
     flex-grow: 1;
   }
+  .border-collapse {
+    border-collapse: collapse;
+  }
   .cursor-pointer {
     cursor: pointer;
+  }
+  .resize {
+    resize: both;
   }
   .grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -491,6 +508,10 @@
   .rounded-full {
     border-radius: calc(infinity * 1px);
   }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
   .border-t {
     border-top-style: var(--tw-border-style);
     border-top-width: 1px;
@@ -509,6 +530,9 @@
   }
   .px-8 {
     padding-inline: calc(var(--spacing) * 8);
+  }
+  .py-8 {
+    padding-block: calc(var(--spacing) * 8);
   }
   .py-16 {
     padding-block: calc(var(--spacing) * 16);
@@ -559,6 +583,9 @@
   .text-light-tx {
     color: var(--color-black);
   }
+  .underline {
+    text-decoration-line: underline;
+  }
   .scheme-light-dark {
     color-scheme: light dark;
   }
@@ -576,6 +603,10 @@
   }
   .shadow-transparent {
     --tw-shadow-color: transparent;
+  }
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
   }
   .sm\:order-none {
     @media (width >= 40rem) {
@@ -688,6 +719,11 @@
   .sm\:py-12 {
     @media (width >= 40rem) {
       padding-block: calc(var(--spacing) * 12);
+    }
+  }
+  .sm\:py-16 {
+    @media (width >= 40rem) {
+      padding-block: calc(var(--spacing) * 16);
     }
   }
   .sm\:pr-8 {
@@ -866,7 +902,7 @@
 @media (prefers-color-scheme: dark) {
   .text-dark-neon {
     color: var(--color-paper);
-    text-shadow: 0 0 7px var(--color-red-50), 0 0 10px var(--color-red-50),  0 0 42px var(--color-red-600), 0 0 82px var(--color-red-600), 0 0 92px var(--color-red-600), 0 0 102px var(--color-red-600);
+    text-shadow: 0 0 7px var(--color-red-400), 0 0 10px var(--color-red-400), 0 0 21px var(--color-red-400),  0 0 42px var(--color-red-600), 0 0 82px var(--color-red-600), 0 0 92px var(--color-red-600), 0 0 102px var(--color-red-600), 0 0 151px var(--color-red-600);
   }
 }
 @property --tw-border-style {
@@ -928,4 +964,9 @@
   syntax: "*";
   inherits: false;
   initial-value: 0 0 #0000;
+}
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
 }
