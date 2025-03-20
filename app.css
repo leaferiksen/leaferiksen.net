@@ -200,8 +200,7 @@
 }
 
 .web-button {
-    image-rendering: crisp-edges !important;
-    height: 31px !important;
+    image-rendering: crisp-edges;
 }
 
 .text-dark-neon {
