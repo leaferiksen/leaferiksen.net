@@ -199,6 +199,11 @@
     --color-dark-ma-2:   var(--color-magenta-600);
 }
 
+.88x31 {
+    image-rendering: crisp-edges;
+    height: 31px !important;
+}
+
 @media (prefers-color-scheme: dark) {
     .text-dark-neon {
 	color: var(--color-paper);
