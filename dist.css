@@ -186,9 +186,6 @@
   }
 }
 @layer utilities {
-  .fixed {
-    position: fixed;
-  }
   .order-first {
     order: -9999;
   }
@@ -441,10 +438,6 @@
   }
   .inline-flex {
     display: inline-flex;
-  }
-  .web-button {
-    image-rendering: crisp-edges !important;
-    height: 31px !important;
   }
   .h-4 {
     height: calc(var(--spacing) * 4);
@@ -887,8 +880,12 @@
     }
   }
 }
-@media (prefers-color-scheme: dark) {
-  .text-dark-neon {
+.web-button {
+  image-rendering: crisp-edges !important;
+  height: 31px !important;
+}
+.text-dark-neon {
+  @media (prefers-color-scheme: dark) {
     color: var(--color-paper);
     text-shadow: 0 0 7px var(--color-red-400), 0 0 10px var(--color-red-400), 0 0 21px var(--color-red-400),  0 0 42px var(--color-red-600), 0 0 82px var(--color-red-600), 0 0 92px var(--color-red-600), 0 0 102px var(--color-red-600);
   }
