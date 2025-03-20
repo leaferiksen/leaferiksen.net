@@ -199,13 +199,13 @@
     --color-dark-ma-2:   var(--color-magenta-600);
 }
 
-.88x31 {
-    image-rendering: crisp-edges;
+@utility web-button {
+    image-rendering: crisp-edges !important;
     height: 31px !important;
 }
 
-@media (prefers-color-scheme: dark) {
-    .text-dark-neon {
+@utility text-dark-neon
+    @variant dark{
 	color: var(--color-paper);
 	text-shadow:
 	    /* Inner glow */
