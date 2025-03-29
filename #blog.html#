@@ -48,7 +48,7 @@ export HOMEBREW_CASK_OPTS="--appdir=~/Applications"</pre>
 					solve the issue, but if you want to use just caps lock without control, keep reading.</p>
 				<p>In the same menu, go to the App Shortcuts tab. Click the +, pick a shortcut, and enter the name of a tiling
 					action (all of them can be found in the menu bar -> Window -> Move & Resize).</p>
-				<p>Setting all these by hand can be a pain, so I figured out how to automate everything from the terminal. The
+				<p>Setting all these by hand can be a pain, so I figured out how to automate everything from the terminal. The testing testing testing
 					command below uses the keycodes cmd(@) + opt(~) + ctrl(^) + arrows(obscure unicode) for tiling to halves,
 					adding shift($) for quarter tiling. Those modifiers probably sound like terrible hand gymnastics, but I just
 					map all three keys to caps lock using <a href="https://hyperkey.app/">Hyperkey</a> or <a
