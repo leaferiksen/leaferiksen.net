@@ -16,6 +16,7 @@
 	<body
 		class="prose-xl max-w-none bg-light-bg text-light-tx dark:bg-dark-bg dark:text-dark-tx prose-h1:text-light-re prose-h1:dark:text-dark-re prose-h2:text-light-or prose-h2:dark:text-dark-or prose-h3:text-light-ye prose-h3:dark:text-dark-ye prose-a:text-light-pu prose-a:hover:text-dark-pu prose-a:dark:text-dark-pu prose-a:dark:hover:text-light-pu"
 	>
+		<script src="assets/blog.js"></script>
 		<div class="container mx-auto px-8 py-8 sm:py-16 lg:w-2/3">
 			<h1 class="text-dark-neon font-neon">Leaf's Blog</h1>
 			<nav
@@ -35,7 +36,7 @@
 					<p>
 						By default, installing and updating Homebrew packages doesn’t work
 						when run as a normal, non-admin user. This is what I do to fix that.
-						Run this as admin, but replace<code>leaf</code> with your normal
+						Run this as admin, but replace <code>leaf</code> with your normal
 						user’s name.
 					</p>
 					<pre>sudo chown -R leaf /opt/homebrew/</pre>
@@ -101,29 +102,5 @@ defaults write -g "NSUserKeyEquivalents" '{
 				</details>
 			</div>
 		</div>
-		<script>
-			//open the accordion for the current url hash
-			window.onload = function openAccordion() {
-				const hash = window.location.hash;
-				if (hash) {
-					const accordion = document.querySelector(`details${hash}`);
-					if (accordion) accordion.open = true;
-				}
-			};
-
-			function addurl(newhash) {
-				// When client opens an accordion close any other open accordions.
-				const allAccordions = document.querySelectorAll("details");
-				allAccordions.forEach((accordion) => {
-					if (accordion.id !== newhash && accordion.open === true)
-						accordion.open = false;
-				});
-				// Is client local? If so, include html file extension when adding the hash to the url
-				location.href =
-					window.location.protocol === "file:"
-						? "blog.html#" + newhash
-						: "blog#" + newhash;
-			}
-		</script>
 	</body>
 </html>
