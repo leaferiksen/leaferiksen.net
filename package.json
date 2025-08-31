@@ -1,15 +1,14 @@
 {
 	"dependencies": {
-		"@tailwindcss/cli": "^4.1.7",
+		"@tailwindcss/cli": "^4.1.12",
 		"@tailwindcss/typography": "^0.5.16",
-		"tailwindcss": "^4.1.7"
+		"tailwindcss": "^4.1.12"
 	},
 	"devDependencies": {
-		"prettier-plugin-tailwindcss": "^0.6.12"
+		"prettier-plugin-tailwindcss": "^0.6.14"
 	},
 	"prettier": {
 		"plugins": ["prettier-plugin-tailwindcss"],
-		"tailwindStylesheet": "app.css",
-		"useTabs": true
+		"tailwindStylesheet": "app.css"
 	}
 }

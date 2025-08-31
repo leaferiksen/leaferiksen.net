@@ -7,21 +7,14 @@
 		<link href="dist.css" rel="stylesheet" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Vibur&display=swap"
-			rel="stylesheet"
-		/>
+		<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Vibur&display=swap" rel="stylesheet" />
 	</head>
 
-	<body
-		class="prose-xl max-w-none bg-light-bg text-light-tx dark:bg-dark-bg dark:text-dark-tx prose-h1:text-light-re prose-h1:dark:text-dark-re prose-h2:text-light-or prose-h2:dark:text-dark-or prose-h3:text-light-ye prose-h3:dark:text-dark-ye prose-a:text-light-pu prose-a:hover:text-dark-pu prose-a:dark:text-dark-pu prose-a:dark:hover:text-light-pu"
-	>
+	<body class="prose-xl max-w-none bg-light-bg text-light-tx dark:bg-dark-bg dark:text-dark-tx prose-h1:text-light-re prose-h1:dark:text-dark-re prose-h2:text-light-or prose-h2:dark:text-dark-or prose-h3:text-light-ye prose-h3:dark:text-dark-ye prose-a:text-light-pu prose-a:hover:text-dark-pu prose-a:dark:text-dark-pu prose-a:dark:hover:text-light-pu">
 		<script src="assets/blog.js"></script>
 		<div class="container mx-auto px-8 py-8 sm:py-16 lg:w-2/3">
 			<h1 class="text-dark-neon font-neon">Leaf's Blog</h1>
-			<nav
-				class="flex flex-wrap gap-4 prose-a:text-light-ma! prose-a:hover:text-dark-ma! prose-a:dark:text-dark-ma! prose-a:dark:hover:text-light-ma!"
-			>
+			<nav class="flex flex-wrap gap-4 prose-a:text-light-ma! prose-a:hover:text-dark-ma! prose-a:dark:text-dark-ma! prose-a:dark:hover:text-light-ma!">
 				<a href="/">About Me</a>
 				<a href="projects">My Projects</a>
 				<span aria-current="page">My Blog</span>
@@ -29,61 +22,27 @@
 			<div class="mt-6 border-t border-dark-bg pt-2 dark:border-light-bg">
 				<details id="homebrew" class="pt-4">
 					<summary onclick="addurl('homebrew')" class="cursor-pointer">
-						<strong
-							>(2024-10-07) Using Homebrew Without Admin Privileges</strong
-						>
+						<strong>(2024-10-07) Using Homebrew Without Admin Privileges</strong>
 					</summary>
-					<p>
-						By default, installing and updating Homebrew packages doesn’t work
-						when run as a normal, non-admin user. This is what I do to fix that.
-						Run this as admin, but replace <code>leaf</code> with your normal
-						user’s name.
-					</p>
+					<p>By default, installing and updating Homebrew packages doesn’t work when run as a normal, non-admin user. This is what I do to fix that. Run this as admin, but replace <code>leaf</code> with your normal user’s name.</p>
 					<pre>sudo chown -R leaf /opt/homebrew/</pre>
-					<p>
-						Put the following in your normal user's <code>~/.zshrc</code> file.
-					</p>
+					<p>Put the following in your normal user's <code>~/.zshrc</code> file.</p>
 					<pre>
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 export HOMEBREW_CASK_OPTS="--appdir=~/Applications"</pre
 					>
-					<p>
-						Just the first two lines are enough to install formulae. If you want
-						Homebrew to handle casks, include the third line to tell Homebrew to
-						install to the normal user's ~/Applications/ instead of
-						/Applications/.
-					</p>
+					<p>Just the first two lines are enough to install formulae. If you want Homebrew to handle casks, include the third line to tell Homebrew to install to the normal user's ~/Applications/ instead of /Applications/.</p>
 				</details>
 				<details id="macos-tiling" class="pt-4">
 					<summary onclick="addurl('macos-tiling')" class="cursor-pointer">
-						<strong
-							>(2024-09-27) Fixing macOS Window Tiling Keyboard
-							Shortcuts</strong
-						>
+						<strong>(2024-09-27) Fixing macOS Window Tiling Keyboard Shortcuts</strong>
 					</summary>
+					<p>Keyboard shortcuts for macOS window tiling use the Apple's globe key and control, so they don't work with third party keyboards. In System Settings -> Keyboard -> Keyboard Shortcuts you can set caps lock to globe and solve the issue, but if you want to use just caps lock without control, keep reading.</p>
+					<p>In the same menu, go to the App Shortcuts tab. Click the +, pick a shortcut, and enter the name of a tiling action (all of them can be found in the menu bar -> Window -> Move & Resize).</p>
 					<p>
-						Keyboard shortcuts for macOS window tiling use the Apple's globe key
-						and control, so they don't work with third party keyboards. In
-						System Settings -> Keyboard -> Keyboard Shortcuts you can set caps
-						lock to globe and solve the issue, but if you want to use just caps
-						lock without control, keep reading.
-					</p>
-					<p>
-						In the same menu, go to the App Shortcuts tab. Click the +, pick a
-						shortcut, and enter the name of a tiling action (all of them can be
-						found in the menu bar -> Window -> Move & Resize).
-					</p>
-					<p>
-						Setting all these by hand can be a pain, so I figured out how to
-						automate everything from the terminal. The command below uses the
-						keycodes cmd(@) + opt(~) + ctrl(^) + arrows(obscure unicode) for
-						tiling to halves, adding shift($) for quarter tiling. Those
-						modifiers probably sound like terrible hand gymnastics, but I just
-						map all three keys to caps lock using
-						<a href="https://hyperkey.app/">Hyperkey</a> or
-						<a href="https://karabiner-elements.pqrs.org/">Karabiner-Elements</a
-						>.
+						Setting all these by hand can be a pain, so I figured out how to automate everything from the terminal. The command below uses the keycodes cmd(@) + opt(~) + ctrl(^) + arrows(obscure unicode) for tiling to halves, adding shift($) for quarter tiling. Those modifiers probably sound like terrible hand gymnastics, but I just map all three keys to caps lock using
+						<a href="https://hyperkey.app/">Hyperkey</a> or <a href="https://karabiner-elements.pqrs.org/">Karabiner-Elements</a>.
 					</p>
 					<pre>
 defaults write -g "NSUserKeyEquivalents" '{
