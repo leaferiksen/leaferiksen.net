@@ -6,6 +6,7 @@ body {
 	overflow-y: hidden;
 	margin: auto;
 	padding: 2em;
+	font-family: "Atkinson Hyperlegible Next";
 	font-size: 18px;
 	color: lightgray;
 	background-image: url("img/grass.png");
@@ -14,27 +15,55 @@ body {
 body::-webkit-scrollbar {
 	display: none;
 }
-a {
-	text-decoration: none;
-	color: lightgreen;
+.frutiger-button {
 	padding: 0.5em;
 	border-radius: 0.5em;
-
 	background: linear-gradient(rgba(83, 85, 87, 0.9) 0%, rgba(14, 15, 15, 0.9) 100%);
 	box-shadow:
 		0px 10px 15px rgba(0, 0, 0, 0.3),
 		inset 0px 2px 1px rgba(255, 255, 255, 0.3),
 		inset 0px -2px 1px rgba(0, 0, 0, 0.4);
 }
-.container {
-	height: 30em;
-	width: 95vw;
-	background: linear-gradient(180deg, rgba(83, 85, 87, 0.9) 0%, rgba(14, 15, 15, 0.9) 100%);
+.frutiger-box {
+	padding: 1em;
+	background: linear-gradient(rgba(83, 85, 87, 0.8) 0%, rgba(14, 15, 15, 0.8) 100%);
 	box-shadow:
 		0px 10px 15px rgba(0, 0, 0, 0.3),
 		inset 0px 2px 1px rgba(255, 255, 255, 0.3),
 		inset 0px -2px 1px rgba(0, 0, 0, 0.4);
-	border-radius: 15px;
+}
+.frutiger-bar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+	width: 95vw;
+	height: 3em;
+	border-radius: 0.5em;
+	margin-bottom: 1em;
+	background: linear-gradient(to bottom, rgba(119, 119, 119, 0.8) 0%, rgba(97, 97, 97, 0.8) 10%, rgba(35, 35, 35, 0.8) 50%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.8) 60%, rgba(32, 32, 32, 0.8) 100%);
+}
+
+.left,
+.right {
+	flex: 1;
+}
+.icon {
+	width: 2.5em;
+	margin-top: 0.2em;
+	margin-left: 0.5em;
+}
+h1 {
+	font-size: 1.5em;
+}
+a {
+	text-decoration: none;
+	color: lightgreen;
+}
+.container {
+	height: 30em;
+	width: 95vw;
+	border-radius: 1em;
 }
 .h-scroll {
 	width: 30em;
@@ -59,8 +88,3 @@ a {
 	display: table-caption;
 	height: 3em;
 }
-/* @-moz-document url-prefix() { */
-/*   h1, p{ */
-/*     color:pink; */
-/*   } */
-/* } */
