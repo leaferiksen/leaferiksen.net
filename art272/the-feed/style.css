@@ -1,0 +1,66 @@
+:root {
+	scrollbar-color: transparent transparent;
+	scrollbar-width: thin;
+}
+body {
+	overflow-y: hidden;
+	margin: auto;
+	padding: 2em;
+	font-size: 18px;
+	color: lightgray;
+	background-image: url("img/grass.png");
+	background-attachment: fixed;
+}
+body::-webkit-scrollbar {
+	display: none;
+}
+a {
+	text-decoration: none;
+	color: lightgreen;
+	padding: 0.5em;
+	border-radius: 0.5em;
+
+	background: linear-gradient(rgba(83, 85, 87, 0.9) 0%, rgba(14, 15, 15, 0.9) 100%);
+	box-shadow:
+		0px 10px 15px rgba(0, 0, 0, 0.3),
+		inset 0px 2px 1px rgba(255, 255, 255, 0.3),
+		inset 0px -2px 1px rgba(0, 0, 0, 0.4);
+}
+.container {
+	height: 30em;
+	width: 95vw;
+	background: linear-gradient(180deg, rgba(83, 85, 87, 0.9) 0%, rgba(14, 15, 15, 0.9) 100%);
+	box-shadow:
+		0px 10px 15px rgba(0, 0, 0, 0.3),
+		inset 0px 2px 1px rgba(255, 255, 255, 0.3),
+		inset 0px -2px 1px rgba(0, 0, 0, 0.4);
+	border-radius: 15px;
+}
+.h-scroll {
+	width: 30em;
+	height: 90vw;
+	overflow-y: auto;
+	rotate: -90deg;
+	translate: -30em;
+	transform-origin: right top;
+	padding-top: 1em;
+}
+
+.h-scroll > div {
+	rotate: 90deg;
+}
+.h-scroll > div > figure {
+	display: table;
+}
+.h-scroll > div > figure > img {
+	height: 20em;
+}
+.h-scroll > div > figure > figcaption {
+	display: table-caption;
+	height: 3em;
+}
+/* @-moz-document url-prefix() { */
+/*   h1, p{ */
+/*     color:pink; */
+/*   } */
+/* } */
