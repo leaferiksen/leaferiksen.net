@@ -1,16 +1,24 @@
 body {
 	scrollbar-color: rgba(14, 15, 15, 0.9) transparent;
 	overflow-y: hidden;
-	margin: 2em;
 	font-family: "Atkinson Hyperlegible Next";
 	font-size: 18px;
 	color: lightgray;
-	background-image: url("img/grass.png");
+	background-image: url("img/windows_vista_59.jpg");
 	background-attachment: fixed;
 }
-body::-webkit-scrollbar {
-	display: none;
+.feed {
+	margin: 2em;
 }
+.index-title {
+	margin: 4em;
+	display: flex;
+	justify-content: space-between;
+}
+.index-title > div {
+	text-align: right;
+}
+
 .frutiger-button {
 	padding: 0.5em;
 	border-radius: 0.5em;
@@ -48,6 +56,15 @@ body::-webkit-scrollbar {
 	width: 2.5em;
 	margin-top: 0.2em;
 	margin-left: 0.5em;
+}
+.gif {
+	margin: 1em;
+	display: flex;
+	justify-content: center;
+}
+.gif > img {
+	image-rendering: crisp-edges;
+	scale: 400%;
 }
 h1 {
 	font-size: 1.5em;
