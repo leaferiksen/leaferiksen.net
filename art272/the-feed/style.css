@@ -1,11 +1,7 @@
-:root {
-	scrollbar-color: transparent transparent;
-	scrollbar-width: thin;
-}
 body {
+	scrollbar-color: rgba(14, 15, 15, 0.9) transparent;
 	overflow-y: hidden;
-	margin: auto;
-	padding: 2em;
+	margin: 2em;
 	font-family: "Atkinson Hyperlegible Next";
 	font-size: 18px;
 	color: lightgray;
@@ -37,7 +33,7 @@ body::-webkit-scrollbar {
 	justify-content: center;
 	align-items: center;
 	margin: 0 auto;
-	width: 95vw;
+	width: 100%;
 	height: 3em;
 	border-radius: 0.5em;
 	margin-bottom: 1em;
@@ -61,18 +57,18 @@ a {
 	color: lightgreen;
 }
 .container {
-	height: 30em;
-	width: 95vw;
+	--container-height: 28em;
+	height: var(--container-height);
 	border-radius: 1em;
 }
 .h-scroll {
-	width: 30em;
+	width: var(--container-height);
 	height: 90vw;
 	overflow-y: auto;
 	rotate: -90deg;
-	translate: -30em;
+	translate: calc(var(--container-height) * -1);
 	transform-origin: right top;
-	padding-top: 1em;
+	margin-top: -1em;
 }
 
 .h-scroll > div {
