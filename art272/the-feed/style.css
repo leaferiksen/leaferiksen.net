@@ -104,7 +104,7 @@ a {
 	height: calc(100vw - 6em);
 	overflow-y: auto;
 	rotate: -90deg;
-	translate: calc(calc(var(--container-height) - 2em) * -1);
+	translate: calc(calc(var(--container-height) - 1.5em) * -1);
 	transform-origin: right top;
 	margin-top: -1em;
 	padding-top: -1em;
@@ -120,6 +120,7 @@ a {
 }
 .h-scroll > div > figure > img {
 	height: 20em;
+	margin-top: 0.5em;
 }
 .round {
 	border-radius: 1em;
