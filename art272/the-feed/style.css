@@ -20,27 +20,14 @@ body {
 .index-title > div {
 	text-align: right;
 }
-
-.frutiger-button {
-	padding: 0.5em;
-	border-radius: 0.5em;
-	background: linear-gradient(rgba(83, 85, 87, 0.9) 0%, rgba(14, 15, 15, 0.9) 100%);
-	box-shadow:
-		0px 10px 15px rgba(0, 0, 0, 0.3),
-		inset 0px 2px 1px rgba(255, 255, 255, 0.3),
-		inset 0px -2px 1px rgba(0, 0, 0, 0.4);
-}
-.frutiger-box {
-	padding: 1em;
-	border-radius: 1em;
-	backdrop-filter: blur(4px);
+.frutiger {
 	background: linear-gradient(rgba(83, 85, 87, 0.8) 0%, rgba(14, 15, 15, 0.8) 100%);
 	box-shadow:
 		0px 10px 15px rgba(0, 0, 0, 0.3),
 		inset 0px 2px 1px rgba(255, 255, 255, 0.3),
 		inset 0px -2px 1px rgba(0, 0, 0, 0.4);
 }
-.frutiger-bar {
+.bar {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -49,11 +36,6 @@ body {
 	border-radius: 1em;
 	margin-bottom: 1em;
 	backdrop-filter: blur(4px);
-	background: linear-gradient(rgba(119, 119, 119, 0.8) 0%, rgba(97, 97, 97, 0.8) 10%, rgba(35, 35, 35, 0.8) 50%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.8) 60%, rgba(32, 32, 32, 0.8) 100%);
-	box-shadow:
-		0px 10px 15px rgba(0, 0, 0, 0.3),
-		inset 0px 2px 1px rgba(255, 255, 255, 0.3),
-		inset 0px -2px 1px rgba(0, 0, 0, 0.4);
 }
 .center {
 	display: flex;
@@ -72,6 +54,25 @@ body {
 .left,
 .right {
 	flex: 1;
+}
+button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+button > a:hover {
+	filter: brightness(80%);
+}
+button:active {
+	padding-top: 0.3em;
+}
+button > a {
+	padding: 0.5em;
+	border-radius: 0.5em;
 }
 .icon {
 	width: 48px;
@@ -92,13 +93,18 @@ a {
 	text-decoration: none;
 	color: lightgreen;
 }
+.box {
+	padding: 1em;
+	border-radius: 1em;
+	backdrop-filter: blur(4px);
+}
 .container {
 	--container-height: 28em;
 	height: var(--container-height);
 }
 .h-scroll {
 	width: calc(var(--container-height) - 2em);
-	height: 90vw;
+	height: calc(100vw - 6em);
 	overflow-y: auto;
 	rotate: -90deg;
 	translate: calc(calc(var(--container-height) - 2em) * -1);
