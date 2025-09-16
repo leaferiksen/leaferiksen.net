@@ -77,7 +77,7 @@ button > a {
 .icon {
 	width: 48px;
 	margin-top: 0.3em;
-	margin-left: 0.7em;
+	margin-left: 0.6em;
 }
 .gif {
 	margin: 1em;
@@ -88,17 +88,14 @@ button > a {
 	image-rendering: pixelated;
 	scale: 400%;
 }
-
 a {
 	text-decoration: none;
 	color: lightgreen;
 }
-.box {
+.container {
 	padding: 1em;
 	border-radius: 1em;
 	backdrop-filter: blur(4px);
-}
-.container {
 	--container-height: 28em;
 	height: var(--container-height);
 }
@@ -112,7 +109,6 @@ a {
 	margin-top: -1em;
 	padding-top: -1em;
 }
-
 .h-scroll > div {
 	rotate: 90deg;
 }
