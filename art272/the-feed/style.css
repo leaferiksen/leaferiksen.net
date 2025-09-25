@@ -6,7 +6,6 @@ body {
 	overflow-y: hidden;
 	font-family: "Atkinson Hyperlegible Next";
 	font-size: 18px;
-	color: lightgray;
 	background-image: url("img/grass.png");
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -14,7 +13,7 @@ body {
 }
 .frutiger {
 	color: light-dark(rgb(20, 20, 20), lightgray);
-	background: linear-gradient(light-dark(rgba(220, 230, 240, 0.8), rgba(83, 85, 87, 0.8)) 0%, light-dark(rgba(180, 200, 190, 0.8), rgba(14, 15, 15, 0.8)) 100%);
+	background: linear-gradient(light-dark(rgba(180, 240, 240, 0.8), rgba(60, 80, 100, 0.8)) 0%, light-dark(rgba(180, 200, 250, 0.8), rgba(10, 30, 60, 0.8)) 100%);
 	box-shadow:
 		0px 10px 15px light-dark(rgba(83, 85, 87, 0.3), rgba(0, 0, 0, 0.3)),
 		inset 0px 2px 1px light-dark(rgba(40, 45, 50, 0.3), rgba(255, 255, 255, 0.3)),
@@ -82,12 +81,15 @@ button {
 			justify-content: center;
 			align-items: center;
 			h1 {
-				font-size: 1.6em;
-				margin: 0.3em;
+				font-size: 1.8em;
+				margin-top: 0.3em;
+				margin-bottom: 0.2em;
 			}
-			p {
+			h2 {
+				font-size: 1.3em;
+				font-weight: 500;
 				margin-top: 0em;
-				margin-bottom: 0.5em;
+				margin-bottom: 0.3em;
 			}
 		}
 		&:nth-child(1),
