@@ -1,0 +1,74 @@
+*,
+::before,
+::after {
+	box-sizing: border-box;
+}
+:root {
+	color-scheme: light dark;
+}
+html {
+	font-size: 20px;
+	font-family: system-ui; /* Improve consistency of default fonts in all browsers. */
+	line-height: 1.15; /* 1. Correct the line height in all browsers. */
+	-webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font size after orientation changes in iOS. */
+	tab-size: 4; /* 3. Use a more readable tab size (opinionated). */
+	text-wrap-style: pretty;
+	color: CanvasText;
+	background-color: Canvas;
+}
+body {
+	margin: 10vh 10vw 10vh 10vw;
+	width: 80vw;
+}
+p {
+	position: relative;
+	top: 1em;
+}
+img {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	max-width: 90%;
+	max-height: 60%;
+	position: absolute;
+}
+nav {
+	a {
+		color: Canvas;
+		text-decoration: none;
+	}
+	:not(:last-child) {
+		border-right: 0.2em solid currentColor;
+		padding-right: 0.5em;
+		margin-right: 0.5em;
+	}
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	background-color: CanvasText;
+	padding: 0.5em;
+	overscroll-behavior: auto;
+	position: fixed;
+	bottom: 2em;
+	left: 5vw;
+	width: 90vw;
+	z-index: 1;
+}
+#absolute {
+	border: 0.5em solid yellow;
+	padding: 0.5em;
+	width: 30em;
+	position: absolute;
+	top: 5em;
+	left: 5vw;
+	width: 90vw;
+}
+#relative {
+	border: 0.5em solid red;
+	padding: 0.5em;
+	width: 30em;
+	position: relative;
+	top: 10em;
+	left: 5vw;
+	width: 90vw;
+}
