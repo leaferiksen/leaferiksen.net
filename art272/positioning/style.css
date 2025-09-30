@@ -22,7 +22,7 @@ body {
 }
 p {
 	position: relative;
-	top: 1em;
+	top: .5em;
 }
 img {
 	top: 50%;
