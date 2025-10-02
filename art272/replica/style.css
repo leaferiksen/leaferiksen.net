@@ -1,0 +1,135 @@
+body {
+	display: block !important;
+	font-size: 20px;
+	nav {
+		border-bottom: 0.1em solid black;
+		ul {
+			padding: 1em 2em 1em 1em;
+			list-style: none;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			li > span {
+				padding: 1em;
+			}
+			:nth-child(1):has(strong) {
+				font-family: "IBM Plex Sans", sans-serif;
+				font-size: 24px;
+				color: darkorange;
+				display: flex;
+				align-items: center;
+			}
+			:nth-child(2) {
+				display: flex;
+				align-items: center;
+				:nth-child(1) {
+					color: black;
+				}
+				:nth-child(2) {
+					cursor: pointer;
+					color: darkorange;
+					text-transform: uppercase;
+					border: 0.2em solid darkorange;
+					transition: all 0.25s ease;
+					&:hover {
+						color: white;
+						background-color: darkorange;
+					}
+				}
+			}
+		}
+	}
+	.intro {
+		font-family: "IBM Plex Sans", sans-serif;
+		border-bottom: 0.1em solid black;
+		background-color: peachpuff;
+		padding: 2em;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 5vw;
+		width: 100%;
+		div {
+			border-bottom: none;
+			flex-direction: column;
+			align-content: center;
+			gap: 0;
+			min-width: 10em;
+			width: 20em;
+			max-width: 100%;
+			span {
+				cursor: pointer;
+				font-size: 16px;
+				text-transform: uppercase;
+				padding: 0.5em;
+				text-align: center;
+				width: 80%;
+				color: darkorange;
+				border: 0.2em solid darkorange;
+				transition: all 0.25s ease;
+				&:hover {
+					color: white;
+					background-color: darkorange;
+				}
+			}
+		}
+		img {
+			border-bottom: none;
+			min-width: 10em;
+			width: 20em;
+			max-width: 100%;
+			aspect-ratio: 1 / 1;
+			object-fit: cover;
+			border-radius: 2em;
+		}
+	}
+	.approach {
+		border-bottom: 0.1em solid black;
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		div {
+			padding: calc(1em + 5vw);
+		}
+		img {
+			height: 100vh;
+			width: 50%;
+			aspect-ratio: 1 / 1;
+			object-fit: cover;
+			@media (max-width: 48rem) {
+				display: none;
+			}
+		}
+		h2,
+		h3 {
+			font-family: "IBM Plex Sans", sans-serif;
+		}
+	}
+	.studies {
+		min-height: 100vh;
+		h2 {
+			padding: calc(10vh);
+			text-align: center;
+		}
+		h2,
+		h3 {
+			font-family: "IBM Plex Sans", sans-serif;
+		}
+		div {
+			flex: 1;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			padding: 1em;
+			gap: 1em;
+			border-radius: 2em;
+			min-width: 10em;
+			div {
+				flex-wrap: nowrap;
+				min-width: 10em;
+				background-color: darkorange;
+				flex-direction: column;
+			}
+		}
+	}
+}
