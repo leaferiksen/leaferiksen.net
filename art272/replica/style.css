@@ -93,7 +93,7 @@ body {
 		}
 		img {
 			height: 100vh;
-			width: 50%;
+			width: 50vw;
 			aspect-ratio: 1 / 1;
 			object-fit: cover;
 			@media (max-width: 48rem) {
