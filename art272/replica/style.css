@@ -42,7 +42,7 @@ body {
 	.intro {
 		font-family: "IBM Plex Sans", sans-serif;
 		border-bottom: 0.1em solid black;
-		background-color: peachpuff;
+		background-color: #f3d0a4;
 		padding: 2em;
 		display: flex;
 		flex-wrap: wrap;
