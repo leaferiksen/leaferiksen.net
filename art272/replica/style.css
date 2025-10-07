@@ -49,6 +49,7 @@ body {
 		justify-content: center;
 		gap: 5vw;
 		width: 100%;
+		min-height: 80vh;
 		div {
 			border-bottom: none;
 			flex-direction: column;
