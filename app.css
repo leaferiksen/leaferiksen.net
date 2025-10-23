@@ -4,7 +4,7 @@
 /* https://tailwindcss.com/docs/colors#customizing-your-colors */
 
 @theme {
-	--default-font-family: "Atkinson Hyperlegible Next", var(--font-sans);
+	/* --default-font-family: "Atkinson Hyperlegible Next", var(--font-sans); */
 	--font-neon: "Vibur", var(--font-sans);
 	--shadow-round: 0 0 1rem;
 	--shadow-square: -1rem 1rem;
