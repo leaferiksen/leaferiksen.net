@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+	/* Disable default colors to prevent their use; feel free to re-enable as needed. */
+	--color-amber-*: initial;
+	--color-lime-*: initial;
+	--color-emerald-*: initial;
+	--color-teal-*: initial;
+	--color-sky-*: initial;
+	--color-indigo-*: initial;
+	--color-violet-*: initial;
+	--color-fuchsia-*: initial;
+	--color-pink-*: initial;
+	--color-rose-*: initial;
+	--color-slate-*: initial;
+	--color-zinc-*: initial;
+	--color-neutral-*: initial;
+	--color-stone-*: initial;
+
+	--color-purple: #674577;
+	--color-pink: #ffa3d6;
+	--color-blue: #64b9ca;
+	--color-beige: #ffebe5;
+}
