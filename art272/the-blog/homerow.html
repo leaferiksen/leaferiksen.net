@@ -6,32 +6,40 @@
 		<title>Document</title>
 		<link href="dist.css" rel="stylesheet" />
 	</head>
-	<body class="bg-purple font-serif text-white">
-		<header class="flex justify-center p-4 text-2xl">
-			<nav class="flex gap-4 rounded-xl bg-white p-2 text-black">
-				<li class="list-none">
-					<a class="px-2" href="index.html">🏠</a>
-				</li>
-				<li class="bg-purple list-none rounded-md text-white">
-					<a class="px-2" href="homerow.html" aria-current="page">Homerow</a>
-				</li>
-				<li class="list-none">
-					<a class="px-2" href="iina.html">IINA</a>
-				</li>
-				<li class="list-none">
-					<a class="px-2" href="quicklook.html">Quick Look</a>
-				</li>
-			</nav>
-		</header>
-		<div class="grid grid-cols-2 grid-rows-3 gap-4 py-8">
-			<div class="col-start-1 row-start-2 prose-xl pl-16">
-				<h1 class="text-beige">Homerow</h1>
-				<p>My mouse for everything (except adobe and figma)</p>
-				<button class="bg-blue my-2 rounded-xl px-3 py-1 text-white">Try it out in your browser!</button>
+	<body class="bg-purple overflow-y-scroll font-serif text-white">
+		<header class="flex justify-center p-4 text-xl">
+			<div class="mx-auto max-w-screen-xl">
+				<nav class="flex gap-4 rounded-xl bg-white/80 p-2 text-black backdrop-blur-lg">
+					<li class="list-none" data-tooltip="HM">
+						<a id="nav-home" class="px-2" href="index.html">🏠</a>
+						<span class="tooltip">HM</span>
+					</li>
+					<li class="bg-blue fade-in-blue list-none rounded-md text-white" data-tooltip="HR">
+						<a id="nav-homerow" class="px-2" href="homerow.html" aria-current="page">Homerow</a>
+						<span class="tooltip">HR</span>
+					</li>
+					<li class="list-none" data-tooltip="IN">
+						<a id="nav-iina" class="px-2" href="iina.html">IINA</a>
+						<span class="tooltip">IN</span>
+					</li>
+					<li class="list-none" data-tooltip="QL">
+						<a id="nav-quicklook" class="px-2" href="quicklook.html">Quick Look</a>
+						<span class="tooltip">QL</span>
+					</li>
+				</nav>
 			</div>
-			<div class="col-start-2 row-span-3 row-start-1">
-				<img class="h-full object-cover object-left" alt="" src="./assets/homerow.png" />
+		</header>
+		<div class="animate-fade-in grid gap-4 lg:grid-cols-2 lg:grid-rows-5">
+			<div class="col-start-1 row-span-3 row-start-2 prose-xl px-8">
+				<h1 class="text-beige">Homerow</h1>
+				<p>My mouse for everything (except adobe and figma). I like to keep my hands on the keyboard as much as possible, and this makes that easy.</p>
+				<p>This app is a one-time purchase of $35 with a student discount, and that feels reasonable to me, bc I see it as the best mouse I've ever used.</p>
+				<button id="homerowModeButton" class="bg-blue my-2 rounded-xl px-3 py-1 text-white">Try it out in your browser!</button>
+			</div>
+			<div class="row-span-5 lg:col-start-2 lg:row-start-1">
+				<img class="h-full object-cover object-left" alt="Homerow application screenshot" src="./assets/homerow.png" />
 			</div>
 		</div>
+		<script src="homerow-mode.js"></script>
 	</body>
 </html>

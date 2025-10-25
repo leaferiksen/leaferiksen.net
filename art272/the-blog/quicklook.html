@@ -6,9 +6,9 @@
 		<title>Document</title>
 		<link href="dist.css" rel="stylesheet" />
 	</head>
-	<body class="bg-purple font-serif text-white">
-		<header class="flex justify-center p-4 text-2xl">
-			<nav class="flex gap-4 rounded-xl bg-white p-2 text-black">
+	<body class="bg-purple overflow-y-scroll font-serif text-white">
+		<header class="flex justify-center p-4 text-xl">
+			<nav class="flex gap-4 rounded-xl bg-white/80 p-2 text-black backdrop-blur-lg">
 				<li class="list-none">
 					<a class="px-2" href="index.html">🏠</a>
 				</li>
@@ -18,24 +18,24 @@
 				<li class="list-none">
 					<a class="px-2" href="iina.html">IINA</a>
 				</li>
-				<li class="bg-purple list-none rounded-md text-white">
+				<li class="bg-blue fade-in-blue list-none rounded-md text-white">
 					<a class="px-2" href="quicklook.html">Quick Look</a>
 				</li>
 			</nav>
 		</header>
-		<div class="grid grid-cols-3 px-16">
+		<div class="animate-fade-in grid grid-cols-3 px-16">
 			<div class="col-span-2 prose-xl self-center">
 				<h1>Quick Look</h1>
-				<p>Almost no one in Gen Z bothers to check for keyboard shortcuts, so here we are</p>
+				<p>Calling QuickLook a text preview tool doen’t nearly do it justice. It can render anything from calendar invites to webpages, and has a powerful plugin system to enable the preview many complex file formats.</p>
 			</div>
 			<div class="col-start-3">
-				<img class="h-full object-contain" alt="" src="./assets/quicklook-ical.png" />
+				<img class="h-full object-contain" alt="Quick Look preview of an iCal event" src="./assets/quicklook-ical.png" />
 			</div>
 			<div class="">
-				<img class="h-full object-contain" alt="" src="./assets/quicklook-web.png" />
+				<img class="h-full object-contain" alt="Quick Look preview of a webpage" src="./assets/quicklook-web.png" />
 			</div>
 			<div class="col-span-2 col-start-2 prose-xl self-center">
-				<p>Calling it a text preview doen’t nearly do it justice. It can render calendar invites, webpages, and has a powerful plugin system.</p>
+				<p>Almost no one my age bothers to check for keyboard shortcuts, so I thought including a system feature might be useful.</p>
 			</div>
 		</div>
 	</body>

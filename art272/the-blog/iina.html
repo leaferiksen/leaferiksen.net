@@ -6,16 +6,16 @@
 		<title>Document</title>
 		<link href="dist.css" rel="stylesheet" />
 	</head>
-	<body class="bg-purple overflow-hidden font-serif text-white">
-		<header class="flex justify-center p-4 text-2xl">
-			<nav class="flex gap-4 rounded-xl bg-white p-2 text-black">
+	<body class="bg-purple overflow-y-scroll font-serif text-white">
+		<header class="flex justify-center p-4 text-xl">
+			<nav class="flex gap-4 rounded-xl bg-white/80 p-2 text-black backdrop-blur-lg">
 				<li class="list-none">
 					<a class="px-2" href="index.html">🏠</a>
 				</li>
 				<li class="list-none">
 					<a class="px-2" href="homerow.html" aria-current="page">Homerow</a>
 				</li>
-				<li class="bg-purple list-none rounded-md text-white">
+				<li class="bg-blue fade-in-blue list-none rounded-md text-white">
 					<a class="px-2" href="iina.html">IINA</a>
 				</li>
 				<li class="list-none">
@@ -23,13 +23,13 @@
 				</li>
 			</nav>
 		</header>
-		<div class="grid grid-cols-3 gap-4 py-8">
-			<div class="col-start-2 prose-xl text-center">
+		<div class="animate-fade-in grid grid-cols-3 gap-4 py-8">
+			<div class="col-span-3 prose-xl px-8 text-center md:col-span-1 md:col-start-2">
 				<h1 class="text-beige">IINA</h1>
 				<p>The modern media player for macOS. Picture the magic of QuickTime in 2010, if it had just kept getting better.</p>
 			</div>
 			<div class="col-span-3">
-				<img class="" alt="" src="./assets/iina.png" />
+				<img class="" alt="IINA media player playing Gundam" src="./assets/iina.png" />
 			</div>
 		</div>
 	</body>
