@@ -797,7 +797,7 @@
     background-color: transparent;
   }
   to {
-    color: var: color(--color-white);
+    color: color(--color-white);
     background-color: var(--color-blue);
   }
 }
@@ -821,6 +821,9 @@ body {
 nav li {
   position: relative;
 }
+#homerowModeButton {
+  position: relative;
+}
 .tooltip {
   position: absolute;
   bottom: -25px;
@@ -834,7 +837,7 @@ nav li {
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.3s ease,	visibility 0.3s ease;
 }
 body.homerow-mode-active .tooltip {
   opacity: 1;

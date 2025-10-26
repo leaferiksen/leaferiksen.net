@@ -1,10 +1,12 @@
 let keyBuffer = "";
 let timeoutId;
+const HOMEROW_MODE_KEY = "homerowModeActive";
 
 function toggleHomerowMode() {
-	document.body.classList.toggle("homerow-mode-active");
+	const isActive = document.body.classList.toggle("homerow-mode-active");
+	localStorage.setItem(HOMEROW_MODE_KEY, isActive);
 
-	if (document.body.classList.contains("homerow-mode-active")) {
+	if (isActive) {
 		document.addEventListener("keydown", handleKeyDown);
 	} else {
 		document.removeEventListener("keydown", handleKeyDown);
@@ -30,8 +32,15 @@ function handleKeyDown(event) {
 				if (item.dataset.tooltip === keyBuffer) {
 					item.querySelector("a").click();
 					event.preventDefault();
-					break;
+					keyBuffer = ""; // Reset buffer after attempting a match
+					return;
 				}
+			}
+
+			const homerowModeButton = document.getElementById("homerowModeButton");
+			if (homerowModeButton && homerowModeButton.dataset.tooltip === keyBuffer) {
+				homerowModeButton.click();
+				event.preventDefault();
 			}
 			keyBuffer = ""; // Reset buffer after attempting a match
 		}
@@ -42,6 +51,13 @@ function handleKeyDown(event) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+	// Initialize mode from localStorage
+	const savedMode = localStorage.getItem(HOMEROW_MODE_KEY);
+	if (savedMode === "true") {
+		document.body.classList.add("homerow-mode-active");
+		document.addEventListener("keydown", handleKeyDown);
+	}
+
 	const homerowModeButton = document.getElementById("homerowModeButton");
 	if (homerowModeButton) {
 		homerowModeButton.addEventListener("click", toggleHomerowMode);
