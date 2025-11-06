@@ -180,6 +180,9 @@
   .absolute {
     position: absolute;
   }
+  .relative {
+    position: relative;
+  }
   .col-span-1 {
     grid-column: span 1 / span 1;
   }
@@ -840,9 +843,6 @@
 }
 .bg-fade-in {
   animation: fadeIn 0.5s ease-out forwards;
-}
-body {
-  scrollbar-gutter: stable both-edges;
 }
 #homerowModeButton {
   position: relative;

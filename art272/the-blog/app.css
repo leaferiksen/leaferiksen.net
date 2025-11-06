@@ -4,7 +4,6 @@
 .nav-fade-in {
 	animation: fadeInBackground 0.5s ease-in-out forwards;
 }
-
 @keyframes fadeInBackground {
 	from {
 		color: black;
@@ -20,19 +19,13 @@
 		opacity: 1;
 	}
 }
-
 .bg-fade-in {
 	animation: fadeIn 0.5s ease-out forwards;
-}
-
-body {
-	scrollbar-gutter: stable both-edges;
 }
 
 #homerowModeButton {
 	position: relative;
 }
-
 .tooltip {
 	position: absolute;
 	bottom: -25px; /* Adjust as needed to position below the button */
@@ -50,7 +43,6 @@ body {
 		opacity 0.3s ease,
 		visibility 0.3s ease;
 }
-
 body.homerow-mode-active .tooltip {
 	opacity: 1;
 	visibility: visible;

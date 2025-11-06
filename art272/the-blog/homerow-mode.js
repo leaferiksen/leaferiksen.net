@@ -4,6 +4,7 @@ const HOMEROW_MODE_KEY = "homerowModeActive";
 
 function toggleHomerowMode() {
 	const isActive = document.body.classList.toggle("homerow-mode-active");
+	console.log("Homerow Mode Active:", isActive);
 	localStorage.setItem(HOMEROW_MODE_KEY, isActive);
 
 	if (isActive) {
