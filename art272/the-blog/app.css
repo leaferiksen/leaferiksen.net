@@ -1,42 +1,15 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-@theme {
-	/* Disable default colors to prevent their use; feel free to re-enable as needed. */
-	--color-amber-*: initial;
-	--color-lime-*: initial;
-	--color-emerald-*: initial;
-	--color-teal-*: initial;
-	--color-sky-*: initial;
-	--color-indigo-*: initial;
-	--color-violet-*: initial;
-	--color-fuchsia-*: initial;
-	--color-pink-*: initial;
-	--color-rose-*: initial;
-	--color-slate-*: initial;
-	--color-zinc-*: initial;
-	--color-neutral-*: initial;
-	--color-stone-*: initial;
-
-	--color-purple: #674577;
-	--color-pink: #ffa3d6;
-	--color-blue: #3a91a2;
-	--color-beige: #ffebe5;
+.nav-fade-in {
+	animation: fadeInBackground 0.5s ease-in-out forwards;
 }
 
 @keyframes fadeInBackground {
 	from {
-		color: var(--color-black);
+		color: black;
 		background-color: transparent;
 	}
-	to {
-		color: color(--color-white);
-		background-color: var(--color-blue);
-	}
-}
-
-.fade-in-blue {
-	animation: fadeInBackground 0.5s ease-in-out forwards;
 }
 
 @keyframes fadeIn {
@@ -48,16 +21,12 @@
 	}
 }
 
-.animate-fade-in {
-	animation: fadeIn 1s ease-out forwards;
+.bg-fade-in {
+	animation: fadeIn 0.5s ease-out forwards;
 }
 
 body {
 	scrollbar-gutter: stable both-edges;
-}
-
-nav li {
-	position: relative;
 }
 
 #homerowModeButton {
@@ -69,8 +38,8 @@ nav li {
 	bottom: -25px; /* Adjust as needed to position below the button */
 	left: 50%;
 	transform: translateX(-50%);
-	background-color: #333;
-	color: #fff;
+	background-color: oklch(94.5% 0.129 101.54);
+	color: oklch(12.9% 0.042 264.695);
 	padding: 2px 6px;
 	border-radius: 4px;
 	font-size: 0.75rem;
