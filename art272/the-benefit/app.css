@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@theme {
+	--default-font-family: "Caveat", var(--font-sans);
+	--font-display: "Momo Signature", var(--font-sans);
+	/* Disable default colors to prevent their use; feel free to re-enable as needed. */
+	--color-amber-*: initial;
+	--color-lime-*: initial;
+	--color-emerald-*: initial;
+	--color-teal-*: initial;
+	--color-sky-*: initial;
+	--color-indigo-*: initial;
+	--color-violet-*: initial;
+	--color-fuchsia-*: initial;
+	--color-pink-*: initial;
+	--color-rose-*: initial;
+	--color-slate-*: initial;
+	--color-zinc-*: initial;
+	--color-neutral-*: initial;
+	--color-stone-*: initial;
+	/* Specify new default colors. */
+	--color-light-orange: #fcb08c;
+	--color-orange: #ef9d7f;
+	--color-dark-orange: #d6938a;
+	--color-brown: #b48d92;
+	--color-light-brown: #a597a1;
+	--color-dark-blue: #8fa0bf;
+	--color-blue: #9aabc9;
+	--color-light-blue: #a5b7d4;
+}
