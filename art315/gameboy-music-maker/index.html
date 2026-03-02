@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GameBoy Music Maker</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1a2e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Press Start 2P', monospace;
+    background-image: 
+      radial-gradient(ellipse at 20% 50%, rgba(120,40,200,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(0,180,255,0.1) 0%, transparent 50%);
+  }
+
+  .title {
+    color: #9bbc0f;
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px #9bbc0f;
+    animation: flicker 4s infinite;
+  }
+
+  @keyframes flicker {
+    0%,95%,100% { opacity: 1; }
+    96% { opacity: 0.7; }
+    97% { opacity: 1; }
+    98% { opacity: 0.5; }
+  }
+
+  .gameboy {
+    width: 360px;
+    background: linear-gradient(160deg, #c8c8d0 0%, #a8a8b8 40%, #9090a0 100%);
+    border-radius: 12px 12px 60px 12px;
+    padding: 20px;
+    box-shadow:
+      inset 0 2px 4px rgba(255,255,255,0.6),
+      inset 0 -3px 6px rgba(0,0,0,0.3),
+      0 20px 60px rgba(0,0,0,0.7),
+      0 0 0 2px rgba(0,0,0,0.4);
+    position: relative;
+  }
+
+  .gameboy::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 12px 12px 60px 12px;
+    background: linear-gradient(120deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Screen area */
+  .screen-housing {
+    background: #606070;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 16px;
+    box-shadow: inset 0 3px 8px rgba(0,0,0,0.6), 0 1px 2px rgba(255,255,255,0.3);
+    position: relative;
+  }
+
+  .screen-label {
+    color: #9bbc0f;
+    font-size: 5px;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 6px;
+    opacity: 0.8;
+  }
+
+  .screen {
+    background: #0f380f;
+    border-radius: 4px;
+    padding: 12px;
+    height: 240px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+  }
+
+  .screen::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.05) 2px,
+      rgba(0,0,0,0.05) 4px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .screen-content {
+    color: #9bbc0f;
+    font-size: 9px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .screen-title {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #306230;
+    padding-bottom: 6px;
+    margin-bottom: 2px;
+  }
+
+  .bpm-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8px;
+  }
+
+  .bpm-val {
+    font-size: 14px;
+    color: #8bac0f;
+  }
+
+  .sequencer-display {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    gap: 1px;
+    margin-top: 2px;
+  }
+
+  .seq-cell-display {
+    height: 10px;
+    background: #306230;
+    border-radius: 1px;
+  }
+  .seq-cell-display.active { background: #9bbc0f; }
+  .seq-cell-display.playing { background: #fff; }
+
+  .waveform {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 1px;
+    overflow: hidden;
+  }
+
+  .wave-bar {
+    flex: 1;
+    background: #306230;
+    border-radius: 1px 1px 0 0;
+    transition: height 0.05s;
+    min-height: 1px;
+  }
+
+  /* Power LED */
+  .power-led {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #ff2244;
+    box-shadow: 0 0 6px #ff2244;
+    position: absolute;
+    top: 8px; right: 10px;
+  }
+  .power-led.on { animation: pulse-led 1s ease-in-out infinite; }
+  @keyframes pulse-led {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* Controls section */
+  .controls-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    gap: 8px;
+  }
+
+  /* D-pad */
+  .dpad-section { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+
+  .dpad {
+    display: grid;
+    grid-template-columns: 44px 44px 44px;
+    grid-template-rows: 44px 44px 44px;
+    gap: 3px;
+  }
+
+  .dpad-btn {
+    background: linear-gradient(145deg, #333340, #222230);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9bbc0f;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1);
+    transition: all 0.1s;
+    font-family: inherit;
+  }
+
+  .dpad-btn:active, .dpad-btn.pressed {
+    transform: scale(0.95);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    background: #444450;
+  }
+
+  .dpad-center { border-radius: 4px; }
+  .dpad-up { border-radius: 4px 4px 0 0; }
+  .dpad-down { border-radius: 0 0 4px 4px; }
+  .dpad-left { border-radius: 4px 0 0 4px; }
+  .dpad-right { border-radius: 0 4px 4px 0; }
+
+  .dpad-label {
+    font-size: 5px;
+    color: #666677;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* Sound pad area */
+  .pad-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pad-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .pad-btn {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.08s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pad-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 40%;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50% 50% 0 0;
+  }
+
+  .pad-btn:active, .pad-btn.pressed {
+    transform: scale(0.92) translateY(2px);
+    filter: brightness(1.3);
+  }
+
+  .pad-a { background: linear-gradient(145deg, #cc2244, #991133); box-shadow: 0 4px 0 #660022, 0 6px 10px rgba(0,0,0,0.4); color: #fff; }
+  .pad-b { background: linear-gradient(145deg, #3344cc, #223399); box-shadow: 0 4px 0 #001166, 0 6px 10px rgba(0,0,0,0.4); color: #fff; }
+  .pad-x { background: linear-gradient(145deg, #22aa44, #116633); box-shadow: 0 4px 0 #004422, 0 6px 10px rgba(0,0,0,0.4); color: #fff; }
+  .pad-y { background: linear-gradient(145deg, #ccaa22, #997711); box-shadow: 0 4px 0 #554400, 0 6px 10px rgba(0,0,0,0.4); color: #fff; }
+
+  /* Menu buttons */
+  .menu-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 14px;
+  }
+
+  .menu-btn {
+    background: linear-gradient(145deg, #444455, #333344);
+    border: none;
+    border-radius: 20px;
+    padding: 6px 12px;
+    color: #9bbc0f;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+    transition: all 0.1s;
+  }
+  .menu-btn:active { transform: scale(0.95); }
+  .menu-btn.active-btn { background: linear-gradient(145deg, #9bbc0f, #6a8a0a); color: #0f380f; }
+
+  /* Sequencer grid */
+  .sequencer-section {
+    background: #505060;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 12px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+  }
+
+  .seq-row-label {
+    font-size: 5px;
+    color: #9bbc0f;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .seq-grid {
+    display: grid;
+    grid-template-rows: repeat(4, 18px);
+    grid-template-columns: repeat(16, 1fr);
+    gap: 2px;
+  }
+
+  .seq-cell {
+    background: #30303e;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.1s;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
+    border: 1px solid rgba(0,0,0,0.3);
+    position: relative;
+  }
+
+  .seq-cell:hover { background: #404055; }
+
+  .seq-cell.active { border: none; }
+  .seq-cell[data-row="0"].active { background: #cc2244; box-shadow: 0 0 4px #cc2244; }
+  .seq-cell[data-row="1"].active { background: #3344cc; box-shadow: 0 0 4px #3344cc; }
+  .seq-cell[data-row="2"].active { background: #22aa44; box-shadow: 0 0 4px #22aa44; }
+  .seq-cell[data-row="3"].active { background: #ccaa22; box-shadow: 0 0 4px #ccaa22; }
+
+  .seq-cell.playing::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.5);
+    border-radius: 2px;
+    animation: flash 0.1s ease-out forwards;
+  }
+
+  @keyframes flash {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  /* BPM Slider */
+  .bpm-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 4px;
+  }
+
+  .bpm-label { font-size: 5px; color: #7777aa; letter-spacing: 1px; white-space: nowrap; }
+
+  input[type=range] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 4px;
+    background: #30303e;
+    border-radius: 2px;
+    outline: none;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: #9bbc0f;
+    cursor: pointer;
+    box-shadow: 0 0 4px #9bbc0f;
+  }
+
+  .bpm-number { font-size: 7px; color: #9bbc0f; min-width: 24px; text-align: right; }
+
+  /* Bottom speaker holes */
+  .speaker-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 3px;
+    margin-top: 8px;
+    padding-right: 10px;
+  }
+
+  .speaker-hole {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: #888898;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+  }
+
+  /* Nintendo-style logo */
+  .brand {
+    text-align: center;
+    font-size: 5px;
+    color: #777788;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+  }
+
+  /* Wave type buttons */
+  .wave-row {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .wave-btn {
+    background: #30303e;
+    border: 1px solid #444;
+    border-radius: 3px;
+    color: #666677;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 5px;
+    padding: 4px 6px;
+    cursor: pointer;
+    transition: all 0.1s;
+    letter-spacing: 0;
+  }
+  .wave-btn:hover { background: #404055; color: #9bbc0f; }
+  .wave-btn.selected { background: #9bbc0f; color: #0f380f; border-color: #9bbc0f; }
+
+  .track-indicators {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .track-ind {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 7px;
+    color: #555566;
+  }
+
+  .track-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  .track-dot-a { background: #cc2244; }
+  .track-dot-b { background: #3344cc; }
+  .track-dot-x { background: #22aa44; }
+  .track-dot-y { background: #ccaa22; }
+</style>
+</head>
+<body>
+
+<div class="title">♪ CHIPTUNE COMPOSER ♪</div>
+
+<div class="gameboy">
+  <div class="brand">SOUNDBOY COLOR</div>
+
+  <!-- Screen -->
+  <div class="screen-housing">
+    <div class="screen-label">DOT MATRIX WITH STEREO SOUND</div>
+    <div class="power-led on" id="powerLed"></div>
+    <div class="screen">
+      <div class="screen-content">
+        <div class="screen-title">♪ MUSIC MAKER ♪</div>
+        <div class="bpm-display">
+          <span>BPM</span>
+          <span class="bpm-val" id="screenBpm">120</span>
+          <span>STEP <span id="screenStep">--</span>/16</span>
+        </div>
+        <div class="track-indicators">
+          <div class="track-ind"><div class="track-dot track-dot-a"></div>KICK</div>
+          <div class="track-ind"><div class="track-dot track-dot-b"></div>BASS</div>
+          <div class="track-ind"><div class="track-dot track-dot-x"></div>LEAD</div>
+          <div class="track-ind"><div class="track-dot track-dot-y"></div>HI-HAT</div>
+        </div>
+        <div class="sequencer-display" id="seqDisplay"></div>
+        <div class="waveform" id="waveform"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu buttons -->
+  <div class="menu-row">
+    <button class="menu-btn active-btn" id="btnPlay" onclick="togglePlay()">▶ PLAY</button>
+    <button class="menu-btn" id="btnStop" onclick="stopAll()">■ STOP</button>
+    <button class="menu-btn" onclick="clearAll()">✕ CLEAR</button>
+  </div>
+
+  <!-- Wave type selector -->
+  <div class="wave-row">
+    <button class="wave-btn selected" data-wave="square" onclick="selectWave('square')">SQR</button>
+    <button class="wave-btn" data-wave="sawtooth" onclick="selectWave('sawtooth')">SAW</button>
+    <button class="wave-btn" data-wave="triangle" onclick="selectWave('triangle')">TRI</button>
+    <button class="wave-btn" data-wave="sine" onclick="selectWave('sine')">SIN</button>
+  </div>
+
+  <!-- Sequencer grid -->
+  <div class="sequencer-section">
+    <div class="seq-row-label">
+      <span>KICK</span><span>BASS</span><span>LEAD</span><span>HAT</span>
+    </div>
+    <div class="seq-grid" id="seqGrid"></div>
+  </div>
+
+  <!-- BPM -->
+  <div class="bpm-row">
+    <span class="bpm-label">BPM</span>
+    <input type="range" id="bpmSlider" min="60" max="200" value="120" oninput="changeBpm(this.value)">
+    <span class="bpm-number" id="bpmDisplay">120</span>
+  </div>
+
+  <!-- Main controls row -->
+  <div class="controls-row" style="margin-top:14px">
+    <!-- D-pad -->
+    <div class="dpad-section">
+      <div class="dpad">
+        <div></div>
+        <button class="dpad-btn dpad-up" onclick="dpadAction('up')">▲</button>
+        <div></div>
+        <button class="dpad-btn dpad-left" onclick="dpadAction('left')">◀</button>
+        <button class="dpad-btn dpad-center">+</button>
+        <button class="dpad-btn dpad-right" onclick="dpadAction('right')">▶</button>
+        <div></div>
+        <button class="dpad-btn dpad-down" onclick="dpadAction('down')">▼</button>
+        <div></div>
+      </div>
+      <div class="dpad-label">OCTAVE/PITCH</div>
+    </div>
+
+    <!-- Face buttons -->
+    <div class="pad-section">
+      <div class="pad-row">
+        <button class="pad-btn pad-y" onmousedown="playSound(3)" ontouchstart="playSound(3)">HAT</button>
+        <button class="pad-btn pad-a" onmousedown="playSound(0)" ontouchstart="playSound(0)">KICK</button>
+      </div>
+      <div class="pad-row">
+        <button class="pad-btn pad-b" onmousedown="playSound(1)" ontouchstart="playSound(1)">BASS</button>
+        <button class="pad-btn pad-x" onmousedown="playSound(2)" ontouchstart="playSound(2)">LEAD</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Speaker holes -->
+  <div class="speaker-row">
+    <div class="speaker-hole"></div>
+    <div class="speaker-hole"></div>
+    <div class="speaker-hole"></div>
+    <div class="speaker-hole"></div>
+    <div class="speaker-hole"></div>
+    <div class="speaker-hole"></div>
+  </div>
+</div>
+
+<script>
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let bpm = 120;
+let isPlaying = false;
+let currentStep = 0;
+let intervalId = null;
+let currentWave = 'square';
+let octaveOffset = 0;
+
+const grid = [
+  new Array(16).fill(false),
+  new Array(16).fill(false),
+  new Array(16).fill(false),
+  new Array(16).fill(false),
+];
+
+const seqGrid = document.getElementById('seqGrid');
+for (let row = 0; row < 4; row++) {
+  for (let col = 0; col < 16; col++) {
+    const cell = document.createElement('div');
+    cell.className = 'seq-cell';
+    cell.dataset.row = row;
+    cell.dataset.col = col;
+    cell.addEventListener('mousedown', () => toggleCell(row, col));
+    cell.addEventListener('touchstart', (e) => { e.preventDefault(); toggleCell(row, col); });
+    seqGrid.appendChild(cell);
+  }
+}
+
+const seqDisplay = document.getElementById('seqDisplay');
+seqDisplay.style.display = 'grid';
+seqDisplay.style.gridTemplateColumns = 'repeat(16, 1fr)';
+seqDisplay.style.gap = '1px';
+for (let col = 0; col < 16; col++) {
+  const cell = document.createElement('div');
+  cell.className = 'seq-cell-display';
+  cell.id = `disp-${col}`;
+  seqDisplay.appendChild(cell);
+}
+
+const waveformEl = document.getElementById('waveform');
+const waveBars = [];
+for (let i = 0; i < 32; i++) {
+  const bar = document.createElement('div');
+  bar.className = 'wave-bar';
+  bar.style.height = '1px';
+  waveformEl.appendChild(bar);
+  waveBars.push(bar);
+}
+
+function toggleCell(row, col) {
+  grid[row][col] = !grid[row][col];
+  const cell = seqGrid.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+  cell.classList.toggle('active', grid[row][col]);
+  updateMiniDisplay();
+}
+
+function updateMiniDisplay() {
+  for (let col = 0; col < 16; col++) {
+    const hasAny = grid.some(row => row[col]);
+    const cell = document.getElementById(`disp-${col}`);
+    if (cell) cell.classList.toggle('active', hasAny);
+  }
+}
+
+function playKick() {
+  const t = audioCtx.currentTime;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(150, t);
+  osc.frequency.exponentialRampToValueAtTime(0.01, t + 0.15);
+  gain.gain.setValueAtTime(1, t);
+  gain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start(t);
+  osc.stop(t + 0.2);
+  animateWave(8);
+}
+
+function playBass(freq) {
+  const t = audioCtx.currentTime;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = currentWave;
+  osc.frequency.setValueAtTime(freq * Math.pow(2, octaveOffset), t);
+  gain.gain.setValueAtTime(0.4, t);
+  gain.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start(t);
+  osc.stop(t + 0.25);
+  animateWave(6);
+}
+
+function playLead(freq) {
+  const t = audioCtx.currentTime;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = currentWave;
+  osc.frequency.setValueAtTime(freq * Math.pow(2, octaveOffset), t);
+  gain.gain.setValueAtTime(0.3, t);
+  gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start(t);
+  osc.stop(t + 0.3);
+  animateWave(10);
+}
+
+function playHihat() {
+  const t = audioCtx.currentTime;
+  const bufferSize = audioCtx.sampleRate * 0.05;
+  const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+  const source = audioCtx.createBufferSource();
+  source.buffer = buffer;
+  const gain = audioCtx.createGain();
+  const filter = audioCtx.createBiquadFilter();
+  filter.type = 'highpass';
+  filter.frequency.value = 8000;
+  gain.gain.setValueAtTime(0.5, t);
+  gain.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+  source.connect(filter);
+  filter.connect(gain);
+  gain.connect(audioCtx.destination);
+  source.start(t);
+  animateWave(3);
+}
+
+function playSound(track) {
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  if (track === 0) playKick();
+  else if (track === 1) playBass(130.81);
+  else if (track === 2) playLead(523.25);
+  else if (track === 3) playHihat();
+
+  const btns = document.querySelectorAll('.pad-btn');
+  btns[track === 0 ? 1 : track === 1 ? 2 : track === 2 ? 3 : 0].classList.add('pressed');
+  setTimeout(() => btns[track === 0 ? 1 : track === 1 ? 2 : track === 2 ? 3 : 0].classList.remove('pressed'), 100);
+}
+
+const leadScales = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25];
+const bassNotes = [65.41, 73.42, 82.41, 87.31, 98.00, 110.00, 123.47, 130.81];
+
+function stepSequencer() {
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+
+  const prevStep = (currentStep - 1 + 16) % 16;
+  document.querySelectorAll(`[data-col="${prevStep}"]`).forEach(c => c.classList.remove('playing'));
+  document.getElementById(`disp-${prevStep}`)?.classList.remove('playing');
+
+  document.querySelectorAll(`[data-col="${currentStep}"]`).forEach(c => c.classList.add('playing'));
+  const dispCell = document.getElementById(`disp-${currentStep}`);
+  if (dispCell) dispCell.classList.add('playing');
+
+  document.getElementById('screenStep').textContent = (currentStep + 1).toString().padStart(2,'0');
+
+  for (let row = 0; row < 4; row++) {
+    if (grid[row][currentStep]) {
+      if (row === 0) playKick();
+      else if (row === 1) playBass(bassNotes[currentStep % bassNotes.length]);
+      else if (row === 2) playLead(leadScales[currentStep % leadScales.length]);
+      else if (row === 3) playHihat();
+    }
+  }
+
+  currentStep = (currentStep + 1) % 16;
+}
+
+function togglePlay() {
+  isPlaying = !isPlaying;
+  const btn = document.getElementById('btnPlay');
+  if (isPlaying) {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const interval = (60 / bpm / 4) * 1000;
+    intervalId = setInterval(stepSequencer, interval);
+    btn.textContent = '⏸ PAUSE';
+    btn.classList.add('active-btn');
+  } else {
+    clearInterval(intervalId);
+    btn.textContent = '▶ PLAY';
+  }
+}
+
+function stopAll() {
+  isPlaying = false;
+  clearInterval(intervalId);
+  currentStep = 0;
+  document.getElementById('btnPlay').textContent = '▶ PLAY';
+  document.getElementById('btnPlay').classList.add('active-btn');
+  document.getElementById('screenStep').textContent = '--';
+  document.querySelectorAll('.seq-cell').forEach(c => c.classList.remove('playing'));
+  document.querySelectorAll('.seq-cell-display').forEach(c => c.classList.remove('playing'));
+}
+
+function clearAll() {
+  stopAll();
+  for (let r = 0; r < 4; r++) grid[r].fill(false);
+  document.querySelectorAll('.seq-cell').forEach(c => c.classList.remove('active'));
+  updateMiniDisplay();
+}
+
+function changeBpm(val) {
+  bpm = parseInt(val);
+  document.getElementById('bpmDisplay').textContent = bpm;
+  document.getElementById('screenBpm').textContent = bpm;
+  if (isPlaying) {
+    clearInterval(intervalId);
+    const interval = (60 / bpm / 4) * 1000;
+    intervalId = setInterval(stepSequencer, interval);
+  }
+}
+
+function selectWave(type) {
+  currentWave = type;
+  document.querySelectorAll('.wave-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelector(`[data-wave="${type}"]`).classList.add('selected');
+}
+
+function dpadAction(dir) {
+  if (dir === 'up') octaveOffset = Math.min(2, octaveOffset + 1);
+  if (dir === 'down') octaveOffset = Math.max(-2, octaveOffset - 1);
+  if (dir === 'left') changeBpm(Math.max(60, bpm - 5));
+  if (dir === 'right') changeBpm(Math.min(200, bpm + 5));
+  if (dir === 'left' || dir === 'right') {
+    document.getElementById('bpmSlider').value = bpm;
+  }
+}
+
+function animateWave(amplitude) {
+  waveBars.forEach(bar => {
+    const h = Math.random() * amplitude * 8 + 1;
+    bar.style.height = h + 'px';
+    bar.style.background = '#9bbc0f';
+    setTimeout(() => {
+      bar.style.height = Math.random() * 3 + 1 + 'px';
+      bar.style.background = '#306230';
+    }, 100 + Math.random() * 100);
+  });
+}
+
+setInterval(() => {
+  if (!isPlaying) {
+    waveBars.forEach(bar => {
+      bar.style.height = (Math.random() * 2 + 1) + 'px';
+    });
+  }
+}, 200);
+
+const defaultPattern = [
+  [1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],
+  [0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0],
+  [0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+  [0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0],
+];
+
+defaultPattern.forEach((row, r) => {
+  row.forEach((val, c) => {
+    if (val) {
+      grid[r][c] = true;
+      const cell = seqGrid.querySelector(`[data-row="${r}"][data-col="${c}"]`);
+      if (cell) cell.classList.add('active');
+    }
+  });
+});
+updateMiniDisplay();
+</script>
+</body>
+</html>
