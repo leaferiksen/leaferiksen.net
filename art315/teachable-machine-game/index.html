@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>⚓ Port &amp; Starboard — Voice Ship Game</title>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.4.0/dist/speech-commands.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#060f1e;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;font-family:Georgia,serif;color:#e8d5a3;overflow:hidden}
+h1{font-size:2rem;letter-spacing:4px;text-shadow:0 0 24px #4af;margin-bottom:6px}
+#status{font-size:.9rem;color:#9bc;min-height:1.4em;margin:4px 0 8px;text-align:center;max-width:960px}
+#startBtn{background:linear-gradient(135deg,#1a3a5c,#0d2840);border:2px solid #4af;color:#e8d5a3;padding:9px 28px;border-radius:8px;font-size:.95rem;cursor:pointer;letter-spacing:2px;font-family:Georgia,serif;transition:all .2s;margin-bottom:10px}
+#startBtn:hover{background:linear-gradient(135deg,#2a5a8c,#1a3a6c);box-shadow:0 0 18px #4af9}
+#startBtn:disabled{opacity:.4;cursor:not-allowed}
+canvas{display:block;border:2px solid #1a3a5c;border-radius:4px;box-shadow:0 0 60px rgba(0,80,180,.4)}
+#hud{display:flex;gap:36px;align-items:center;margin-top:10px;font-size:.9rem;letter-spacing:1px}
+.ind{padding:5px 18px;border-radius:20px;border:1px solid #1a3a5c;background:#060f1e;transition:all .15s}
+.ind.active{background:#0e3a80;border-color:#4af;color:#fff;box-shadow:0 0 14px #4af}
+#scoreDisp{color:#9bc;font-size:.85rem}
+</style>
+</head>
+<body>
+<h1>⚓ PORT &amp; STARBOARD</h1>
+<div id="status">Press "Set Sail" and allow microphone access to play!</div>
+<button id="startBtn" onclick="init()">⛵ Set Sail</button>
+<canvas id="c" width="960" height="580"></canvas>
+<div id="hud">
+  <div class="ind" id="pInd">◄ PORT</div>
+  <div id="scoreDisp">SCORE <span id="sv">0</span> &nbsp;·&nbsp; <span id="lv">❤️❤️❤️</span></div>
+  <div class="ind" id="sInd">STARBOARD ►</div>
+</div>
+<script>
+const MODEL='https://teachablemachine.withgoogle.com/models/ZpWQYr41f/';
+const cvs=document.getElementById('c'),ctx=cvs.getContext('2d');
+const W=cvs.width,H=cvs.height;
+
+let ship,obs,score,lives,dead,running,f;
+let pI=-1,sI=-1,sDir,sTmr,lastCmd,flashA;
+let rec=null,modelReady=false,obsTimeout=null;
+
+// Static scenery (generated once)
+const stars=[];const wvs=[];
+for(let i=0;i<100;i++)stars.push({x:Math.random()*W,y:Math.random()*H*.42,r:Math.random()*1.5+.3,t:Math.random()*6.28});
+for(let i=0;i<14;i++)wvs.push({y:H*.43+Math.random()*H*.57,sp:.2+Math.random()*.35,a:.025+Math.random()*.06});
+
+const $=id=>document.getElementById(id);
+function setMsg(m){$('status').textContent=m;}
+
+function resetState(){
+  ship={x:W/2,y:H-120};
+  obs=[];score=0;lives=3;dead=false;f=0;
+  sDir=0;sTmr=0;lastCmd='';flashA=0;
+  $('sv').textContent=0;
+  updLives();
+}
+
+async function init(){
+  const btn=$('startBtn');
+  btn.disabled=true;
+
+  if(modelReady){
+    restartGame();
+    return;
+  }
+
+  setMsg('⚓ Loading AI model & requesting microphone…');
+  try{
+    rec=speechCommands.create('BROWSER_FFT',undefined,MODEL+'model.json',MODEL+'metadata.json');
+    await rec.ensureModelLoaded();
+    const lbls=rec.wordLabels();
+    console.log('Model labels:',lbls);
+    lbls.forEach((l,i)=>{
+      const lo=l.toLowerCase();
+      if(lo.includes('port')&&!lo.includes('star'))pI=i;
+      if(lo.includes('starboard')||lo.includes('stbd')||(lo.includes('star')&&!lo.includes('port')))sI=i;
+    });
+    if(pI<0&&lbls.length>=2)pI=1;
+    if(sI<0&&lbls.length>=3)sI=2;
+
+    rec.listen(r=>{
+      const sc=r.scores,mx=Math.max(...sc),mi=sc.indexOf(mx);
+      $('pInd').className='ind';$('sInd').className='ind';
+      if(mx>.72){
+        if(mi===pI){sDir=-1;sTmr=22;lastCmd='PORT';$('pInd').className='ind active';}
+        else if(mi===sI){sDir=1;sTmr=22;lastCmd='STARBOARD';$('sInd').className='ind active';}
+      }
+    },{probabilityThreshold:.68,invokeCallbackOnNoiseAndUnknown:true,overlapFactor:.2});
+
+    modelReady=true;
+    restartGame();
+  }catch(e){
+    setMsg('Error: '+e.message+'. Use Chrome & HTTPS or a local server.');
+    btn.disabled=false;
+    btn.textContent='⛵ Retry';
+  }
+}
+
+function restartGame(){
+  if(obsTimeout)clearTimeout(obsTimeout);
+  resetState();
+  running=true;
+  setMsg('🎙️ Say "PORT" to turn left — "STARBOARD" to turn right — dodge the hazards!');
+  $('startBtn').textContent='⚓ Sailing…';
+  $('startBtn').disabled=true;
+  schedObs();
+  requestAnimationFrame(loop);
+}
+
+function schedObs(){
+  if(obsTimeout)clearTimeout(obsTimeout);
+  if(dead)return;
+  spawn();
+  obsTimeout=setTimeout(schedObs,Math.max(1200,3400-score*4));
+}
+function spawn(){
+  if(dead)return;
+  const types=['rock','rock','rock','whirl','berg'],t=types[Math.floor(Math.random()*5)];
+  const sz=20+Math.random()*30;
+  obs.push({x:55+Math.random()*(W-110),y:-sz-10,sz,t,sp:1.4});
+}
+
+// ── Draw functions ───────────────────────────────────────────────
+function drawSky(){
+  const g=ctx.createLinearGradient(0,0,0,H*.43);
+  g.addColorStop(0,'#030a16');g.addColorStop(1,'#091c3a');
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H*.43);
+}
+function drawStars(){
+  stars.forEach(s=>{
+    const tw=.45+.55*Math.sin(s.t+f*.018);
+    ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.28);
+    ctx.fillStyle=`rgba(255,255,240,${tw})`;ctx.fill();
+  });
+}
+function drawMoon(){
+  ctx.save();
+  ctx.beginPath();ctx.arc(W-90,52,30,0,6.28);
+  ctx.fillStyle='#f5eabc';ctx.shadowColor='#f5e8a8';ctx.shadowBlur=45;ctx.fill();
+  ctx.beginPath();ctx.arc(W-76,44,25,0,6.28);ctx.fillStyle='#030a16';ctx.shadowBlur=0;ctx.fill();
+  ctx.restore();
+}
+function drawSea(){
+  const g=ctx.createLinearGradient(0,H*.4,0,H);
+  g.addColorStop(0,'#0a284e');g.addColorStop(1,'#040d1c');
+  ctx.fillStyle=g;ctx.fillRect(0,H*.4,W,H*.6);
+  ctx.fillStyle='rgba(0,80,200,.16)';ctx.fillRect(0,H*.4,W,3);
+  const rg=ctx.createLinearGradient(0,H*.4,0,H);
+  rg.addColorStop(0,'rgba(245,234,185,.15)');rg.addColorStop(1,'rgba(245,234,185,0)');
+  ctx.save();ctx.fillStyle=rg;ctx.fillRect(W-125,H*.4,60,H*.6);ctx.restore();
+  wvs.forEach(w=>{
+    ctx.save();ctx.globalAlpha=w.a;ctx.strokeStyle='#7ab8e8';ctx.lineWidth=1;
+    ctx.beginPath();
+    for(let x=0;x<W;x+=3){
+      const y=w.y+Math.sin((x+f*w.sp*2)*.022)*6;
+      x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }ctx.stroke();ctx.restore();
+  });
+}
+function drawShip(){
+  const lean=sDir*.13+Math.sin(f*.04)*.018;
+  const sc=1.45;
+  ctx.save();ctx.translate(ship.x,ship.y);ctx.rotate(lean);ctx.scale(sc,sc);
+  // wake
+  ctx.save();ctx.globalAlpha=.22;ctx.fillStyle='#8cc8f8';
+  [-13,13].forEach(dx=>{ctx.beginPath();ctx.ellipse(dx,44,13,6,0,0,Math.PI);ctx.fill();});
+  ctx.restore();
+  // hull
+  ctx.beginPath();ctx.moveTo(-22,17);ctx.lineTo(22,17);ctx.lineTo(14,36);ctx.lineTo(-14,36);ctx.closePath();
+  ctx.fillStyle='#582c0a';ctx.fill();ctx.strokeStyle='#8a4e20';ctx.lineWidth=1.5;ctx.stroke();
+  ctx.fillStyle='#371600';ctx.fillRect(-20,22,40,4);
+  [-8,8].forEach(dx=>{ctx.beginPath();ctx.arc(dx,28,3,0,6.28);ctx.fillStyle='#f0d070';ctx.fill();});
+  // mast
+  ctx.strokeStyle='#78501e';ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(0,16);ctx.lineTo(0,-40);ctx.stroke();
+  // main sail
+  ctx.beginPath();ctx.moveTo(0,-37);ctx.quadraticCurveTo(28,-14,0,5);
+  ctx.fillStyle='rgba(238,224,188,.93)';ctx.fill();ctx.strokeStyle='#c09858';ctx.lineWidth=1;ctx.stroke();
+  // top sail
+  ctx.beginPath();ctx.moveTo(0,-37);ctx.quadraticCurveTo(15,-48,0,-57);
+  ctx.fillStyle='rgba(215,198,155,.85)';ctx.fill();ctx.stroke();
+  // flag
+  ctx.beginPath();ctx.moveTo(0,-57);ctx.lineTo(13,-52);ctx.lineTo(0,-47);ctx.fillStyle='#c82000';ctx.fill();
+  ctx.restore();
+}
+function drawObs(o){
+  ctx.save();ctx.translate(o.x,o.y);
+  if(o.t==='rock'){
+    ctx.beginPath();ctx.ellipse(0,0,o.sz,o.sz*.62,0,0,6.28);
+    const g=ctx.createRadialGradient(-o.sz*.2,-o.sz*.2,1,0,0,o.sz);
+    g.addColorStop(0,'#888');g.addColorStop(1,'#252525');
+    ctx.fillStyle=g;ctx.fill();ctx.strokeStyle='#4a4a4a';ctx.lineWidth=1;ctx.stroke();
+    ctx.globalAlpha=.3;ctx.fillStyle='#a0e0e0';
+    ctx.beginPath();ctx.ellipse(0,o.sz*.5,o.sz*.8,6,0,0,6.28);ctx.fill();
+  }else if(o.t==='whirl'){
+    ctx.rotate(f*.05);
+    for(let i=4;i>=0;i--){ctx.beginPath();ctx.arc(0,0,o.sz*(.2+i*.18),0,6.28);ctx.strokeStyle=`rgba(28,95,210,${.65-i*.1})`;ctx.lineWidth=2.5-i*.35;ctx.stroke();}
+    ctx.beginPath();
+    for(let a=0;a<Math.PI*5;a+=.09){
+      const r=a*o.sz*.05,px=r*Math.cos(a),py=r*Math.sin(a);
+      a<.09?ctx.moveTo(px,py):ctx.lineTo(px,py);
+    }
+    ctx.strokeStyle='rgba(90,170,255,.5)';ctx.lineWidth=1.5;ctx.stroke();
+  }else{
+    ctx.beginPath();ctx.moveTo(0,-o.sz);ctx.lineTo(o.sz*.65,0);ctx.lineTo(o.sz*.3,o.sz*.3);ctx.lineTo(-o.sz*.3,o.sz*.3);ctx.lineTo(-o.sz*.65,0);ctx.closePath();
+    ctx.fillStyle='#cce8f8';ctx.fill();ctx.strokeStyle='#8cc0e0';ctx.lineWidth=1;ctx.stroke();
+    ctx.globalAlpha=.22;ctx.fillStyle='#78b0e0';
+    ctx.beginPath();ctx.ellipse(0,o.sz*.33,o.sz*.48,o.sz*.12,0,0,6.28);ctx.fill();
+  }
+  ctx.restore();
+}
+function drawHUD(){
+  ctx.save();
+  if(flashA>0){ctx.fillStyle=`rgba(255,40,40,${flashA})`;ctx.fillRect(0,0,W,H);flashA=Math.max(0,flashA-.05);}
+  ctx.textAlign='center';ctx.fillStyle='rgba(175,155,95,.5)';ctx.font='12px Georgia';ctx.fillText('SCORE',W/2,18);
+  ctx.fillStyle='#e8d5a3';ctx.font='bold 26px Georgia';ctx.fillText(score,W/2,44);
+  if(lastCmd&&sTmr>0){
+    ctx.fillStyle=`rgba(100,205,255,${sTmr/22})`;ctx.font='bold 24px Georgia';
+    ctx.fillText(lastCmd==='PORT'?'◄ PORT':'STARBOARD ►',W/2,H-18);
+  }
+  ctx.restore();
+}
+function drawGameOver(){
+  ctx.fillStyle='rgba(3,10,22,.88)';ctx.fillRect(0,0,W,H);
+  ctx.textAlign='center';
+  ctx.fillStyle='#e8d5a3';ctx.font='bold 52px Georgia';ctx.fillText('⚓ SHIPWRECKED! ⚓',W/2,H/2-70);
+  ctx.font='28px Georgia';ctx.fillText('Final Score: '+score,W/2,H/2-18);
+  ctx.font='16px Georgia';ctx.fillStyle='#9bc';ctx.fillText('← → arrow keys · Enter or Space to restart',W/2,H/2+22);
+  // Restart button
+  const bx=W/2,by=H/2+95,bw=240,bh=52;
+  ctx.save();
+  ctx.beginPath();ctx.roundRect(bx-bw/2,by-bh/2,bw,bh,10);
+  ctx.fillStyle='#1a3a5c';ctx.fill();
+  ctx.strokeStyle='#4af';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#e8d5a3';ctx.font='bold 20px Georgia';ctx.textBaseline='middle';
+  ctx.fillText('⛵ Sail Again',bx,by);
+  ctx.restore();
+}
+
+function hit(o){const dx=ship.x-o.x,dy=(ship.y+8)-o.y;return Math.sqrt(dx*dx+dy*dy)<o.sz*.76+20;}
+function updLives(){$('lv').textContent='❤️'.repeat(Math.max(0,lives))+'🖤'.repeat(Math.max(0,3-lives));}
+
+// Click "Sail Again" on canvas
+cvs.addEventListener('click',e=>{
+  if(!dead)return;
+  const rect=cvs.getBoundingClientRect();
+  const mx=(e.clientX-rect.left)*(W/rect.width);
+  const my=(e.clientY-rect.top)*(H/rect.height);
+  const bx=W/2,by=H/2+95,bw=240,bh=52;
+  if(mx>=bx-bw/2&&mx<=bx+bw/2&&my>=by-bh/2&&my<=by+bh/2) restartGame();
+});
+
+function loop(){
+  if(!running)return;
+  f++;
+  if(sTmr>0)sTmr--;else sDir=0;
+  if(!dead){
+    ship.x=Math.max(38,Math.min(W-38,ship.x+sDir*6));
+    score++;$('sv').textContent=score;
+  }
+  obs.forEach(o=>o.y+=o.sp);
+  obs=obs.filter(o=>o.y<H+110);
+  if(!dead){
+    for(let i=obs.length-1;i>=0;i--){
+      if(hit(obs[i])){
+        obs.splice(i,1);lives--;flashA=.65;updLives();
+        if(lives<=0){
+          dead=true;
+          $('startBtn').textContent='⛵ Sail Again';
+          $('startBtn').disabled=false;
+          $('startBtn').onclick=restartGame;
+        }
+        break;
+      }
+    }
+  }
+  ctx.clearRect(0,0,W,H);
+  drawSky();drawStars();drawMoon();drawSea();
+  obs.forEach(drawObs);
+  if(!dead)drawShip();
+  drawHUD();
+  if(dead)drawGameOver();
+  requestAnimationFrame(loop);
+}
+
+document.addEventListener('keydown',e=>{
+  if(!running)return;
+  if(e.key==='ArrowLeft'||e.key==='a'){sDir=-1;sTmr=22;lastCmd='PORT';$('pInd').className='ind active';}
+  if(e.key==='ArrowRight'||e.key==='d'){sDir=1;sTmr=22;lastCmd='STARBOARD';$('sInd').className='ind active';}
+  if((e.key==='Enter'||e.key===' ')&&dead) restartGame();
+});
+document.addEventListener('keyup',()=>{$('pInd').className='ind';$('sInd').className='ind';});
+</script>
+</body>
+</html>
