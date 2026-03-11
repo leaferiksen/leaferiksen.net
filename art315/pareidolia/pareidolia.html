@@ -254,6 +254,17 @@
 				opacity: 1;
 			}
 
+			.click-feedback {
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				border: 3px solid #fff;
+				border-radius: 50%;
+				pointer-events: none;
+				box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+				transform: translate(-50%, -50%);
+			}
+
 			@media (max-width: 900px) {
 				.container {
 					grid-template-columns: 1fr;
