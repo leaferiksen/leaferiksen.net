@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pareidolia Test - Tell Humans and Computers Apart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            line-height: 1.4;
+            color: #000;
+        }
+
+        .header-subtitle {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #666;
+            max-width: 280px;
+        }
+
+        h2 {
+            font-size: 42px;
+            font-weight: 800;
+            line-height: 1.15;
+            color: #000;
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #999;
+            max-width: 350px;
+        }
+
+        .loading-text {
+            font-size: 36px;
+            font-weight: 800;
+            color: #000;
+            margin-bottom: 12px;
+        }
+
+        .loading-subtext {
+            font-size: 15px;
+            color: #999;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: #000;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #222;
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: #000;
+            border: 1px solid #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            background: #f5f5f5;
+            border-color: #ccc;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1.1;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: crosshair;
+        }
+
+        .canvas-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+            display: block;
+            pointer-events: auto;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e0e0e0;
+            border-top-color: #000;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .state {
+            display: none;
+        }
+
+        .state.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-message h2 {
+            font-size: 52px;
+            margin-bottom: 20px;
+        }
+
+        .click-feedback {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+            transform: translate(-50%, -50%);
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            h2 {
+                font-size: 36px;
+            }
+
+            .image-container {
+                aspect-ratio: 1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 16px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            .container {
+                gap: 30px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+
+            .loading-text {
+                font-size: 28px;
+            }
+
+            .success-message h2 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Question State -->
+        <div class="state active" id="questionState">
+            <div class="content">
+                <h1>Leaf's Completely Automated Public Pareidolia test to tell Computers and Humans Apart</h1>
+                <h2>Are you a robot?</h2>
+                <p class="question-text">If not, please exercise your creative ability to find a face in a cloudy sky where there isn't one.</p>
+                <div class="buttons">
+                    <button class="btn-primary" onclick="startTest()">I found the face</button>
+                    <button class="btn-secondary" onclick="markVisionImpaired()">I am vision impaired</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div class="state" id="loadingState">
+            <div class="content">
+                <div>
+                    <div class="loading-text">
+                        <span class="loading-spinner"></span>Loading...
+                    </div>
+                    <p class="loading-subtext">Please wait for a moment</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success State -->
+        <div class="state" id="successState">
+            <div class="content success-message">
+                <h2>Congratulations! We think you aren't a robot</h2>
+            </div>
+        </div>
+
+        <!-- Robot Detection State -->
+        <div class="state" id="robotState">
+            <div class="content success-message">
+                <h2>Sorry, we think you're a robot</h2>
+            </div>
+        </div>
+
+        <!-- Accessible CAPTCHA State -->
+        <div class="state" id="captchaState">
+            <div class="content">
+                <h1>Leaf's Completely Automated Public Turing test to tell Computers and Humans Apart</h1>
+                <h2>Verify you're human</h2>
+                <p class="question-text">Please solve the following math problem to continue.</p>
+                <div style="margin-top: 30px; padding: 24px; background: #f5f5f5; border-radius: 12px; max-width: 350px;">
+                    <div id="captchaQuestion" style="font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #000;"></div>
+                    <input 
+                        type="number" 
+                        id="captchaAnswer" 
+                        placeholder="Enter your answer" 
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif; margin-bottom: 16px;"
+                        aria-label="Enter the answer to the math problem"
+                    >
+                    <button class="btn-primary" onclick="verifyCaptcha()" style="width: 100%;">Verify</button>
+                </div>
+                <button class="btn-secondary" onclick="switchState('questionState')" style="margin-top: 16px;">Back</button>
+            </div>
+        </div>
+
+        <!-- Image Container -->
+        <div class="image-container">
+            <img id="testImage" src="https://lh3.googleusercontent.com/rd-d/ALs6j_FLZ-rzydY8_GWJ41fPFfUk6uKsH2xi8ME5rY2D9Z7nmsDYYhBkGoUAJO9wE5Ru6cv_5XmWnMEvJuPbbV3lc5T534nnipwb3CSMAgnu9nNmCVFysvZ6QC2mDdwWoAl7wiouRyd5_k2FYhlrfg6v5tnO1sfuEEImPMfu0VoBm_bvnC9B6rqJ-mAvj5b5pybiyiEFaLRKeYj-0-_eV8oiMFuwzV_DeKwplB8aC1dwu9AH0cs452mbsDF9Uyw1q_tMnG0Vl8ebeQewfwDYG-tgUIe3ly4W5f92N3Kd-kttvP7WsX0f8wOyR3T42SFA89Ou4CP1sA-5X_6f9cS9I-RjpOh_211cV6rMEVjzI5PVnMWKHcX1R4YAKxqlZ-Bh6tfiZ9EJCqlVzkO3bEwmP8RW9hOfaBFBWlCyIVkuXl3tnDYr2B7iXIwYu4rYgUGeM4LxjhG3pHwdwBkrEc6izv8gCbeJ7kRsUH7FLSqr4ZkXISlicJQeJvFb0C8c4qQiZ9ieKM8BKNlK4QhHaj-vaufcHm8cileeFvBf5RuwIM8MC9qPDNiV4MljElOiQMO9bhTqn0xry2JV0FCDx8iGltpAmuQXnRWf7EIbRUwOphWIxkoWrhacA76OotCclaPnuvLTHgbp0D3boO4m2t5uIFXXlE9U1IH9yYitSXnNmpsX-RIACK1o3bmWCakFOjXbblCDvCby2RFCh6IJnxaDB2Xba3l5zsRBrpTwYA5dMANK4I1SOEFS37UrtbEKUzUTFLKgX6J0iJrRdnfWC6vHhn5JQpcVRg9LdrrFYrFWIbti-IY_o6vmm3iPX1wnJeErFJeyDijjjMGA5PX0bC8xQ3U0jNp8GkZorXd3rFuyWZ5lzigZPnyr3dSoZnb8_7ue_N11bp_WuSIl1Vf7basyHgN6IBdp1-033d5QjTq06GQVLBxnhnQ_3Kkz_GJx-vaNp3gLbryeF4FfUStq5aMAT80Zzl0W5XczH6_ejFnEyS0pe7e7MSA0Bf5ZG6jwo8OyW2PoB8LzO2TtwoyCrndpESjPgMiducelwndWy0yjw32ADmXd56SAs2EiyF9QrLz7k_qK3VfIroN0_oVrVmIt8A=w1452-h1560?auditContext=forDisplay" alt="Cloud sky with building">
+            <canvas class="canvas-overlay" id="clickCanvas"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const testImage = document.getElementById('testImage');
+        const clickCanvas = document.getElementById('clickCanvas');
+        const ctx = clickCanvas.getContext('2d');
+
+        // Set canvas size to match image
+        function resizeCanvas() {
+            const rect = testImage.getBoundingClientRect();
+            clickCanvas.width = rect.width;
+            clickCanvas.height = rect.height;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        testImage.addEventListener('load', resizeCanvas);
+
+        function switchState(stateName) {
+            document.querySelectorAll('.state').forEach(el => el.classList.remove('active'));
+            document.getElementById(stateName).classList.add('active');
+        }
+
+        // Make image clickable immediately on page load
+        function initImageClicking() {
+            clickCanvas.style.display = 'block';
+            clickCanvas.addEventListener('click', handleCanvasClick);
+        }
+
+        function handleCanvasClick(e) {
+            const rect = clickCanvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Store click location
+            lastClickX = x;
+            lastClickY = y;
+
+            // Remove previous circle if it exists
+            const prevCircle = clickCanvas.parentElement.querySelector('.click-feedback');
+            if (prevCircle) {
+                prevCircle.remove();
+            }
+
+            // Draw white circle at click location
+            const circle = document.createElement('div');
+            circle.className = 'click-feedback';
+            circle.style.left = x + 'px';
+            circle.style.top = y + 'px';
+            circle.style.zIndex = '10';
+            clickCanvas.parentElement.appendChild(circle);
+        }
+
+        function handleImageClick(e) {
+            const rect = testImage.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Store click location
+            lastClickX = x;
+            lastClickY = y;
+
+            // Remove previous circle if it exists
+            const prevCircle = clickCanvas.parentElement.querySelector('.click-feedback');
+            if (prevCircle) {
+                prevCircle.remove();
+            }
+
+            // Draw white circle at click location
+            const circle = document.createElement('div');
+            circle.className = 'click-feedback';
+            circle.style.left = x + 'px';
+            circle.style.top = y + 'px';
+            circle.style.zIndex = '10';
+            clickCanvas.parentElement.appendChild(circle);
+        }
+
+        let lastClickX = null;
+        let lastClickY = null;
+
+        function startTest() {
+            if (lastClickX === null || lastClickY === null) {
+                switchState('robotState');
+                return;
+            }
+
+            const rect = testImage.getBoundingClientRect();
+            const imageWidth = rect.width;
+            const imageHeight = rect.height;
+            const midX = imageWidth / 2;
+            const midY = imageHeight / 2;
+
+            // Show loading state while "checking"
+            switchState('loadingState');
+
+            if (lastClickX > midX && lastClickY < midY) {
+                // Correct quadrant - show success after loading
+                setTimeout(() => {
+                    switchState('successState');
+                    clickCanvas.style.display = 'none';
+                }, 1500);
+            } else {
+                // Wrong quadrant - show robot message
+                setTimeout(() => {
+                    switchState('robotState');
+                }, 1500);
+            }
+        }
+
+        function markVisionImpaired() {
+            generateCaptcha();
+            switchState('captchaState');
+        }
+
+        let captchaNum1, captchaNum2;
+
+        function generateCaptcha() {
+            captchaNum1 = Math.floor(Math.random() * 10) + 1;
+            captchaNum2 = Math.floor(Math.random() * 10) + 1;
+            const operation = Math.random() > 0.5 ? '+' : '-';
+            
+            document.getElementById('captchaQuestion').textContent = 
+                operation === '+' 
+                    ? `What is ${captchaNum1} + ${captchaNum2}?`
+                    : `What is ${captchaNum1} - ${captchaNum2}?`;
+            
+            window.captchaOperation = operation;
+            document.getElementById('captchaAnswer').value = '';
+            document.getElementById('captchaAnswer').focus();
+        }
+
+        function verifyCaptcha() {
+            const userAnswer = parseInt(document.getElementById('captchaAnswer').value);
+            const correctAnswer = window.captchaOperation === '+' 
+                ? captchaNum1 + captchaNum2 
+                : captchaNum1 - captchaNum2;
+            
+            if (userAnswer === correctAnswer) {
+                switchState('successState');
+            } else {
+                alert('Incorrect answer. Please try again.');
+                generateCaptcha();
+            }
+        }
+
+        // Allow Enter key to submit CAPTCHA
+        document.addEventListener('DOMContentLoaded', function() {
+            initImageClicking();
+            document.getElementById('captchaAnswer')?.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    verifyCaptcha();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
