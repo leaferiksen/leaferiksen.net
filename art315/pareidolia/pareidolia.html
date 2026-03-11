@@ -64,7 +64,7 @@
         .question-text {
             font-size: 15px;
             line-height: 1.6;
-            color: #999;
+            color: #555;
             max-width: 350px;
         }
 
@@ -106,6 +106,18 @@
         .btn-primary:hover {
             background: #222;
             transform: scale(1.02);
+        }
+
+        .btn-primary:disabled {
+            background: #ddd;
+            color: #999;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-primary:disabled:hover {
+            background: #ddd;
+            transform: none;
         }
 
         .btn-secondary {
@@ -192,15 +204,47 @@
             margin-bottom: 20px;
         }
 
-        .click-feedback {
+        .tooltip {
+            position: relative;
+            border-bottom: 1px dotted #000;
+            cursor: help;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            width: 280px;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 12px;
             position: absolute;
-            width: 50px;
-            height: 50px;
-            border: 3px solid #fff;
-            border-radius: 50%;
-            pointer-events: none;
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-            transform: translate(-50%, -50%);
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -140px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.5;
+            white-space: normal;
+        }
+
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #000 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
         }
 
         @media (max-width: 900px) {
@@ -251,11 +295,12 @@
         <!-- Question State -->
         <div class="state active" id="questionState">
             <div class="content">
-                <h1>Leaf's Completely Automated Public Pareidolia test to tell Computers and Humans Apart</h1>
+                <h1>Leaf's Completely Automated Public <span class="tooltip">Pareidolia<span class="tooltip-text">The perception of apparently significant patterns or recognizable images, especially faces, in random or accidental arrangements of shapes and lines</span></span> test to tell Computers and Humans Apart</h1>
                 <h2>Are you a robot?</h2>
                 <p class="question-text">If not, please exercise your creative ability to find a face in a cloudy sky where there isn't one.</p>
+                <p class="question-text" style="margin-top: 12px; font-weight: 500;">Click on the image where you see the face.</p>
                 <div class="buttons">
-                    <button class="btn-primary" onclick="startTest()">I found the face</button>
+                    <button class="btn-primary" id="submitBtn" onclick="startTest()" disabled>I found the face</button>
                     <button class="btn-secondary" onclick="markVisionImpaired()">I am vision impaired</button>
                 </div>
             </div>
@@ -349,6 +394,9 @@
             // Store click location
             lastClickX = x;
             lastClickY = y;
+
+            // Enable the submit button
+            document.getElementById('submitBtn').disabled = false;
 
             // Remove previous circle if it exists
             const prevCircle = clickCanvas.parentElement.querySelector('.click-feedback');
