@@ -378,7 +378,8 @@
 			<!-- Robot Detection State -->
 			<div class="state" id="robotState">
 				<div class="content success-message">
-					<h2>Sorry, we think you're a robot</h2>
+					<h2 id="robotMessage">Sorry, we think you're a robot</h2>
+					<button class="btn-primary" onclick="retryTest()" style="margin-top: 30px;">Try Again</button>
 				</div>
 			</div>
 
@@ -413,6 +414,7 @@
 			let lastClickX = null;
 			let lastClickY = null;
 			let captchaNum1, captchaNum2;
+			let failedTestNum = null;
 
 			const testConfigs = {
 				1: {
@@ -509,6 +511,7 @@
 
 			function startTest(testNum) {
 				if (lastClickX === null || lastClickY === null) {
+					failedTestNum = testNum;
 					switchState("robotState");
 					return;
 				}
@@ -532,10 +535,37 @@
 						}
 					}, 1500);
 				} else {
+					failedTestNum = testNum;
 					setTimeout(() => {
+						setRobotMessage();
 						switchState("robotState");
 					}, 1500);
 				}
+			}
+
+			function setRobotMessage() {
+				const messageEl = document.getElementById("robotMessage");
+				if (failedTestNum === 2) {
+					messageEl.textContent = "Nice try, robot.";
+				} else if (failedTestNum === 3) {
+					messageEl.textContent = "You almost convinced us... but you are probably still a robot.";
+				} else {
+					messageEl.textContent = "Sorry, we think you're a robot";
+				}
+			}
+
+			function retryTest() {
+				currentTest = 1;
+				lastClickX = null;
+				lastClickY = null;
+				failedTestNum = null;
+				
+				const prevCircle = clickCanvas.parentElement.querySelector(".click-feedback");
+				if (prevCircle) {
+					prevCircle.remove();
+				}
+				
+				switchTest(1);
 			}
 
 			function markVisionImpaired() {
