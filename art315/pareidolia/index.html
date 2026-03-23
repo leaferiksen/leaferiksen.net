@@ -19,7 +19,7 @@
 					BlinkMacSystemFont,
 					"Segoe UI",
 					sans-serif;
-				background: linear-gradient(-45deg, #F0F8FF, #F0E6FF, #FFF0F5, #F0F8FF);
+				background: linear-gradient(-45deg, #b8daff, #e0d4f0, #ffd6e8, #b8daff);
 				background-size: 400% 400%;
 				animation: skyGradient 40s ease infinite;
 				min-height: 100vh;
@@ -331,7 +331,7 @@
 						Leaf's Completely Automated Public <span class="tooltip">Pareidolia<span class="tooltip-text">The perception of apparently significant patterns or recognizable images, especially faces, in random or accidental arrangements of shapes and lines</span></span> test to tell Computers and Humans Apart
 					</h1>
 					<h2>Are you a robot?</h2>
-					<p class="question-text">If not, please exercise your creative ability to find a face in a cloudy sky where there isn't one.</p>
+					<p class="question-text">If not, please demonstrate the beautifully human instinct and creative ability to find a face in a cloudy sky where there isn't one.</p>
 					<p class="question-text" style="margin-top: 12px; font-weight: 500">Click on the image where you see the face.</p>
 					<div class="buttons">
 						<button class="btn-primary" id="submitBtn1" onclick="startTest(1)" disabled>I found the face</button>
@@ -393,7 +393,7 @@
 			<div class="state" id="robotState">
 				<div class="content success-message">
 					<h2 id="robotMessage">Sorry, we think you're a robot</h2>
-					<button class="btn-primary" onclick="retryTest()" style="margin-top: 30px;">Try Again</button>
+					<button class="btn-primary" onclick="retryTest()" style="margin-top: 30px">Try Again</button>
 				</div>
 			</div>
 
@@ -440,7 +440,7 @@
 						const topThird = h / 3;
 						const bottomThird = (h * 2) / 3;
 						return x < leftThird && y > topThird && y < bottomThird;
-					}
+					},
 				},
 				2: {
 					image: "creepy-cloud-face.webp",
@@ -450,7 +450,7 @@
 						const midX = w / 2;
 						const midY = h / 2;
 						return x > midX && y < midY;
-					}
+					},
 				},
 				3: {
 					image: "big-nose-cloud-face.webp",
@@ -460,8 +460,8 @@
 						const minX = w * 0.2;
 						const maxX = w * 0.66;
 						return x > minX && x < maxX;
-					}
-				}
+					},
+				},
 			};
 
 			function resizeCanvas() {
@@ -573,12 +573,12 @@
 				lastClickX = null;
 				lastClickY = null;
 				failedTestNum = null;
-				
+
 				const prevCircle = clickCanvas.parentElement.querySelector(".click-feedback");
 				if (prevCircle) {
 					prevCircle.remove();
 				}
-				
+
 				switchTest(1);
 			}
 
