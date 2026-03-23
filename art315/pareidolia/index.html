@@ -333,7 +333,7 @@
 						Leaf's Completely Automated Public <span class="tooltip">Pareidolia<span class="tooltip-text">The perception of apparently significant patterns or recognizable images, especially faces, in random or accidental arrangements of shapes and lines</span></span> test to tell Computers and Humans Apart
 					</h1>
 					<h2>Test 2 of 3</h2>
-					<p class="question-text">Can you find the angry face in these clouds?</p>
+					<p class="question-text">Can you find the creepy face in these clouds?</p>
 					<p class="question-text" style="margin-top: 12px; font-weight: 500">Click on the image where you see the face.</p>
 					<div class="buttons">
 						<button class="btn-primary" id="submitBtn2" onclick="startTest(2)" disabled>I found the face</button>
@@ -418,24 +418,24 @@
 
 			const testConfigs = {
 				1: {
-					image: "creepy-cloud-face.webp",
-					alt: "Cloud sky with building",
-					state: "test1State",
-					checkFn: (x, y, w, h) => {
-						const midX = w / 2;
-						const midY = h / 2;
-						return x > midX && y < midY;
-					}
-				},
-				2: {
 					image: "old-mad-cloud-face.webp",
 					alt: "Angry mad face in clouds",
-					state: "test2State",
+					state: "test1State",
 					checkFn: (x, y, w, h) => {
 						const leftThird = w / 3;
 						const topThird = h / 3;
 						const bottomThird = (h * 2) / 3;
 						return x < leftThird && y > topThird && y < bottomThird;
+					}
+				},
+				2: {
+					image: "creepy-cloud-face.webp",
+					alt: "Cloud sky with building",
+					state: "test2State",
+					checkFn: (x, y, w, h) => {
+						const midX = w / 2;
+						const midY = h / 2;
+						return x > midX && y < midY;
 					}
 				},
 				3: {
