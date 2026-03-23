@@ -443,9 +443,9 @@
 					alt: "Face with big nose in clouds",
 					state: "test3State",
 					checkFn: (x, y, w, h) => {
-						const leftThird = w / 3;
-						const rightThird = (w * 2) / 3;
-						return x > leftThird && x < rightThird;
+						const minX = w * 0.2;
+						const maxX = w * 0.66;
+						return x > minX && x < maxX;
 					}
 				}
 			};
