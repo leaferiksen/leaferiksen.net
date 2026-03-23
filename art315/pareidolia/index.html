@@ -19,12 +19,26 @@
 					BlinkMacSystemFont,
 					"Segoe UI",
 					sans-serif;
-				background: #ffffff;
+				background: linear-gradient(-45deg, #F0F8FF, #F0E6FF, #FFF0F5, #F0F8FF);
+				background-size: 400% 400%;
+				animation: skyGradient 40s ease infinite;
 				min-height: 100vh;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				padding: 20px;
+			}
+
+			@keyframes skyGradient {
+				0% {
+					background-position: 0% 50%;
+				}
+				50% {
+					background-position: 100% 50%;
+				}
+				100% {
+					background-position: 0% 50%;
+				}
 			}
 
 			.container {
