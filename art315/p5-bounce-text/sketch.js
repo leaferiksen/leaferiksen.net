@@ -36,7 +36,6 @@ function draw() {
 	textSize(64);
 	textAlign(CENTER);
 	text(word, x, y);
-	text(wordIndex, 50, 50);
 
 	// bounce along x axis
 	if (x > width || x < 0) {
