@@ -1,3 +1,38 @@
+const manyFacesBtn = document.getElementById("manyFaces");
+manyFacesBtn.addEventListener("click", () => {
+	new p5((p) => {
+		p.setup = () => {
+			p.createCanvas(400, 400);
+		};
+
+		p.draw = () => {
+			face(50, 10, 10);
+			face(130, 150, 30);
+			face(300, 70, 20);
+		};
+		function face(x, y, size) {
+			eye(x - size * 2, y, size);
+			eye(x + size * 2, y, size);
+			mouth(x, y + size * 2, size);
+		}
+		function eye(x, y, size) {
+			p.ellipseMode(p.CENTER);
+			p.rectMode(p.CENTER);
+			p.noStroke();
+			p.fill("grey");
+			p.rect(x, y, size * 2, size);
+			p.fill("black");
+			p.circle(x, y, size / 4);
+		}
+		function mouth(x, y, size) {
+			p.strokeWeight(size / 5);
+			p.stroke("maroon");
+			p.fill("red");
+			p.ellipse(x, y, size * 4, size * 2);
+		}
+	});
+});
+
 const weirdEyesBtn = document.getElementById("weirdEyes");
 weirdEyesBtn.addEventListener("click", () => {
 	new p5((p) => {
@@ -17,7 +52,7 @@ weirdEyesBtn.addEventListener("click", () => {
 			p.ellipseMode(p.CENTER);
 			p.rectMode(p.CENTER);
 			p.noStroke();
-			p.fill("white");
+			p.fill("grey");
 			p.rect(x, y, size * 2, size);
 			p.fill("black");
 			p.circle(x, y, size / 4);
