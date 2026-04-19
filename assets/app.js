@@ -1,91 +1,65 @@
-			"use strict";
+"use strict";
 
-			const routes = {
-				about: { template: "template-about", title: "Leaf Eriksen", header: "Leaf Eriksen", showSidebar: true },
-				projects: { template: "template-projects", title: "Leaf's Projects", header: "Leaf's Projects", showSidebar: false },
-				blog: { template: "template-blog", title: "Leaf's Blog", header: "Leaf's Blog", showSidebar: false },
-			};
+const routes = {
+	about: { title: "Leaf Eriksen" },
+	projects: { title: "Leaf's Projects" },
+	blog: { title: "Leaf's Blog" },
+};
 
-			let lastViewId = null;
+const app = document.getElementById("app");
+const titleEl = document.getElementById("main-title");
+const navLinks = document.querySelectorAll("#main-nav a");
 
-			function updateView(url) {
-				const viewId = url.searchParams.get("p") || "about";
-				const hash = url.hash;
-				const route = routes[viewId] || routes.about;
-				const template = document.getElementById(route.template);
-				const app = document.getElementById("app");
-				const sidebar = document.getElementById("app-sidebar");
-				const titleEl = document.getElementById("main-title");
-				const nav = document.getElementById("main-nav");
+let lastViewId = "about";
 
-				const render = () => {
-					if (lastViewId !== viewId) {
-						app.innerHTML = "";
-						app.appendChild(template.content.cloneNode(true));
-						document.title = route.title;
-						titleEl.textContent = route.header;
-						lastViewId = viewId;
+function updateView(url) {
+	const viewId = routes[url.searchParams.get("p")] ? url.searchParams.get("p") : "about";
+	const { title } = routes[viewId];
+	const hash = url.hash.slice(1);
 
-						// Toggle Sidebar
-						if (route.showSidebar) {
-							sidebar.classList.remove("hidden");
-							sidebar.classList.add("flex");
-							app.classList.add("sm:w-2/3", "sm:border-l", "sm:pl-8");
-						} else {
-							sidebar.classList.add("hidden");
-							sidebar.classList.remove("flex");
-							app.classList.remove("sm:w-2/3", "sm:border-l", "sm:pl-8");
-						}
-					}
+	const render = () => {
+		if (lastViewId !== viewId) {
+			app.replaceChildren(document.getElementById(`template-${viewId}`).content.cloneNode(true));
+			document.title = titleEl.textContent = title;
 
-					// Update navigation links visibility/active state
-					document.querySelectorAll("#main-nav a").forEach((link) => {
-						if (link.dataset.path === viewId) {
-							link.setAttribute("aria-current", "page");
-						} else {
-							link.removeAttribute("aria-current");
-						}
-					});
-
-					if (viewId === "blog") {
-						const targetId = hash.substring(1);
-						const accordions = app.querySelectorAll("details");
-						accordions.forEach((acc) => {
-							if (targetId && acc.id === targetId) {
-								acc.open = true;
-								requestAnimationFrame(() => acc.scrollIntoView({ behavior: "smooth" }));
-							} else {
-								acc.open = false;
-							}
-						});
-					}
-				};
-
-				if (lastViewId !== viewId) {
-					document.startViewTransition(render);
-				} else {
-					render();
-				}
-			}
-
-			window.addurl = (event, newhash) => {
-				event.preventDefault();
-				const url = new URL(window.location.href);
-				url.hash = url.hash === `#${newhash}` ? "" : newhash;
-				navigation.navigate(url.href, { history: "replace" });
-			};
-
-			navigation.addEventListener("navigate", (event) => {
-				const url = new URL(event.destination.url);
-				if (url.origin === location.origin) {
-					event.intercept({
-						async handler() {
-							updateView(url);
-						},
-					});
-				}
+			navLinks.forEach((a) => {
+				if (a.dataset.path === viewId) a.setAttribute("aria-current", "page");
+				else a.removeAttribute("aria-current");
 			});
+			lastViewId = viewId;
+		}
 
-			window.addEventListener("DOMContentLoaded", () => {
-				updateView(new URL(window.location.href));
+		if (viewId === "blog") {
+			app.querySelectorAll("details").forEach((acc) => {
+				acc.open = acc.id === hash;
 			});
+		}
+	};
+
+	lastViewId !== viewId ? document.startViewTransition(render) : render();
+}
+
+app.addEventListener("click", (e) => {
+	const summary = e.target.closest("summary");
+	if (!summary) return;
+
+	const details = summary.parentElement;
+	if (details.tagName !== "DETAILS") return;
+
+	e.preventDefault();
+	navigation.navigate(`?p=blog${details.open ? "" : `#${details.id}`}`, { history: "replace" });
+});
+
+navigation.addEventListener("navigate", (e) => {
+	const url = new URL(e.destination.url);
+	if (url.origin === location.origin) e.intercept({ handler: () => updateView(url) });
+});
+
+addEventListener("DOMContentLoaded", () => {
+	const url = new URL(location.href);
+	if (url.searchParams.get("p") && url.searchParams.get("p") !== "about") {
+		updateView(url);
+	} else if (url.hash) {
+		updateView(url);
+	}
+});
