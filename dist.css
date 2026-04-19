@@ -715,9 +715,6 @@
   .mt-8 {
     margin-top: calc(var(--spacing) * 8);
   }
-  .mt-10 {
-    margin-top: calc(var(--spacing) * 10);
-  }
   .mt-12 {
     margin-top: calc(var(--spacing) * 12);
   }
@@ -814,9 +811,6 @@
   .list-none {
     list-style-type: none;
   }
-  .grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
   .grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -847,8 +841,14 @@
   .gap-4 {
     gap: calc(var(--spacing) * 4);
   }
+  .gap-6 {
+    gap: calc(var(--spacing) * 6);
+  }
   .gap-8 {
     gap: calc(var(--spacing) * 8);
+  }
+  .gap-10 {
+    gap: calc(var(--spacing) * 10);
   }
   .self-center {
     align-self: center;
@@ -881,10 +881,6 @@
   .border-0 {
     border-style: var(--tw-border-style);
     border-width: 0px;
-  }
-  .border-t {
-    border-top-style: var(--tw-border-style);
-    border-top-width: 1px;
   }
   .border-b-2 {
     border-bottom-style: var(--tw-border-style);
@@ -971,9 +967,6 @@
   .py-10 {
     padding-block: calc(var(--spacing) * 10);
   }
-  .pt-2 {
-    padding-top: calc(var(--spacing) * 2);
-  }
   .pt-4 {
     padding-top: calc(var(--spacing) * 4);
   }
@@ -982,9 +975,6 @@
   }
   .text-center {
     text-align: center;
-  }
-  .text-start {
-    text-align: start;
   }
   .font-neon {
     font-family: var(--font-neon);
@@ -1019,6 +1009,12 @@
   .tracking-widest {
     --tw-tracking: var(--tracking-widest);
     letter-spacing: var(--tracking-widest);
+  }
+  .text-dark-neon {
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-paper);
+      text-shadow: 0 0 7px var(--color-red-400),	0 0 10px var(--color-red-400),	0 0 21px var(--color-red-400),	 0 0 42px var(--color-red-600),	0 0 82px var(--color-red-600),	0 0 92px var(--color-red-600),	0 0 102px var(--color-red-600);
+    }
   }
   .text-black {
     color: var(--color-black);
@@ -1072,6 +1068,9 @@
     --tw-outline-style: none;
     outline-style: none;
   }
+  .web-button {
+    image-rendering: crisp-edges;
+  }
   .hover\:scale-110 {
     &:hover {
       @media (hover: hover) {
@@ -1092,6 +1091,21 @@
     &:focus {
       --tw-outline-style: none;
       outline-style: none;
+    }
+  }
+  .aria-\[current\=page\]\:pointer-events-auto {
+    &[aria-current="page"] {
+      pointer-events: auto;
+    }
+  }
+  .aria-\[current\=page\]\:text-inherit\! {
+    &[aria-current="page"] {
+      color: inherit !important;
+    }
+  }
+  .aria-\[current\=page\]\:no-underline\! {
+    &[aria-current="page"] {
+      text-decoration-line: none !important;
     }
   }
   .sm\:order-none {
@@ -1117,16 +1131,6 @@
   .sm\:ml-10 {
     @media (width >= 40rem) {
       margin-left: calc(var(--spacing) * 10);
-    }
-  }
-  .sm\:flex {
-    @media (width >= 40rem) {
-      display: flex;
-    }
-  }
-  .sm\:hidden {
-    @media (width >= 40rem) {
-      display: none;
     }
   }
   .sm\:w-1\/2 {
@@ -1159,11 +1163,6 @@
       flex-wrap: nowrap;
     }
   }
-  .sm\:flex-wrap {
-    @media (width >= 40rem) {
-      flex-wrap: wrap;
-    }
-  }
   .sm\:items-end {
     @media (width >= 40rem) {
       align-items: flex-end;
@@ -1174,26 +1173,10 @@
       justify-content: flex-start;
     }
   }
-  .sm\:gap-4 {
-    @media (width >= 40rem) {
-      gap: calc(var(--spacing) * 4);
-    }
-  }
-  .sm\:border-t-0 {
-    @media (width >= 40rem) {
-      border-top-style: var(--tw-border-style);
-      border-top-width: 0px;
-    }
-  }
   .sm\:border-l {
     @media (width >= 40rem) {
       border-left-style: var(--tw-border-style);
       border-left-width: 1px;
-    }
-  }
-  .sm\:px-0 {
-    @media (width >= 40rem) {
-      padding-inline: calc(var(--spacing) * 0);
     }
   }
   .sm\:px-6 {
@@ -1204,11 +1187,6 @@
   .sm\:py-8 {
     @media (width >= 40rem) {
       padding-block: calc(var(--spacing) * 8);
-    }
-  }
-  .sm\:py-12 {
-    @media (width >= 40rem) {
-      padding-block: calc(var(--spacing) * 12);
     }
   }
   .sm\:py-16 {
@@ -1224,11 +1202,6 @@
   .sm\:pl-8 {
     @media (width >= 40rem) {
       padding-left: calc(var(--spacing) * 8);
-    }
-  }
-  .sm\:text-end {
-    @media (width >= 40rem) {
-      text-align: end;
     }
   }
   .sm\:text-left {
@@ -1462,13 +1435,9 @@
     }
   }
 }
-.web-button {
-  image-rendering: crisp-edges;
-}
-.text-dark-neon {
-  @media (prefers-color-scheme: dark) {
-    color: var(--color-paper);
-    text-shadow: 0 0 7px var(--color-red-400),	0 0 10px var(--color-red-400),	0 0 21px var(--color-red-400),	 0 0 42px var(--color-red-600),	0 0 82px var(--color-red-600),	0 0 92px var(--color-red-600),	0 0 102px var(--color-red-600);
+@layer base {
+  ::view-transition-group(root) {
+    animation: none;
   }
 }
 @property --tw-rotate-x {

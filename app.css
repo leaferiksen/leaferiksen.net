@@ -199,11 +199,19 @@
 	--color-dark-ma-2: var(--color-magenta-600);
 }
 
-.web-button {
+/* Custom Base Styles */
+@layer base {
+	::view-transition-group(root) {
+		animation: none;
+	}
+}
+
+/* Custom Utilities */
+@utility web-button {
 	image-rendering: crisp-edges;
 }
 
-.text-dark-neon {
+@utility text-dark-neon {
 	@variant dark {
 		color: var(--color-paper);
 		text-shadow:

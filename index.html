@@ -9,39 +9,215 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Vibur&display=swap" rel="stylesheet" />
+		<script src="assets/app.js" defer></script>
 	</head>
 	<body class="prose-xl max-w-none bg-light-bg font-serif text-light-tx dark:bg-dark-bg dark:text-dark-tx prose-a:text-light-pu prose-a:hover:text-dark-pu prose-a:dark:text-dark-pu prose-a:dark:hover:text-light-pu">
 		<div class="container mx-auto px-8 py-8 sm:py-16 lg:w-5/6">
-			<div class="flex flex-col sm:mt-10 sm:flex-row">
-				<div class="text-start sm:w-1/3 sm:py-12 sm:pr-8 sm:pl-8 sm:text-end">
-					<div class="flex flex-col items-start justify-center sm:items-end">
-						<img class="mt-0 w-[160px] rounded-full" src="assets/leaf.jpg" alt="Headshot of me, Leaf Eriksen, a young white man with long hair and glasses" />
-						<h1 class="text-dark-neon font-neon" aria-hidden="true">Leaf Eriksen</h1>
-					</div>
-					<nav class="flex flex-wrap gap-4 sm:hidden prose-a:text-light-ma! prose-a:hover:text-dark-ma! prose-a:dark:text-dark-ma! prose-a:dark:hover:text-light-ma!">
-						<span aria-current="page">About Me</span>
-						<a href="projects">My Projects</a>
-						<a href="blog">My Blog</a>
-					</nav>
-				</div>
-				<div class="mt-6 border-t border-dark-bg sm:mt-0 sm:w-2/3 sm:border-t-0 sm:border-l sm:py-8 sm:pl-8 dark:border-light-bg">
-					<nav class="hidden sm:flex sm:flex-wrap sm:gap-4 prose-a:text-light-ma! prose-a:hover:text-dark-ma! prose-a:dark:text-dark-ma! prose-a:dark:hover:text-light-ma!">
-						<span aria-current="page">About Me</span>
-						<a href="projects">My Projects</a>
-						<a href="blog">My Blog</a>
-					</nav>
-					<p>
-						Hello netizen! I am a young UI/UX Designer studying at the University of San Francisco. I enjoy writing accessible HTML, Tailwind CSS and JS in Emacs, and designing in Adobe and Affinity suites. If you could use my skills, please take a look at
-						<a href="assets/resume.pdf">my resume</a> and send me an <a href="mailto:lweriksen@dons.usfca.edu">email</a>!
-					</p>
-					<p>In my free time I enjoy playing Osu!, reading visual novels, and watching mecha anime. If you are in SF and think we could be good friends, let's meet up for coffee or tea sometime!</p>
-					<p class="not-prose web-button flex flex-wrap gap-2">
+			<header>
+				<h1 id="main-title" class="font-neon text-dark-neon">&nbsp;</h1>
+				<nav id="main-nav" class="flex flex-wrap gap-4 prose-a:text-light-ma! prose-a:hover:text-dark-ma! prose-a:dark:text-dark-ma! prose-a:dark:hover:text-light-ma!">
+					<a href="/" data-path="about" class="aria-[current=page]:pointer-events-auto aria-[current=page]:text-inherit! aria-[current=page]:no-underline!">About Me</a>
+					<a href="/?p=projects" data-path="projects" class="aria-[current=page]:pointer-events-auto aria-[current=page]:text-inherit! aria-[current=page]:no-underline!">My Projects</a>
+					<a href="/?p=blog" data-path="blog" class="aria-[current=page]:pointer-events-auto aria-[current=page]:text-inherit! aria-[current=page]:no-underline!">My Blog</a>
+				</nav>
+			</header>
+
+			<div class="mt-6 flex flex-col items-start sm:mt-10 sm:flex-row">
+				<aside id="app-sidebar" class="hidden flex-col items-center gap-6 sm:w-1/3 sm:items-end sm:py-8 sm:pr-8">
+					<img class="mt-0 w-[160px] rounded-full" src="assets/leaf.jpg" alt="Headshot of me, Leaf Eriksen, a young white man with long hair and glasses" />
+					<div class="not-prose flex w-[160px] flex-col items-center gap-2 web-button">
 						<a rel="me" href="https://mastodon.social/@leaferiksen"><img src="assets/fedi-by-apertown.png" alt="follow me on the fediverse" /></a>
 						<img src="assets/made-with-macos.gif" alt="made with MacOS" />
 						<img src="assets/created-in-emacs-by-leaf.png" alt="created in Emacs" />
-					</p>
-				</div>
+					</div>
+				</aside>
+				<main id="app" class="w-full border-dark-bg sm:py-8 dark:border-light-bg">
+					<!-- Content will be injected here -->
+				</main>
 			</div>
 		</div>
+
+		<template id="template-about">
+			<p class="mt-0">
+				Hello netizen! I am a young UI/UX Designer studying at the University of San Francisco. I enjoy writing accessible HTML, Tailwind CSS and JS in Emacs, and designing in Adobe and Affinity suites. If you could use my skills, please take a look at
+				<a href="assets/resume.pdf">my resume</a> and send me an <a href="mailto:lweriksen@dons.usfca.edu">email</a>!
+			</p>
+			<p>In my free time I enjoy playing Osu!, reading visual novels, and watching mecha anime. If you are in SF and think we could be good friends, let's meet up for coffee or tea sometime!</p>
+		</template>
+
+		<template id="template-projects">
+			<div class="flex flex-col gap-10">
+				<div class="mx-auto flex flex-col items-center sm:flex-row">
+					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+						<h2>Amtrak App UX Redesign</h2>
+						<p>Figma | March 23rd, 2026</p>
+						<p>A restructuring of the ticket purchasing and viewing flows in Amtrak’s mobile app, focused on accelerating and streamlining linear tasks, and improving the organization of the app to improve retention.</p>
+						<p><a class="mt-3 inline-flex items-center" href="https://www.figma.com/deck/vJgijbMooVaSu4DcCWAdWZ/Leaf-Eriksen-Amtrak-Redesign?node-id=1-42&t=WieHwIpi67G2BHv4-1">Learn More (Figma login required)</a></p>
+					</div>
+					<div class="not-prose order-first inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:order-none sm:ml-10 sm:w-1/2">
+						<img class="max-h-100" src="assets/amtrak.png" alt="Poster showing a massive gas station and a small EV charger that is out of service" />
+					</div>
+				</div>
+				<div class="mx-auto flex flex-col items-center sm:flex-row">
+					<div class="not-prose inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:mr-10 sm:w-1/2">
+						<img class="max-h-100" src="assets/typography-p4-front.jpg" alt="The book cover" />
+					</div>
+					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+						<h2>Book Cover Project</h2>
+						<p>Adobe Photoshop and InDesign | December 10th, 2025</p>
+						<p>Book Cover for the Wee Free Men</p>
+					</div>
+				</div>
+				<div class="mx-auto flex flex-col items-center sm:flex-row">
+					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+						<h2>Presidio Pet Cemetery Booklet</h2>
+						<p>Adobe InDesign | November 18th, 2025</p>
+						<p></p>
+						<p><a class="mt-3 inline-flex items-center" href="assets/typography-p3.pdf">Read Here (Download to file with side-by-side pages)</a></p>
+					</div>
+					<div class="not-prose order-first inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:order-none sm:ml-10 sm:w-1/2">
+						<img class="max-h-100" src="assets/typography-p3.jpg" alt="Two pages of a booklet with a yellowed background, Blackletter titles, and old maps of San Francisco" />
+					</div>
+				</div>
+				<div class="mx-auto flex flex-col items-center sm:flex-row">
+					<div class="not-prose inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:mr-10 sm:w-1/2">
+						<img class="max-h-100" src="assets/gundam.jpg" alt="The cover of a printed copy of the zine" />
+					</div>
+					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+						<h2>Gundam Fanzine</h2>
+						<p>Adobe InDesign | June 1st, 2025</p>
+						<p>A 16-page fanzine about Mobile Suit Gundam, the anti-colonial military robot anime that has been on air since 1979.</p>
+						<p><a class="mt-3 inline-flex items-center" href="assets/gundam.pdf">Read Here</a></p>
+					</div>
+				</div>
+				<div class="mx-auto flex flex-col items-center sm:flex-row">
+					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+						<h2>Pixel Portrait of Susan Kare</h2>
+						<p>Adobe Illustrator | April 2nd, 2025</p>
+						<p>A pixel art portrait of Susan Kare, inspired by her graph paper portrait of Steve Jobs, extensive work on the first Machintosh, and Solitare for Windows 3.0. I explored various environments it could be placed into, and loved the "Alternate Reality Game Studio" the most.</p>
+					</div>
+					<div class="not-prose order-first inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:order-none sm:ml-10 sm:w-1/2">
+						<img class="max-h-100" src="assets/susan-kare.png" alt="Poster showing a massive gas station and a small EV charger that is out of service" />
+					</div>
+				</div>
+				<div class="mx-auto flex flex-col items-center sm:flex-row">
+					<div class="not-prose inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:mr-10 sm:w-1/2">
+						<img class="max-h-100" src="assets/big-essentials.png" alt="screenshot of Zen Browser with bigger pinned pinned tab favicons" />
+					</div>
+					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+						<h2>Big Essentials</h2>
+						<p>Emacs & Zen Browser | March 11th, 2025</p>
+						<p>
+							A theme for Zen Browser to make the Essential tab icons big enough (32px w/ 16px padding) to be recognisable without their names.<br />
+							<a class="mt-3 inline-flex items-center" href="https://zen-browser.app/mods/9bbaab67-a2c8-4d79-837f-90cd72a8932a/">Learn More</a>
+						</p>
+					</div>
+				</div>
+				<div class="mx-auto flex flex-col items-center sm:flex-row">
+					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+						<h2>The State of EV Charging</h2>
+						<p>Affinity Photo | February 25, 2025</p>
+						<p>California Energy Commission announced it is starting a new program providing fully subsidized charging stations to businesses in the state. This poster was made to visualize the current issues with EV charging and provide information on this new program that could lessen these issues.</p>
+					</div>
+					<div class="not-prose order-first inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:order-none sm:ml-10 sm:w-1/2">
+						<img class="max-h-100" src="assets/ev-chargers.jpg" alt="Poster showing a massive gas station and a small EV charger that is out of service" />
+					</div>
+				</div>
+				<div class="mx-auto flex flex-col items-center sm:flex-row">
+					<div class="not-prose inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:mr-10 sm:w-1/2">
+						<img class="max-h-100 dark:hidden" src="assets/spatialfolders-light.png" alt="screenshot of a third-party macos file manager" />
+						<img class="hidden max-h-100 dark:block" src="assets/spatialfolders-dark.png" alt="screenshot of a third-party macos file manager" />
+					</div>
+					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+						<h2>SpatialFolders</h2>
+						<p>Xcode | November 26, 2024</p>
+						<p>
+							A macOS File Manager application designed to recreate the unique workflow of Finder in Classic Mac OS.<br />
+							<a class="mt-3 inline-flex items-center" href="https://github.com/leaferiksen/SpatialFolders">Learn More</a>
+						</p>
+					</div>
+				</div>
+				<div class="mx-auto flex flex-col items-center sm:flex-row">
+					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+						<h2>wearin' a demon</h2>
+						<p>Adobe Photoshop | November 18th, 2024</p>
+						<p>A tryptic of photographs taken in Golden Gate park captioned with and inspired by lyrics from 5g by brakence.</p>
+					</div>
+					<div class="not-prose order-first inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:order-none sm:ml-10 sm:w-1/2">
+						<div class="grid grid-cols-3">
+							<img src="assets/triptych0.jpg" alt="a line of thin trees bending over with the lyrics 'theyre laying waste to a new biome'" />
+							<img src="assets/triptych1.jpg" alt="wooden stairs disappearing into a dimly lit forest with the lyrics 'to make a case for the new iphone'" />
+							<img src="assets/triptych2.jpg" alt="a tiny waterfall with the lyrics 'the waters laced and they know I know'" />
+						</div>
+					</div>
+				</div>
+				<div class="mx-auto flex flex-col items-center sm:flex-row">
+					<div class="not-prose inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:mr-10 sm:w-1/2">
+						<img class="max-h-100" src="assets/usf-architecture-small.png" alt="a grid of vector art illustations of various buildings" />
+					</div>
+					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+						<h2>Architectural Shapes and Colors</h2>
+						<p>Adobe Illustrator | October 16th, 2024</p>
+						<p>Architexture from around my campus, drawn by hand based on photos of the campus church and various other buildings that complemented the diagonal lines of the center photo of my dorm's hallway.</p>
+					</div>
+				</div>
+				<div class="mx-auto flex flex-col items-center sm:flex-row">
+					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+						<h2>"I Voted!" Sticker</h2>
+						<p>Adobe Illustrator | September 16th, 2024</p>
+						<p>The Seattle Link light rail bursting from a cloud, drawn by hand for a voting sticker design project, as a reminder to always vote for better free transit, wherever you are!</p>
+					</div>
+					<div class="not-prose order-first inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:order-none sm:ml-10 sm:w-1/2">
+						<img class="max-h-100" src="assets/light-rail.png" alt="a sticker of train bursting out of a cloud" />
+					</div>
+				</div>
+			</div>
+		</template>
+
+		<template id="template-blog">
+			<div class="flex flex-col gap-4">
+				<details id="homebrew">
+					<summary onclick="addurl(event, 'homebrew')" class="cursor-pointer list-none">
+						<h2>Using Homebrew Without Admin Privileges</h2>
+					</summary>
+					<p>2024-10-07</p>
+					<p>By default, installing and updating Homebrew packages doesn’t work when run as a normal, non-admin user. This is what I do to fix that. Run this as admin, but replace <code>leaf</code> with your normal user’s name.</p>
+					<pre>sudo chown -R leaf /opt/homebrew/</pre>
+					<p>Put the following in your normal user's <code>~/.zshrc</code> file.</p>
+					<pre>
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
+export HOMEBREW_CASK_OPTS="--appdir=~/Applications"</pre
+					>
+					<p>Just the first two lines are enough to install formulae. If you want Homebrew to handle casks, include the third line to tell Homebrew to install to the normal user's ~/Applications/ instead of /Applications/.</p>
+				</details>
+				<details id="macos-tiling" class="pt-4">
+					<summary onclick="addurl(event, 'macos-tiling')" class="cursor-pointer list-none">
+						<h2>Fixing macOS Window Tiling Keyboard Shortcuts</h2>
+					</summary>
+					<p>2024-09-27</p>
+					<p>Keyboard shortcuts for macOS window tiling use the Apple's globe key and control, so they don't work with third party keyboards. In System Settings -> Keyboard -> Keyboard Shortcuts you can set caps lock to globe and solve the issue, but if you want to use just caps lock without control, keep reading.</p>
+					<p>In the same menu, go to the App Shortcuts tab. Click the +, pick a shortcut, and enter the name of a tiling action (all of them can be found in the menu bar -> Window -> Move & Resize).</p>
+					<p>
+						Setting all these by hand can be a pain, so I figured out how to automate everything from the terminal. The command below uses the keycodes cmd(@) + opt(~) + ctrl(^) + arrows(obscure unicode) for tiling to halves, adding shift($) for quarter tiling. Those modifiers probably sound like terrible hand gymnastics, but I just map all three keys to caps lock using
+						<a href="https://hyperkey.app/">Hyperkey</a> or <a href="https://karabiner-elements.pqrs.org/">Karabiner-Elements</a>.
+					</p>
+					<pre>
+defaults write -g "NSUserKeyEquivalents" '{
+    Fill = "@~^f";
+    Left = "@~^\U0090";
+    Right = "@~^\U0092";
+    Top = "@~^\U0091";
+    Bottom = "@~^\U0093";
+    "Bottom Left" = "@~^$\U2190";
+    "Top Left" = "@~^$\U2191";
+    "Top Right" = "@~^$\U2192";
+    "Bottom Right" = "@~^$\U2193";
+    "Return to Previous Size" = "@~^r";
+}'</pre
+					>
+				</details>
+			</div>
+		</template>
 	</body>
 </html>
