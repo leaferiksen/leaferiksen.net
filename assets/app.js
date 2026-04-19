@@ -2,7 +2,7 @@
 
 const routes = {
 	about: { title: "Leaf Eriksen" },
-	projects: { title: "Leaf's Projects" },
+	portfolio: { title: "Leaf's Portfolio" },
 	blog: { title: "Leaf's Blog" },
 };
 
