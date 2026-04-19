@@ -10,7 +10,7 @@ const app = document.getElementById("app");
 const titleEl = document.getElementById("main-title");
 const navLinks = document.querySelectorAll("#main-nav a");
 
-let lastViewId = "about";
+let lastViewId = null;
 
 function updateView(url) {
 	const viewId = routes[url.searchParams.get("p")] ? url.searchParams.get("p") : "about";
@@ -57,9 +57,5 @@ navigation.addEventListener("navigate", (e) => {
 
 addEventListener("DOMContentLoaded", () => {
 	const url = new URL(location.href);
-	if (url.searchParams.get("p") && url.searchParams.get("p") !== "about") {
-		updateView(url);
-	} else if (url.hash) {
-		updateView(url);
-	}
+	updateView(url);
 });
