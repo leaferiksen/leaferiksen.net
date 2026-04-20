@@ -1003,6 +1003,9 @@
   .text-center {
     text-align: center;
   }
+  .text-left {
+    text-align: left;
+  }
   .font-neon {
     font-family: var(--font-neon);
   }
@@ -1267,6 +1270,34 @@
     @media (width >= 40rem) {
       font-size: var(--text-3xl);
       line-height: var(--tw-leading, var(--text-3xl--line-height));
+    }
+  }
+  .odd\:sm\:text-left {
+    &:nth-child(odd) {
+      @media (width >= 40rem) {
+        text-align: left;
+      }
+    }
+  }
+  .even\:sm\:flex-row-reverse {
+    &:nth-child(even) {
+      @media (width >= 40rem) {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+  .even\:sm\:text-left {
+    &:nth-child(even) {
+      @media (width >= 40rem) {
+        text-align: left;
+      }
+    }
+  }
+  .even\:sm\:text-right {
+    &:nth-child(even) {
+      @media (width >= 40rem) {
+        text-align: right;
+      }
     }
   }
   .md\:col-span-1 {

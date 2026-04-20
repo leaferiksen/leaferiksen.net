@@ -28,8 +28,8 @@
 		</div>
 
 		<template id="template-about">
-			<div class="flex flex-col items-start sm:flex-row">
-				<div class="w-full sm:w-2/3 sm:py-8 sm:pr-8">
+			<div class="flex flex-col items-start gap-10 sm:flex-row">
+				<div class="w-full sm:w-2/3">
 					<p class="mt-0">
 						Hello netizen! I am a young UI/UX Designer studying at the University of San Francisco. I enjoy writing accessible HTML, Tailwind CSS and JS in Emacs, and designing in Adobe and Affinity suites. If you could use my skills, please take a look at
 						<a href="assets/resume.pdf">my resume</a> and send me an <a href="mailto:lweriksen@dons.usfca.edu">email</a>!
@@ -38,7 +38,7 @@
 				</div>
 				<aside class="order-first flex flex-col items-start gap-6 border-dark-bg sm:order-last sm:w-1/3 sm:items-center sm:border-l sm:py-8 sm:pl-8 dark:border-light-bg">
 					<img class="mt-0 w-[160px] rounded-full" src="assets/leaf.jpg" alt="Headshot of me, Leaf Eriksen, a young white man with long hair and glasses" />
-					<div class="not-prose flex flex-row flex-wrap items-start gap-2 pb-8 web-button sm:flex-col sm:items-center sm:pb-0">
+					<div class="not-prose flex flex-row flex-wrap items-start gap-2 web-button sm:flex-col sm:items-center">
 						<a rel="me" href="https://mastodon.social/@leaferiksen"><img src="assets/fedi-by-apertown.png" alt="follow me on the fediverse" /></a>
 						<img src="assets/made-with-macos.gif" alt="made with MacOS" />
 						<img src="assets/created-in-emacs-by-leaf.png" alt="created in Emacs" />
@@ -48,126 +48,122 @@
 		</template>
 
 		<template id="template-portfolio">
-			<div class="flex flex-col gap-10 sm:py-8">
-				<div class="mx-auto flex flex-col items-center sm:flex-row">
-					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+			<div class="flex flex-col gap-10">
+				<div class="flex flex-col gap-10 text-left sm:flex-row even:sm:flex-row-reverse even:sm:text-right">
+					<div class="not-prose sm:justify-right even:sm:justify-left mx-auto inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:w-1/2">
+						<img class="max-h-100" src="assets/amtrak.png" alt="Screenshots of Amtrak App Prototype" />
+					</div>
+					<div class="flex-grow">
 						<h2>Amtrak App UX Redesign</h2>
 						<p>Figma | March 23rd, 2026</p>
 						<p>A restructuring of the ticket purchasing and viewing flows in Amtrak’s mobile app, focused on accelerating and streamlining linear tasks, and improving the organization of the app to improve retention.</p>
 						<p><a class="mt-3 inline-flex items-center" href="https://www.figma.com/deck/vJgijbMooVaSu4DcCWAdWZ/Leaf-Eriksen-Amtrak-Redesign?node-id=1-42&t=WieHwIpi67G2BHv4-1">Learn More (Figma login required)</a></p>
 					</div>
-					<div class="not-prose order-first inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:order-none sm:ml-10 sm:w-1/2">
-						<img class="max-h-100" src="assets/amtrak.png" alt="Poster showing a massive gas station and a small EV charger that is out of service" />
-					</div>
 				</div>
-				<div class="mx-auto flex flex-col items-center sm:flex-row">
-					<div class="not-prose inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:mr-10 sm:w-1/2">
+				<div class="flex flex-col gap-10 text-left sm:flex-row even:sm:flex-row-reverse even:sm:text-right">
+					<div class="not-prose sm:justify-right even:sm:justify-left mx-auto inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:w-1/2">
 						<img class="max-h-100" src="assets/typography-p4-front.jpg" alt="The book cover" />
 					</div>
-					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+					<div class="flex-grow">
 						<h2>Book Cover Project</h2>
-						<p>Adobe Photoshop and InDesign | December 10th, 2025</p>
+						<p>Adobe InDesign | December 10th, 2025</p>
 						<p>Book Cover for the Wee Free Men</p>
 					</div>
 				</div>
-				<div class="mx-auto flex flex-col items-center sm:flex-row">
-					<div class="not-prose inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:mr-10 sm:w-1/2">
-						<img class="max-h-100" src="assets/typography-p3.jpg" alt="Two pages of a booklet with a yellowed background, Blackletter titles, and old maps of San Francisco" />
+				<div class="flex flex-col gap-10 text-left sm:flex-row even:sm:flex-row-reverse even:sm:text-right">
+					<div class="not-prose sm:justify-right even:sm:justify-left mx-auto inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:w-1/2">
+						<img class="max-h-100" src="assets/typography-p3.jpg" alt="Two pages of a yellowed booklet with Blackletter titles and old maps of San Francisco" />
 					</div>
-					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+					<div class="flex-grow">
 						<h2>Presidio Pet Cemetery Booklet</h2>
 						<p>Adobe InDesign | November 18th, 2025</p>
 						<p></p>
-						<p><a class="mt-3 inline-flex items-center" href="assets/typography-p3.pdf">Read Here (Download to file with side-by-side pages)</a></p>
+						<p><a class="mt-3 inline-flex items-center" href="assets/typography-p3.pdf">Read Here (Download to view with side-by-side pages)</a></p>
 					</div>
 				</div>
-				<div class="mx-auto flex flex-col items-center sm:flex-row">
-					<div class="not-prose inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:mr-10 sm:w-1/2">
+				<div class="flex flex-col gap-10 text-left sm:flex-row even:sm:flex-row-reverse even:sm:text-right">
+					<div class="not-prose sm:justify-right even:sm:justify-left mx-auto inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:w-1/2">
 						<img class="max-h-100" src="assets/gundam.jpg" alt="The cover of a printed copy of the zine" />
 					</div>
-					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+					<div class="flex-grow">
 						<h2>Gundam Fanzine</h2>
 						<p>Adobe InDesign | June 1st, 2025</p>
 						<p>A 16-page fanzine about Mobile Suit Gundam, the anti-colonial military robot anime that has been on air since 1979.</p>
 						<p><a class="mt-3 inline-flex items-center" href="assets/gundam.pdf">Read Here</a></p>
 					</div>
 				</div>
-				<div class="mx-auto flex flex-col items-center sm:flex-row">
-					<div class="not-prose order-first inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:order-none sm:ml-10 sm:w-1/2">
+				<div class="flex flex-col gap-10 text-left sm:flex-row even:sm:flex-row-reverse even:sm:text-right">
+					<div class="not-prose sm:justify-right even:sm:justify-left mx-auto inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:w-1/2">
 						<img class="max-h-100" src="assets/susan-kare.png" alt="Poster showing a massive gas station and a small EV charger that is out of service" />
 					</div>
-					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+					<div class="flex-grow">
 						<h2>Pixel Portrait of Susan Kare</h2>
 						<p>Adobe Illustrator | April 2nd, 2025</p>
 						<p>A pixel art portrait of Susan Kare, inspired by her graph paper portrait of Steve Jobs, extensive work on the first Machintosh, and Solitare for Windows 3.0. I explored various environments it could be placed into, and loved the "Alternate Reality Game Studio" the most.</p>
 					</div>
 				</div>
-				<div class="mx-auto flex flex-col items-center sm:flex-row">
-					<div class="not-prose inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:mr-10 sm:w-1/2">
+				<div class="flex flex-col gap-10 text-left sm:flex-row even:sm:flex-row-reverse even:sm:text-right">
+					<div class="not-prose sm:justify-right even:sm:justify-left mx-auto inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:w-1/2">
 						<img class="max-h-100" src="assets/big-essentials.png" alt="screenshot of Zen Browser with bigger pinned pinned tab favicons" />
 					</div>
-					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+					<div class="flex-grow">
 						<h2>Big Essentials</h2>
 						<p>Emacs & Zen Browser | March 11th, 2025</p>
-						<p>
-							A theme for Zen Browser to make the Essential tab icons big enough (32px w/ 16px padding) to be recognisable without their names.<br />
-							<a class="mt-3 inline-flex items-center" href="https://zen-browser.app/mods/9bbaab67-a2c8-4d79-837f-90cd72a8932a/">Learn More</a>
-						</p>
+						<p>A theme for Zen Browser to transform the Essential tabs into something that feels more like an app library and ensures that they are recognizable without their tab names.</p>
+						<p><a class="mt-3 inline-flex items-center" href="https://zen-browser.app/mods/9bbaab67-a2c8-4d79-837f-90cd72a8932a/">Learn More</a></p>
 					</div>
 				</div>
-				<div class="mx-auto flex flex-col items-center sm:flex-row">
-					<div class="not-prose order-first inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:order-none sm:ml-10 sm:w-1/2">
+				<div class="flex flex-col gap-10 text-left sm:flex-row even:sm:flex-row-reverse even:sm:text-right">
+					<div class="not-prose sm:justify-right even:sm:justify-left mx-auto inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:w-1/2">
 						<img class="max-h-100" src="assets/ev-chargers.jpg" alt="Poster showing a massive gas station and a small EV charger that is out of service" />
 					</div>
-					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+					<div class="flex-grow">
 						<h2>The State of EV Charging</h2>
 						<p>Affinity Photo | February 25, 2025</p>
 						<p>California Energy Commission announced it is starting a new program providing fully subsidized charging stations to businesses in the state. This poster was made to visualize the current issues with EV charging and provide information on this new program that could lessen these issues.</p>
 					</div>
 				</div>
-				<div class="mx-auto flex flex-col items-center sm:flex-row">
-					<div class="not-prose inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:mr-10 sm:w-1/2">
+				<div class="flex flex-col gap-10 text-left sm:flex-row even:sm:flex-row-reverse even:sm:text-right">
+					<div class="not-prose sm:justify-right even:sm:justify-left mx-auto inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:w-1/2">
 						<img class="max-h-100 dark:hidden" src="assets/spatialfolders-light.png" alt="screenshot of a third-party macos file manager" />
 						<img class="hidden max-h-100 dark:block" src="assets/spatialfolders-dark.png" alt="screenshot of a third-party macos file manager" />
 					</div>
-					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+					<div class="flex-grow">
 						<h2>SpatialFolders</h2>
 						<p>Xcode | November 26, 2024</p>
-						<p>
-							A macOS File Manager application designed to recreate the unique workflow of Finder in Classic Mac OS.<br />
-							<a class="mt-3 inline-flex items-center" href="https://github.com/leaferiksen/SpatialFolders">Learn More</a>
-						</p>
+						<p>A macOS File Manager application designed to recreate the unique workflow of Finder in Classic Mac OS.</p>
+						<p><a class="mt-3 inline-flex items-center" href="https://github.com/leaferiksen/SpatialFolders">Learn More</a></p>
 					</div>
 				</div>
-				<div class="mx-auto flex flex-col items-center sm:flex-row">
-					<div class="not-prose order-first inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:order-none sm:ml-10 sm:w-1/2">
+				<div class="flex flex-col gap-10 text-left sm:flex-row even:sm:flex-row-reverse even:sm:text-right">
+					<div class="not-prose sm:justify-right even:sm:justify-left mx-auto inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:w-1/2">
 						<div class="grid grid-cols-3">
 							<img src="assets/triptych0.jpg" alt="a line of thin trees bending over with the lyrics 'theyre laying waste to a new biome'" />
 							<img src="assets/triptych1.jpg" alt="wooden stairs disappearing into a dimly lit forest with the lyrics 'to make a case for the new iphone'" />
 							<img src="assets/triptych2.jpg" alt="a tiny waterfall with the lyrics 'the waters laced and they know I know'" />
 						</div>
 					</div>
-					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+					<div class="flex-grow">
 						<h2>wearin' a demon</h2>
 						<p>Adobe Photoshop | November 18th, 2024</p>
 						<p>A tryptic of photographs taken in Golden Gate park captioned with and inspired by lyrics from 5g by brakence.</p>
 					</div>
 				</div>
-				<div class="mx-auto flex flex-col items-center sm:flex-row">
-					<div class="not-prose inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:mr-10 sm:w-1/2">
+				<div class="flex flex-col gap-10 text-left sm:flex-row even:sm:flex-row-reverse even:sm:text-right">
+					<div class="not-prose sm:justify-right even:sm:justify-left mx-auto inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:w-1/2">
 						<img class="max-h-100" src="assets/usf-architecture-small.png" alt="a grid of vector art illustations of various buildings" />
 					</div>
-					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+					<div class="flex-grow">
 						<h2>Architectural Shapes and Colors</h2>
 						<p>Adobe Illustrator | October 16th, 2024</p>
 						<p>Architexture from around my campus, drawn by hand based on photos of the campus church and various other buildings that complemented the diagonal lines of the center photo of my dorm's hallway.</p>
 					</div>
 				</div>
-				<div class="mx-auto flex flex-col items-center sm:flex-row">
-					<div class="not-prose order-first inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:order-none sm:ml-10 sm:w-1/2">
+				<div class="flex flex-col gap-10 text-left sm:flex-row even:sm:flex-row-reverse even:sm:text-right">
+					<div class="not-prose sm:justify-right even:sm:justify-left mx-auto inline-flex w-5/6 flex-shrink-0 items-center justify-center sm:w-1/2">
 						<img class="max-h-100" src="assets/light-rail.png" alt="a sticker of train bursting out of a cloud" />
 					</div>
-					<div class="mt-6 flex-grow text-center sm:mt-0 sm:text-left">
+					<div class="flex-grow">
 						<h2>"I Voted!" Sticker</h2>
 						<p>Adobe Illustrator | September 16th, 2024</p>
 						<p>The Seattle Link light rail bursting from a cloud, drawn by hand for a voting sticker design project, as a reminder to always vote for better free transit, wherever you are!</p>
@@ -177,7 +173,7 @@
 		</template>
 
 		<template id="template-blog">
-			<div class="flex flex-col gap-4 sm:py-8">
+			<div class="flex flex-col gap-4">
 				<details id="homebrew">
 					<summary class="cursor-pointer list-none">
 						<h2>Using Homebrew Without Admin Privileges</h2>
