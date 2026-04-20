@@ -52,7 +52,7 @@ app.addEventListener("click", (e) => {
 
 navigation.addEventListener("navigate", (e) => {
 	const url = new URL(e.destination.url);
-	if (url.origin === location.origin) e.intercept({ handler: () => updateView(url) });
+	if (url.origin === location.origin && url.pathname === "/") e.intercept({ handler: () => updateView(url) });
 });
 
 addEventListener("DOMContentLoaded", () => {
