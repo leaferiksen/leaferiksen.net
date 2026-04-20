@@ -1310,6 +1310,13 @@
       }
     }
   }
+  .sm\:group-even\:order-2 {
+    @media (width >= 40rem) {
+      &:is(:where(.group):nth-child(even) *) {
+        order: 2;
+      }
+    }
+  }
   .group-even\:sm\:justify-items-end {
     &:is(:where(.group):nth-child(even) *) {
       @media (width >= 40rem) {
