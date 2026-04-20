@@ -105,9 +105,8 @@ kgToLbsBtn.addEventListener("click", () => {
 
 		function kgToLbs(kg, pos) {
 			let lbs = kg * 2.2;
-			let result = kg + " is " + lbs + " lbs";
 			p.text(result, 20, pos);
-			console.log(result);
+			console.log(kg + " is " + lbs + " lbs");
 		}
 	});
 });
