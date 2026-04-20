@@ -1,3 +1,106 @@
+// all projects in reverse chronological order
+
+const dynamicSquareBtn = document.getElementById("dynamicSquare");
+dynamicSquareBtn.addEventListener("click", () => {
+	new p5((p) => {
+		let b = [];
+		let num = 5;
+
+		p.setup = () => {
+			p.createCanvas(600, 600);
+			for (let i = 0; i < num; i++) {
+				b[i] = new DynamicSquare(p.random(p.width), p.random(p.height), p.random(20, 100), p.random(20, 100), p.random(-20, 20), p.random(-20, 20));
+			}
+		};
+
+		p.draw = () => {
+			p.background("white");
+			for (let i = 0; i < num; i++) {
+				b[i].move();
+				b[i].display();
+				b[i].bounce();
+			}
+		};
+		class DynamicSquare {
+			constructor(tempX, tempY, tempW, tempH, tempXSpeed, tempYSpeed) {
+				this.x = tempX;
+				this.y = tempY;
+				this.w = tempW;
+				this.h = tempH;
+				this.xSpeed = tempXSpeed;
+				this.ySpeed = tempYSpeed;
+			}
+			move() {
+				this.x += this.xSpeed;
+				this.y += this.ySpeed;
+			}
+			display() {
+				p.fill(0, 100);
+				p.noStroke();
+				p.rect(this.x, this.y, this.w, this.h);
+			}
+			bounce() {
+				if (this.x > p.width || this.x < 0) {
+					this.xSpeed = this.xSpeed * -1;
+				}
+				if (this.y > p.height || this.y < 0) {
+					this.ySpeed = this.ySpeed * -1;
+				}
+			}
+		}
+	});
+});
+
+const bouncySquareBtn = document.getElementById("bouncySquare");
+bouncySquareBtn.addEventListener("click", () => {
+	new p5((p) => {
+		let b = [];
+		let num = 25;
+
+		p.setup = () => {
+			p.createCanvas(600, 600);
+			b = new Ball();
+			for (let i = 0; i < num; i++) {
+				b[i] = new Ball();
+			}
+		};
+
+		p.draw = () => {
+			p.background("white");
+			for (let i = 0; i < num; i++) {
+				b[i].move();
+				b[i].display();
+				b[i].bounce();
+			}
+		};
+		class Ball {
+			constructor() {
+				this.x = p.random(p.width);
+				this.y = p.random(p.height);
+				this.xSpeed = p.random(-5, 5);
+				this.ySpeed = p.random(-5, 5);
+			}
+			move() {
+				this.x += this.xSpeed;
+				this.y += this.ySpeed;
+			}
+			display() {
+				p.fill(0, 100);
+				p.noStroke();
+				p.square(this.x, this.y, 100);
+			}
+			bounce() {
+				if (this.x > p.width || this.x < 0) {
+					this.xSpeed = this.xSpeed * -1;
+				}
+				if (this.y > p.height || this.y < 0) {
+					this.ySpeed = this.ySpeed * -1;
+				}
+			}
+		}
+	});
+});
+
 const manyFacesBtn = document.getElementById("manyFaces");
 manyFacesBtn.addEventListener("click", () => {
 	new p5((p) => {
