@@ -4,18 +4,15 @@ const app = document.getElementById("app");
 const navLinks = document.querySelectorAll("#main-nav a");
 
 const routes = {};
-let defaultPath = "about";
+let defaultPath = null;
 
-navLinks.forEach((a) => {
+navLinks.forEach((a, i) => {
 	const path = a.dataset.path;
 	routes[path] = { title: a.dataset.title || a.textContent };
+	if (i === 0) defaultPath = path;
 
-	const href = a.getAttribute("href");
-	if (href === "/") defaultPath = path;
-
-	if (href === "/" || href.startsWith("/?")) {
-		a.setAttribute("href", location.pathname + href.substring(1));
-	}
+	const url = new URL(a.href, location.origin);
+	if (url.pathname === location.pathname && !url.searchParams.has("p")) defaultPath = path;
 });
 
 let lastViewId = null;
