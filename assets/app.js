@@ -1,67 +1,48 @@
 "use strict";
 
 const app = document.getElementById("app");
-const navLinks = document.querySelectorAll("#main-nav a");
+const navLinks = [...document.querySelectorAll("#main-nav a")];
 
 const routes = {};
-let defaultPath = null;
+let defaultPath;
 
 navLinks.forEach((a, i) => {
-	const path = a.dataset.path;
-	routes[path] = { title: a.dataset.title || a.textContent };
-	if (i === 0) defaultPath = path;
-
+	const { path, title } = a.dataset;
+	routes[path] = title || a.textContent;
 	const url = new URL(a.href, location.origin);
-	if (url.pathname === location.pathname && !url.searchParams.has("p")) defaultPath = path;
+	if (i === 0 || (url.pathname === location.pathname && !url.searchParams.has("p"))) defaultPath = path;
 });
 
-let lastViewId = null;
-
-function updateView(url) {
-	const p = url.searchParams.get("p");
-	const viewId = routes[p] ? p : defaultPath;
-	const { title } = routes[viewId];
+const updateView = (url) => {
+	const viewId = routes[url.searchParams.get("p")] ? url.searchParams.get("p") : defaultPath;
 	const hash = url.hash.slice(1);
 
 	const render = () => {
-		if (lastViewId !== viewId) {
+		if (app.dataset.view !== viewId) {
 			app.replaceChildren(document.getElementById(viewId).content.cloneNode(true));
-			document.title = title;
-
-			navLinks.forEach((a) => {
-				if (a.dataset.path === viewId) a.setAttribute("aria-current", "page");
-				else a.removeAttribute("aria-current");
-			});
-			lastViewId = viewId;
+			document.title = routes[viewId];
+			navLinks.forEach((a) => (a.ariaCurrent = a.dataset.path === viewId ? "page" : null));
+			app.dataset.view = viewId;
 		}
-
-		if (viewId === "blog") {
-			app.querySelectorAll("details").forEach((acc) => {
-				acc.open = acc.id === hash;
-			});
-		}
+		app.querySelectorAll("details").forEach((d) => (d.open = d.id === hash));
 	};
 
-	lastViewId !== viewId ? document.startViewTransition(render) : render();
-}
+	app.dataset.view !== viewId && document.startViewTransition ? document.startViewTransition(render) : render();
+};
 
-app.addEventListener("click", (e) => {
-	const summary = e.target.closest("summary");
-	if (!summary) return;
+app.onclick = (e) => {
+	const details = e.target.closest("summary")?.parentElement;
+	if (details?.tagName === "DETAILS") {
+		e.preventDefault();
+		navigation.navigate(`?p=${app.dataset.view}${details.open ? "" : `#${details.id}`}`, { history: "replace" });
+	}
+};
 
-	const details = summary.parentElement;
-	if (details.tagName !== "DETAILS") return;
-
-	e.preventDefault();
-	navigation.navigate(`?p=${lastViewId}${details.open ? "" : `#${details.id}`}`, { history: "replace" });
-});
-
-navigation.addEventListener("navigate", (e) => {
+navigation.onnavigate = (e) => {
 	const url = new URL(e.destination.url);
-	if (url.origin === location.origin && url.pathname === location.pathname) e.intercept({ handler: () => updateView(url) });
-});
+	if (url.origin === location.origin && url.pathname === location.pathname) {
+		e.intercept({ handler: () => updateView(url) });
+	}
+};
 
-addEventListener("DOMContentLoaded", () => {
-	const url = new URL(location.href);
-	updateView(url);
-});
+updateView(new URL(location.href));
