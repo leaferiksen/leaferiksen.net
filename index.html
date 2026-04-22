@@ -4,21 +4,22 @@
 		<title>Leaf Eriksen</title>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="thumbnail" content="assets/leaf.jpg" />
-		<link href="dist.css" rel="stylesheet" />
+		<meta name="thumbnail" content="/assets/leaf.jpg" />
+		<link href="/dist.css" rel="stylesheet" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Vibur&display=swap" rel="stylesheet" />
-		<script src="assets/app.js" defer></script>
+		<script src="/assets/app.js" defer></script>
 	</head>
 	<body class="max-w-none bg-light-bg font-serif text-xl text-light-tx dark:bg-dark-bg dark:text-dark-tx prose-a:text-light-pu prose-a:dark:text-dark-pu">
 		<div class="container mx-auto px-10 py-10 sm:pt-20 lg:w-3/4">
 			<header class="prose-xl">
-				<h1 id="main-title" class="font-neon text-dark-neon">Leaf Eriksen</h1>
+				<h1 class="font-neon text-dark-neon">Leaf Eriksen</h1>
 				<nav id="main-nav" class="flex flex-wrap gap-5 prose-a:text-light-ma! prose-a:dark:text-dark-ma!">
 					<a href="/" data-path="about" aria-current="page" class="aria-[current=page]:text-inherit!">About Me</a>
 					<a href="/?p=portfolio" data-path="portfolio" class="aria-[current=page]:text-inherit!">Portfolio</a>
 					<a href="/?p=blog" data-path="blog" class="aria-[current=page]:text-inherit!">My Blog</a>
+					<a href="/?p=other" data-path="other" class="aria-[current=page]:text-inherit!">Other links</a>
 				</nav>
 			</header>
 
@@ -31,29 +32,29 @@
 			</main>
 		</div>
 
-		<template id="template-about">
+		<template id="about">
 			<div class="flex flex-col items-start gap-10 sm:flex-row">
 				<div class="prose-xl w-full sm:w-2/3">
 					<p>I am a designer currently studying at the University of San Francisco. I have experience prototyping apps in Figma and bringing them to life with SwiftUI, building websites in HTML, CSS and JS, and making graphics using P5.js and the Adobe and Affinity suites.</p>
-					<p>If you could use any of my skills or would like to speak with me, please take a look at <a href="assets/resume.pdf">my resume</a> and send me an <a href="mailto:lweriksen@dons.usfca.edu">email</a>!</p>
+					<p>If you could use any of my skills or would like to speak with me, please take a look at <a href="/assets/resume.pdf">my resume</a> and send me an <a href="mailto:lweriksen@dons.usfca.edu">email</a>!</p>
 					<p>In my free time I enjoy playing Osu!, reading visual novels, and watching mecha anime. If you are in SF and think we could be good friends, let's meet up for coffee or tea sometime!</p>
 				</div>
 				<aside class="order-first flex flex-col items-start gap-5 border-light-tx-2 sm:order-last sm:w-1/3 sm:items-center sm:border-l sm:pl-10 dark:border-dark-tx-2">
-					<img class="mt-0 w-[160px] rounded-full" src="assets/leaf.jpg" alt="Headshot of me, Leaf Eriksen, a young white man with long hair and glasses" />
+					<img class="mt-0 w-[160px] rounded-full" src="/assets/leaf.jpg" alt="Headshot of me, Leaf Eriksen, a young white man with long hair and glasses" />
 					<p>he/him</p>
 					<div class="flex flex-row flex-wrap items-start gap-2 web-button sm:flex-col sm:items-center">
-						<a rel="me" href="https://mastodon.social/@leaferiksen"><img src="assets/fedi-by-apertown.png" alt="follow me on the fediverse" /></a>
-						<img src="assets/made-with-macos.gif" alt="made with MacOS" />
-						<img src="assets/created-in-emacs-by-leaf.png" alt="created in Emacs" />
+						<a rel="me" href="https://mastodon.social/@leaferiksen"><img src="/assets/fedi-by-apertown.png" alt="follow me on the fediverse" /></a>
+						<img src="/assets/made-with-macos.gif" alt="made with MacOS" />
+						<img src="/assets/created-in-emacs-by-leaf.png" alt="created in Emacs" />
 					</div>
 				</aside>
 			</div>
 		</template>
 
-		<template id="template-portfolio">
+		<template id="portfolio">
 			<div class="grid gap-20">
 				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">
-					<img class="max-h-100 sm:group-even:order-2" src="assets/amtrak.png" alt="Screenshots of Amtrak App Prototype" />
+					<img class="max-h-100 sm:group-even:order-2" src="/assets/amtrak.png" alt="Screenshots of Amtrak App Prototype" />
 					<div class="my-auto prose-xl">
 						<h2>Amtrak App UX Redesign</h2>
 						<p>Figma | March 23rd, 2026</p>
@@ -62,7 +63,7 @@
 					</div>
 				</div>
 				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">
-					<img class="max-h-100 sm:group-even:order-2" src="assets/typography-p4-front.jpg" alt="The book cover" />
+					<img class="max-h-100 sm:group-even:order-2" src="/assets/typography-p4-front.jpg" alt="The book cover" />
 					<div class="my-auto prose-xl">
 						<h2>Book Cover Project</h2>
 						<p>Adobe InDesign | December 10th, 2025</p>
@@ -70,25 +71,25 @@
 					</div>
 				</div>
 				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">
-					<img class="max-h-100 sm:group-even:order-2" src="assets/typography-p3.jpg" alt="A yellowed booklet with Blackletter titles and old maps of San Francisco" />
+					<img class="max-h-100 sm:group-even:order-2" src="/assets/typography-p3.jpg" alt="A yellowed booklet with Blackletter titles and old maps of San Francisco" />
 					<div class="my-auto prose-xl">
 						<h2>Presidio Pet Cemetery Booklet</h2>
 						<p>Adobe InDesign | November 18th, 2025</p>
 						<p></p>
-						<p><a href="assets/typography-p3.pdf">Read Here (Download to view with side-by-side pages)</a></p>
+						<p><a href="/assets/typography-p3.pdf">Read Here (Download to view with side-by-side pages)</a></p>
 					</div>
 				</div>
 				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">
-					<img class="max-h-100 sm:group-even:order-2" src="assets/gundam.jpg" alt="The cover of a printed copy of the zine" />
+					<img class="max-h-100 sm:group-even:order-2" src="/assets/gundam.jpg" alt="The cover of a printed copy of the zine" />
 					<div class="my-auto prose-xl">
 						<h2>Gundam Fanzine</h2>
 						<p>Adobe InDesign | June 1st, 2025</p>
 						<p>A 16-page fanzine about Mobile Suit Gundam, the anti-colonial military robot anime that has been on air since 1979.</p>
-						<p><a href="assets/gundam.pdf">Read Here</a></p>
+						<p><a href="/assets/gundam.pdf">Read Here</a></p>
 					</div>
 				</div>
 				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">
-					<img class="max-h-100 sm:group-even:order-2" src="assets/susan-kare.png" alt="Poster showing a massive gas station and a small EV charger that is out of service" />
+					<img class="max-h-100 sm:group-even:order-2" src="/assets/susan-kare.png" alt="Poster showing a massive gas station and a small EV charger that is out of service" />
 					<div class="my-auto prose-xl">
 						<h2>Pixel Portrait of Susan Kare</h2>
 						<p>Adobe Illustrator | April 2nd, 2025</p>
@@ -96,7 +97,7 @@
 					</div>
 				</div>
 				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">
-					<img class="max-h-100 sm:group-even:order-2" src="assets/big-essentials.png" alt="screenshot of Zen Browser with bigger pinned pinned tab favicons" />
+					<img class="max-h-100 sm:group-even:order-2" src="/assets/big-essentials.png" alt="screenshot of Zen Browser with bigger pinned pinned tab favicons" />
 					<div class="my-auto prose-xl">
 						<h2>Big Essentials</h2>
 						<p>Emacs & Zen Browser | March 11th, 2025</p>
@@ -105,7 +106,7 @@
 					</div>
 				</div>
 				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">
-					<img class="max-h-100 sm:group-even:order-2" src="assets/ev-chargers.jpg" alt="Poster showing a massive gas station and a small EV charger that is out of service" />
+					<img class="max-h-100 sm:group-even:order-2" src="/assets/ev-chargers.jpg" alt="Poster showing a massive gas station and a small EV charger that is out of service" />
 					<div class="my-auto prose-xl">
 						<h2>The State of EV Charging</h2>
 						<p>Affinity Photo | February 25, 2025</p>
@@ -113,8 +114,8 @@
 					</div>
 				</div>
 				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">
-					<img class="max-h-100 group-even:order-2 dark:hidden" src="assets/spatialfolders-light.png" alt="screenshot of a third-party macos file manager" />
-					<img class="hidden max-h-100 group-even:order-2 dark:block" src="assets/spatialfolders-dark.png" alt="screenshot of a third-party macos file manager" />
+					<img class="max-h-100 group-even:order-2 dark:hidden" src="/assets/spatialfolders-light.png" alt="screenshot of a third-party macos file manager" />
+					<img class="hidden max-h-100 group-even:order-2 dark:block" src="/assets/spatialfolders-dark.png" alt="screenshot of a third-party macos file manager" />
 					<div class="my-auto prose-xl">
 						<h2>SpatialFolders</h2>
 						<p>Xcode | November 26, 2024</p>
@@ -124,9 +125,9 @@
 				</div>
 				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">
 					<div class="grid max-h-100 grid-cols-3 group-even:order-2">
-						<img src="assets/triptych0.jpg" alt="a line of thin trees bending over with the lyrics 'theyre laying waste to a new biome'" />
-						<img src="assets/triptych1.jpg" alt="wooden stairs disappearing into a dimly lit forest with the lyrics 'to make a case for the new iphone'" />
-						<img src="assets/triptych2.jpg" alt="a tiny waterfall with the lyrics 'the waters laced and they know I know'" />
+						<img src="/assets/triptych0.jpg" alt="a line of thin trees bending over with the lyrics 'theyre laying waste to a new biome'" />
+						<img src="/assets/triptych1.jpg" alt="wooden stairs disappearing into a dimly lit forest with the lyrics 'to make a case for the new iphone'" />
+						<img src="/assets/triptych2.jpg" alt="a tiny waterfall with the lyrics 'the waters laced and they know I know'" />
 					</div>
 					<div class="my-auto prose-xl">
 						<h2>wearin' a demon</h2>
@@ -135,7 +136,7 @@
 					</div>
 				</div>
 				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">
-					<img class="max-h-100 sm:group-even:order-2" src="assets/usf-architecture-small.png" alt="a grid of vector art illustations of various buildings" />
+					<img class="max-h-100 sm:group-even:order-2" src="/assets/usf-architecture-small.png" alt="a grid of vector art illustations of various buildings" />
 					<div class="my-auto prose-xl">
 						<h2>Architectural Shapes and Colors</h2>
 						<p>Adobe Illustrator | October 16th, 2024</p>
@@ -143,7 +144,7 @@
 					</div>
 				</div>
 				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">
-					<img class="max-h-100 sm:group-even:order-2" src="assets/light-rail.png" alt="a sticker of train bursting out of a cloud" />
+					<img class="max-h-100 sm:group-even:order-2" src="/assets/light-rail.png" alt="a sticker of train bursting out of a cloud" />
 					<div class="my-auto prose-xl">
 						<h2>"I Voted!" Sticker</h2>
 						<p>Adobe Illustrator | September 16th, 2024</p>
@@ -153,7 +154,7 @@
 			</div>
 		</template>
 
-		<template id="template-blog">
+		<template id="blog">
 			<div class="prose-xl flex flex-col">
 				<details id="homebrew">
 					<summary class="cursor-pointer list-none">
@@ -196,6 +197,12 @@ defaults write -g "NSUserKeyEquivalents" '{
 }'</pre
 					>
 				</details>
+			</div>
+		</template>
+		<template id="other">
+			<div class="prose-xl flex flex-col">
+				<p><a href="/art315/p5-project">P5.js Project</a></p>
+				<p><a href="/art315/p5-exercises">P5.js Exercises</a></p>
 			</div>
 		</template>
 	</body>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Leaf Eriksen</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="thumbnail" content="/assets/leaf.jpg" />
+		<link href="/dist.css" rel="stylesheet" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Vibur&display=swap" rel="stylesheet" />
+		<script src="/assets/app.js" defer></script>
+	</head>
+	<body class="max-w-none bg-light-bg font-serif text-xl text-light-tx dark:bg-dark-bg dark:text-dark-tx prose-a:text-light-pu prose-a:dark:text-dark-pu">
+		<div class="container mx-auto px-10 py-10 sm:pt-20 lg:w-3/4">
+			<header class="prose-xl">
+				<h1 class="font-neon text-dark-neon">Leaf’s P5 Project</h1>
+				<nav id="main-nav" class="flex flex-wrap gap-5 prose-a:text-light-ma! prose-a:dark:text-dark-ma!">
+					<a href="/" data-path="view" aria-current="page" class="aria-[current=page]:text-inherit!">View</a>
+					<a href="/?p=about" data-path="about" class="aria-[current=page]:text-inherit!">About</a>
+					<a href="/index.html">Back to Home</a>
+				</nav>
+			</header>
+
+			<main id="app" class="mt-10">
+				<!-- Content injected from templates via app.js -->
+				<div class="prose-xl">
+					<p>To see this site, you need a browser version published no earlier than 2026.</p>
+					<p>This site uses the navigation API for routing between pages, so if you still can’t see the content, please enable Javascript.</p>
+				</div>
+			</main>
+		</div>
+
+		<template id="view">
+			<div class="flex flex-col items-start gap-10 sm:flex-row">
+				<div class="prose-xl w-full sm:w-2/3">
+					<p>P5.js sketch will be inserted here</p>
+				</div>
+			</div>
+		</template>
+
+		<template id="about">
+			<div class="prose-xl w-full sm:w-2/3">
+				<p>This project is inspired by the poetry-based artwork of Robert Montgomery. His work focuses on presenting simple, thought-provoking poems in a visually various visually engaging mediums.</p>
+				<p><a href="https://madisongalleries.com/artworks/5536-robert-montgomery-trees-will-riot-mexico-2022/">TREES WILL RIOT</a> was made as part of a fundraising and awareness campaign for <a href="http://greenpeace.org">Greenpeace</a> and their mission.</p>
+			</div>
+		</template>
+	</body>
+</html>
