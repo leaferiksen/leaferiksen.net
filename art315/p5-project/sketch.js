@@ -50,16 +50,16 @@ function startSketch() {
 		};
 
 		p.mouseClicked = () => {
-			// Start the animation on first click inside the canvas
-			if (!started) {
-				started = true;
-				t = 0;
+			// Start the animation only if clicking inside the canvas
+			if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
+				if (!started) {
+					started = true;
+					t = 0;
+				}
 			}
-			return false; // prevent default
 		};
 	}, _holder);
 	console.log("P5 sketch started");
-	window.__sketchActive = true;
 }
 
 function stopSketch() {
@@ -72,7 +72,6 @@ function stopSketch() {
 		_holder = null;
 	}
 	console.log("P5 sketch stopped");
-	window.__sketchActive = false;
 }
 
 window.startSketch = startSketch;
