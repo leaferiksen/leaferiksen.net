@@ -5,7 +5,7 @@
   // Start only if not already active
   const ensureInitialized = () => {
     const holder = document.getElementById('sketch-holder');
-    const isActive = window.__sketchActive === true;
+    const isActive = holder && holder.dataset && holder.dataset.sketchActive === 'true';
     if (holder && !isActive) {
       console.log('[view-watcher] Detected sketch-holder; starting sketch');
       if (typeof window.startSketch === 'function') {
