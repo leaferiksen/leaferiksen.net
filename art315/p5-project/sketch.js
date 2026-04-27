@@ -35,11 +35,9 @@ function startSketch() {
 			// Draw pulsing indicator if there are words left to start
 			const remaining = words.filter((w) => !w.started).length;
 			if (remaining > 0) {
-				p.push();
 				p.noStroke();
-				p.fill(255, 255, 255, 150 + p.sin(p.frameCount * 0.1) * 50);
-				p.circle(startX, wordY, 20 + p.sin(p.frameCount * 0.1) * 5);
-				p.pop();
+				p.fill(255, 150);
+				p.circle(startX, wordY, 15 + p.sin(p.frameCount * 0.08) * 5);
 			}
 
 			words.forEach((w) => {
@@ -53,8 +51,15 @@ function startSketch() {
 
 				// End position off-screen to the bottom-left
 				let endXLocal = -p.textWidth(w.text);
-				let cx = p.lerp(startX, endXLocal, w.t);
-				let y = p.lerp(wordY, p.height + 20, w.t);
+				let targetY = p.height + 20;
+
+				// Quadratic Bezier path for a swoop that goes left first then down
+				// Control point is to the left and lower to aim lower sooner
+				let cpX = -p.width * 0.2;
+				let cpY = wordY * 1.2;
+
+				let cx = (1 - w.t) * (1 - w.t) * startX + 2 * (1 - w.t) * w.t * cpX + w.t * w.t * endXLocal;
+				let y = (1 - w.t) * (1 - w.t) * wordY + 2 * (1 - w.t) * w.t * cpY + w.t * w.t * targetY;
 
 				p.push();
 				p.translate(cx, y);
