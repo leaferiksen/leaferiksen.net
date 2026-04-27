@@ -31,7 +31,18 @@ function startSketch() {
 
 		p.draw = () => {
 			p.clear();
-			words.forEach((w, i) => {
+
+			// Draw pulsing indicator if there are words left to start
+			const remaining = words.filter((w) => !w.started).length;
+			if (remaining > 0) {
+				p.push();
+				p.noStroke();
+				p.fill(255, 255, 255, 150 + p.sin(p.frameCount * 0.1) * 50);
+				p.circle(startX, wordY, 20 + p.sin(p.frameCount * 0.1) * 5);
+				p.pop();
+			}
+
+			words.forEach((w) => {
 				if (!w.started) return;
 
 				// Animate word along a diagonal path toward bottom-left, increasing size
