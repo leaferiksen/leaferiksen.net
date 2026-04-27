@@ -10,9 +10,12 @@ function startSketch() {
 	if (!_holder) return;
 
 	_sketchInstance = new p5((p) => {
-		let word = "WHEN WE ARE GONE";
-		let t = 0;
-		let started = false;
+		let words = [
+			{ text: "WHEN", t: 0, started: false },
+			{ text: "WE", t: 0, started: false },
+			{ text: "ARE", t: 0, started: false },
+			{ text: "GONE", t: 0, started: false },
+		];
 		let startX;
 		let wordY;
 		let startSize = 10;
@@ -27,34 +30,38 @@ function startSketch() {
 		};
 
 		p.draw = () => {
-			// Start animation only after a mouse click
-			if (!started) return;
-			// Clear canvas to transparent so CSS background image shows through
 			p.clear();
-			// Animate word along a diagonal path toward bottom-left, increasing size
-			let size = p.lerp(startSize, endSize, t);
-			p.textSize(size);
-			// End position off-screen to the bottom-left
-			let endXLocal = -p.textWidth(word);
-			let cx = p.lerp(startX, endXLocal, t);
-			// Diagonal movement: linear from center to bottom-left
-			let y = p.lerp(wordY, p.height + 20, t);
-			p.fill(255);
-			p.textAlign(p.CENTER, p.CENTER);
-			p.push();
-			p.translate(cx, y);
-			p.rotate(-0.2);
-			p.text(word, 0, 0);
-			p.pop();
-			if (t < 1) t += 0.01;
+			words.forEach((w, i) => {
+				if (!w.started) return;
+
+				// Animate word along a diagonal path toward bottom-left, increasing size
+				let size = p.lerp(startSize, endSize, w.t);
+				p.textSize(size);
+				p.fill(255);
+				p.textAlign(p.CENTER, p.CENTER);
+
+				// End position off-screen to the bottom-left
+				let endXLocal = -p.textWidth(w.text);
+				let cx = p.lerp(startX, endXLocal, w.t);
+				let y = p.lerp(wordY, p.height + 20, w.t);
+
+				p.push();
+				p.translate(cx, y);
+				p.rotate(-0.2);
+				p.text(w.text, 0, 0);
+				p.pop();
+
+				if (w.t < 1) w.t += 0.01;
+			});
 		};
 
 		p.mouseClicked = () => {
-			// Start the animation only if clicking inside the canvas
+			// Start the next word animation only if clicking inside the canvas
 			if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
-				if (!started) {
-					started = true;
-					t = 0;
+				const nextWord = words.find((w) => !w.started);
+				if (nextWord) {
+					nextWord.started = true;
+					nextWord.t = 0;
 				}
 			}
 		};
