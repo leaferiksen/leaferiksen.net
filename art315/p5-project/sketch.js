@@ -17,7 +17,6 @@
 			let wordY;
 			let startSize = 10;
 			let endSize = 100;
-			const tiltAngle = -0.08;
 			let w = holder.clientWidth;
 			let h = holder.clientHeight;
 
@@ -44,7 +43,7 @@
 				p.fill(255);
 				p.textAlign(p.CENTER, p.CENTER);
 				p.translate(cx, y);
-				p.rotate(tiltAngle);
+				p.rotate(-0.1);
 				p.text(word, 0, 0);
 			};
 
