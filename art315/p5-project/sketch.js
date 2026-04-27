@@ -18,18 +18,22 @@ function startSketch() {
 		];
 		let startX;
 		let wordY;
+		let font;
 		let startSize = 10;
 		let endSize = 100;
 		let w = _holder.clientWidth;
 		let h = _holder.clientHeight;
 
-		p.setup = () => {
+		p.setup = async () => {
 			p.createCanvas(w, h).parent(_holder);
+			font = await p.loadFont("/art315/p5-project/assets/goswell-demo/GoswellDemoRegular.ttf");
+			p.textFont(font);
 			startX = p.width / 2;
-			wordY = p.height * (2 / 3);
+			wordY = p.height * 0.71;
 		};
 
 		p.draw = () => {
+			if (!font) return;
 			p.clear();
 
 			// Draw pulsing indicator if there are words left to start
@@ -53,13 +57,22 @@ function startSketch() {
 				let endXLocal = -p.textWidth(w.text);
 				let targetY = p.height + 20;
 
-				// Quadratic Bezier path for a swoop that goes left first then down
-				// Control point is to the left and lower to aim lower sooner
-				let cpX = -p.width * 0.2;
-				let cpY = wordY * 1.2;
+				// Cubic Bezier path for a shallow start and a sharp drop
+				// cp1 keeps it high and moving left; cp2 pulls it further left and much lower for a sharper drop
+				let cp1X = startX - p.width * 0.4;
+				let cp1Y = wordY + p.height * 0.05;
+				let cp2X = startX - p.width * 0.8;
+				let cp2Y = wordY + p.height * 0.4; // Lowered significantly for sharper drop
 
-				let cx = (1 - w.t) * (1 - w.t) * startX + 2 * (1 - w.t) * w.t * cpX + w.t * w.t * endXLocal;
-				let y = (1 - w.t) * (1 - w.t) * wordY + 2 * (1 - w.t) * w.t * cpY + w.t * w.t * targetY;
+				let x1 = p.lerp(startX, cp1X, w.t);
+				let x2 = p.lerp(cp1X, cp2X, w.t);
+				let x3 = p.lerp(cp2X, endXLocal, w.t);
+				let cx = p.lerp(p.lerp(x1, x2, w.t), p.lerp(x2, x3, w.t), w.t);
+
+				let y1 = p.lerp(wordY, cp1Y, w.t);
+				let y2 = p.lerp(cp1Y, cp2Y, w.t);
+				let y3 = p.lerp(cp2Y, targetY, w.t);
+				let y = p.lerp(p.lerp(y1, y2, w.t), p.lerp(y2, y3, w.t), w.t);
 
 				p.push();
 				p.translate(cx, y);
@@ -67,10 +80,9 @@ function startSketch() {
 				p.text(w.text, 0, 0);
 				p.pop();
 
-				if (w.t < 1) w.t += 0.01;
+				if (w.t < 1) w.t += 0.003;
 			});
 		};
-
 		p.mouseClicked = () => {
 			// Start the next word animation only if clicking inside the canvas
 			if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
