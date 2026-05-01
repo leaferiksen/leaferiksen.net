@@ -1,6 +1,8 @@
 "use strict";
 
 // Standalone P5 sketch controller. Exposes startSketch and stopSketch for integration with router.
+// Sin function made with Gemini
+
 let _sketchInstance = null;
 let _holder = null;
 
@@ -19,6 +21,7 @@ function startSketch() {
 		let startX;
 		let wordY;
 		let font;
+		let bg1, bg2, bg3;
 		let startSize = 10;
 		let endSize = 100;
 		let w = _holder.clientWidth;
@@ -27,22 +30,28 @@ function startSketch() {
 		p.setup = async () => {
 			p.createCanvas(w, h).parent(_holder);
 			font = await p.loadFont("/art315/p5-project/assets/goswell-demo/GoswellDemoRegular.ttf");
+			bg1 = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-1.png");
+			bg2 = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-2.png");
+			bg3 = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-3.png");
 			p.textFont(font);
 			startX = p.width / 2;
 			wordY = p.height * 0.71;
 		};
 
 		p.draw = () => {
-			if (!font) return;
+			if (!font || !bg1 || !bg2 || !bg3) return;
 			p.clear();
 
-			// Draw pulsing indicator if there are words left to start
-			const remaining = words.filter((w) => !w.started).length;
-			if (remaining > 0) {
-				p.noStroke();
-				p.fill(255, 150);
-				p.circle(startX, wordY, 15 + p.sin(p.frameCount * 0.08) * 5);
-			}
+			// Simple fade between backgrounds
+			const allStarted = words.every((w) => w.started);
+			const targetBg = allStarted ? bg3 : bg2;
+			let fade = (p.sin(p.frameCount * 0.03) + 1) / 2;
+
+			p.image(bg1, 0, 0, p.width, p.height);
+			p.push();
+			p.tint(255, fade * 255);
+			p.image(targetBg, 0, 0, p.width, p.height);
+			p.pop();
 
 			words.forEach((w) => {
 				if (!w.started) return;
