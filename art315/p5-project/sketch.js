@@ -1,120 +1,129 @@
 "use strict";
 
 // Standalone P5 sketch controller. Exposes startSketch and stopSketch for integration with router.
-// Sin function made with Gemini
+// Sin function and animation2 progression system made with Gemini
 
 let _sketchInstance = null;
-let _holder = null;
 
 function startSketch() {
 	if (_sketchInstance) return;
-	_holder = document.getElementById("sketch-holder");
-	if (!_holder) return;
+	const holder = document.getElementById("sketch-holder");
+	if (!holder) return;
 
 	_sketchInstance = new p5((p) => {
-		let words = [
-			{ text: "WHEN", t: 0, started: false },
-			{ text: "WE", t: 0, started: false },
-			{ text: "ARE", t: 0, started: false },
-			{ text: "GONE", t: 0, started: false },
+		const animation1 = [
+			{ text: "WHEN", started: false, animationProgress: 0 },
+			{ text: "WE", started: false, animationProgress: 0 },
+			{ text: "ARE", started: false, animationProgress: 0 },
+			{ text: "GONE", started: false, animationProgress: 0 },
 		];
-		let startX;
-		let wordY;
-		let font;
-		let bg1, bg2, bg3;
-		let startSize = 10;
-		let endSize = 100;
-		let w = _holder.clientWidth;
-		let h = _holder.clientHeight;
+		const animation2 = [
+			{ text: "THE", angle: -Math.PI / 2, started: false, typingProgress: 0 },
+			{ text: "TREES", angle: -Math.PI * 2.15, started: false, typingProgress: 0 },
+			{ text: "WILL", angle: -Math.PI * 2.3, started: false, typingProgress: 0 },
+		];
+		let introBaseX, introBaseY, customFont;
+		let backgroundLayer1, backgroundLayer2, backgroundLayer3;
 
 		p.setup = async () => {
-			p.createCanvas(w, h).parent(_holder);
-			font = await p.loadFont("/art315/p5-project/assets/goswell-demo/GoswellDemoRegular.ttf");
-			bg1 = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-1.png");
-			bg2 = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-2.png");
-			bg3 = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-3.png");
-			p.textFont(font);
-			startX = p.width / 2;
-			wordY = p.height * 0.71;
+			p.createCanvas(holder.clientWidth, holder.clientHeight);
+			customFont = await p.loadFont("/art315/p5-project/assets/goswell-demo/GoswellDemoRegular.ttf");
+			backgroundLayer1 = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-1.png");
+			backgroundLayer2 = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-2.png");
+			backgroundLayer3 = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-3.png");
+			p.textFont(customFont);
+			introBaseX = p.width / 2;
+			introBaseY = p.height * 0.71;
 		};
 
 		p.draw = () => {
-			if (!font || !bg1 || !bg2 || !bg3) return;
+			if (!customFont || !backgroundLayer1 || !backgroundLayer2 || !backgroundLayer3) return;
 			p.clear();
 
-			// Simple fade between backgrounds
-			const allStarted = words.every((w) => w.started);
-			const targetBg = allStarted ? bg3 : bg2;
-			let fade = (p.sin(p.frameCount * 0.03) + 1) / 2;
+			const isPhase1Complete = animation1.every((word) => word.started);
+			const backgroundFade = (p.sin(p.frameCount * 0.03) + 1) / 2;
 
-			p.image(bg1, 0, 0, p.width, p.height);
+			p.image(backgroundLayer1, 0, 0, p.width, p.height);
 			p.push();
-			p.tint(255, fade * 255);
-			p.image(targetBg, 0, 0, p.width, p.height);
+			p.tint(255, backgroundFade * 255);
+			p.image(isPhase1Complete ? backgroundLayer3 : backgroundLayer2, 0, 0, p.width, p.height);
 			p.pop();
 
-			words.forEach((w) => {
-				if (!w.started) return;
+			// Animation 1: Sliding Words
+			animation1.forEach((word) => {
+				if (!word.started) return;
 
-				// Animate word along a diagonal path toward bottom-left, increasing size
-				let size = p.lerp(startSize, endSize, w.t);
-				p.textSize(size);
+				const targetFontSize = p.height * 0.125;
+				p.textSize(p.lerp(targetFontSize * 0.1, targetFontSize, word.animationProgress));
 				p.fill(255);
 				p.textAlign(p.CENTER, p.CENTER);
 
-				// End position off-screen to the bottom-left
-				let endXLocal = -p.textWidth(w.text);
-				let targetY = p.height + 20;
+				const destinationX = -p.textWidth(word.text);
+				const controlPoint1 = { x: introBaseX - p.width * 0.4, y: introBaseY + p.height * 0.05 };
+				const controlPoint2 = { x: introBaseX - p.width * 0.8, y: introBaseY + p.height * 0.4 };
 
-				// Cubic Bezier path for a shallow start and a sharp drop
-				// cp1 keeps it high and moving left; cp2 pulls it further left and much lower for a sharper drop
-				let cp1X = startX - p.width * 0.4;
-				let cp1Y = wordY + p.height * 0.05;
-				let cp2X = startX - p.width * 0.8;
-				let cp2Y = wordY + p.height * 0.4; // Lowered significantly for sharper drop
-
-				let x1 = p.lerp(startX, cp1X, w.t);
-				let x2 = p.lerp(cp1X, cp2X, w.t);
-				let x3 = p.lerp(cp2X, endXLocal, w.t);
-				let cx = p.lerp(p.lerp(x1, x2, w.t), p.lerp(x2, x3, w.t), w.t);
-
-				let y1 = p.lerp(wordY, cp1Y, w.t);
-				let y2 = p.lerp(cp1Y, cp2Y, w.t);
-				let y3 = p.lerp(cp2Y, targetY, w.t);
-				let y = p.lerp(p.lerp(y1, y2, w.t), p.lerp(y2, y3, w.t), w.t);
+				const currentX = p.bezierPoint(introBaseX, controlPoint1.x, controlPoint2.x, destinationX, word.animationProgress);
+				const currentY = p.bezierPoint(introBaseY, controlPoint1.y, controlPoint2.y, p.height + 20, word.animationProgress);
 
 				p.push();
-				p.translate(cx, y);
+				p.translate(currentX, currentY);
 				p.rotate(-0.2);
-				p.text(w.text, 0, 0);
+				p.text(word.text, 0, 0);
 				p.pop();
 
-				if (w.t < 1) w.t += 0.003;
+				word.animationProgress = p.constrain(word.animationProgress + 0.003, 0, 1);
 			});
-		};
-		p.mouseClicked = () => {
-			// Start the next word animation only if clicking inside the canvas
-			if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
-				const nextWord = words.find((w) => !w.started);
-				if (nextWord) {
-					nextWord.started = true;
-					nextWord.t = 0;
-				}
+
+			// Animation 2: Tree Growth
+			if (isPhase1Complete) {
+				p.push();
+				p.textSize(p.height * 0.075);
+				p.fill(255);
+				p.textAlign(p.LEFT, p.CENTER);
+				p.translate(p.width * 0.6, p.height * 0.8);
+				p.rotate(0.25); // treeTiltAngle
+
+				const characterSpacingFactor = 1.3;
+				animation2.forEach((word, wordIndex) => {
+					if (!word.started) return;
+					word.typingProgress = p.constrain(word.typingProgress + 0.15, 0, word.text.length);
+
+					if (wordIndex === 1) p.translate(p.textWidth(animation2[0].text) * characterSpacingFactor, 0);
+					if (wordIndex === 2) p.translate((p.textWidth(animation2[1].text) * characterSpacingFactor) / 2, p.height * -0.05);
+
+					const relativeRotation = word.angle - (wordIndex > 0 ? animation2[wordIndex - 1].angle : 0);
+					p.rotate(relativeRotation);
+
+					for (let charIndex = 0; charIndex < p.floor(word.typingProgress); charIndex++) {
+						const charXOffset = p.textWidth(word.text.substring(0, charIndex)) * characterSpacingFactor;
+						p.text(word.text[charIndex], charXOffset, 0);
+					}
+				});
+				p.pop();
 			}
 		};
-	}, _holder);
+
+		p.mouseClicked = () => {
+			if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
+				const currentAnimationList = animation1.every((word) => word.started) ? animation2 : animation1;
+				const nextWordToStart = currentAnimationList.find((word) => !word.started);
+				if (nextWordToStart) nextWordToStart.started = true;
+			}
+		};
+
+		p.windowResized = () => {
+			p.resizeCanvas(0, 0);
+			p.resizeCanvas(holder.clientWidth, holder.clientHeight);
+			introBaseX = p.width / 2;
+			introBaseY = p.height * 0.71;
+		};
+	}, holder);
 	console.log("P5 sketch started");
 }
 
 function stopSketch() {
-	if (_sketchInstance) {
-		_sketchInstance.remove();
-		_sketchInstance = null;
-	}
-	if (_holder) {
-		_holder.innerHTML = "";
-		_holder = null;
-	}
+	_sketchInstance?.remove();
+	_sketchInstance = null;
 	console.log("P5 sketch stopped");
 }
 
