@@ -18,9 +18,9 @@ function startSketch() {
 			{ text: "GONE", started: false, animationProgress: 0 },
 		];
 		const animation2 = [
-			{ text: "THE", angle: -Math.PI / 2, started: false, typingProgress: 0 },
-			{ text: "TREES", angle: -Math.PI * 2.15, started: false, typingProgress: 0 },
-			{ text: "WILL", angle: -Math.PI * 2.3, started: false, typingProgress: 0 },
+			{ text: "THE", angle: -Math.PI * 0.55, started: false, typingProgress: 0 },
+			{ text: "TREES", angle: -Math.PI * 2.25, started: false, typingProgress: 0 },
+			{ text: "WILL", angle: -Math.PI * 2.55, started: false, typingProgress: 0 },
 		];
 		let introBaseX, introBaseY, customFont;
 		let backgroundLayer1, backgroundLayer2, backgroundLayer3;
@@ -74,14 +74,14 @@ function startSketch() {
 				word.animationProgress = p.constrain(word.animationProgress + 0.003, 0, 1);
 			});
 
-			// Animation 2: Tree Growth
+			// --- Animation 2: Tree Growth ---
 			if (isPhase1Complete) {
 				p.push();
 				p.textSize(p.height * 0.075);
 				p.fill(255);
 				p.textAlign(p.LEFT, p.CENTER);
-				p.translate(p.width * 0.6, p.height * 0.8);
-				p.rotate(0.25); // treeTiltAngle
+				p.translate(p.width * 0.6, p.height * 0.85);
+				p.rotate(0.35); // treeTiltAngle
 
 				const characterSpacingFactor = 1.3;
 				animation2.forEach((word, wordIndex) => {
