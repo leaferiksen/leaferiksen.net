@@ -20,16 +20,17 @@ const sketchLogic = (p) => {
 		{ text: "GONE", started: false, animationProgress: 0 },
 	];
 	const animation2 = [
-		{ text: "THE", angle: -Math.PI * 0.55, started: false, typingProgress: 0 },
-		{ text: "TREES", angle: -Math.PI * 2.25, started: false, typingProgress: 0 },
-		{ text: "WILL", angle: -Math.PI * 2.55, started: false, typingProgress: 0 },
+		{ text: "THE", angle: -Math.PI * 0.4, started: false, progress: 0 },
+		{ text: "TREES", angle: Math.PI * 0.3, started: false, progress: 0 },
+		{ text: "  WILL", angle: -Math.PI * 0.4, started: false, progress: 0 },
+		{ text: "RIOT", angle: Math.PI * 0.4, started: false, progress: 0 },
 	];
 	let introBaseX, introBaseY, customFont;
 	let background1, background2, background3;
 	p.setup = async () => {
 		// Use the parent element's size for the canvas
 		const canvas = p.createCanvas(p.canvas.parentElement.clientWidth, p.canvas.parentElement.clientHeight);
-		// Handle clicks ONLY on the canvas area (built with Gemini)
+		// Handle clicks ONLY on the canvas area (made with Gemini)
 		canvas.mouseClicked(() => {
 			const currentAnimationList = animation1.every((word) => word.started) ? animation2 : animation1;
 			const nextWordToStart = currentAnimationList.find((word) => !word.started);
@@ -76,28 +77,25 @@ const sketchLogic = (p) => {
 			// constrain is super cool, I wish it was introduced earlier
 			word.animationProgress = p.constrain(word.animationProgress + 0.003, 0, 1);
 		});
-		// Animation 2: Tree Growth
+		// Animation 2: Tree Growth (substring trick and branching made with gemini)
 		if (isPhase1Complete) {
-			p.push();
 			p.textSize(p.height * 0.075);
 			p.fill(255);
 			p.textAlign(p.LEFT, p.CENTER);
 			p.translate(p.width * 0.6, p.height * 0.85);
-			p.rotate(0.35);
-			const characterSpacingFactor = 1.3;
-			animation2.forEach((word, wordIndex) => {
+
+			animation2.forEach((word, index) => {
 				if (!word.started) return;
-				word.typingProgress = p.constrain(word.typingProgress + 0.15, 0, word.text.length);
-				if (wordIndex === 1) p.translate(p.textWidth(animation2[0].text) * characterSpacingFactor, 0);
-				if (wordIndex === 2) p.translate((p.textWidth(animation2[1].text) * characterSpacingFactor) / 2, p.height * -0.05);
-				const relativeRotation = word.angle - (wordIndex > 0 ? animation2[wordIndex - 1].angle : 0);
-				p.rotate(relativeRotation);
-				for (let charIndex = 0; charIndex < p.floor(word.typingProgress); charIndex++) {
-					const charXOffset = p.textWidth(word.text.substring(0, charIndex)) * characterSpacingFactor;
-					p.text(word.text[charIndex], charXOffset, 0);
-				}
+				word.progress = p.constrain(word.progress + 0.05, 0, 1);
+
+				p.rotate(word.angle);
+				const charsToShow = p.floor(word.progress * word.text.length);
+				p.text(word.text.substring(0, charsToShow), 0, 0);
+
+				// Branching logic: "WILL" (index 2) starts halfway along "TREES" (index 1)
+				const spacingFactor = index === 1 ? 0.5 : 1.1;
+				p.translate(p.textWidth(word.text) * spacingFactor, 0);
 			});
-			p.pop();
 		}
 	};
 	p.windowResized = () => {
