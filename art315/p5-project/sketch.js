@@ -152,11 +152,9 @@ const sketchLogic = (p) => {
 			p.tint(255, pulse * 255);
 			p.image(bgDetailA, 0, 0, p.width, p.height);
 			p.pop();
-		} else {
+		} else if (currentStep === 2) {
 			p.push();
-			// Step 2 pulses, Step 3 is more stable/alive
-			const bgAlpha = currentStep === 2 ? pulse * 255 : 200 + pulse * 55;
-			p.tint(255, bgAlpha);
+			p.tint(255, pulse * 255);
 			p.image(bgDetailB, 0, 0, p.width, p.height);
 			p.pop();
 		}
@@ -168,8 +166,7 @@ const sketchLogic = (p) => {
 
 	p.windowResized = () => {
 		p.resizeCanvas(0, 0);
-		const holder = p.canvas.parentElement;
-		p.resizeCanvas(holder.clientWidth, holder.clientHeight);
+		p.resizeCanvas(p.canvas.parentElement.clientWidth, p.canvas.parentElement.clientHeight);
 		updateLayout();
 	};
 };
