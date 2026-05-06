@@ -38,15 +38,7 @@ const sketchLogic = (p) => {
 				const nextWord = treeWords.find((w) => !w.started);
 				if (nextWord) nextWord.started = true;
 			} else if (currentStep === 3) {
-				// Spawn flower petals (shredding "RIOT")
-				for (let i = 0; i < 5; i++) {
-					flyingPetals.push({
-						x: p.width * 0.85 + p.random(-30, 30),
-						y: p.height * 0.6 + p.random(-p.height * 0.2, p.height * 0.2),
-						vx: p.random(-4, -2),
-						vy: p.random(-0.5, 0.5),
-					});
-				}
+				spawnPetals();
 			}
 		});
 		customFont = await p.loadFont("/art315/p5-project/assets/Permanent_Marker/PermanentMarker-Regular.ttf");
@@ -107,20 +99,38 @@ const sketchLogic = (p) => {
 		p.pop();
 	};
 
+	const spawnPetals = () => {
+		const petalsPerClick = 5;
+		for (let i = 0; i < petalsPerClick; i++) {
+			flyingPetals.push({
+				posX: p.width * 0.75 + p.random(-30, 30),
+				posY: p.height * 0.5 + p.random(-p.height * 0.2, p.height * 0.2),
+				driftX: p.random(-4, -2),
+				driftY: p.random(-0.5, -0.2),
+			});
+		}
+	};
+
 	const drawPetals = () => {
 		p.textSize(p.height * 0.02);
 		p.textAlign(p.CENTER, p.CENTER);
+		p.fill(255, 200);
+
 		for (let i = flyingPetals.length - 1; i >= 0; i--) {
-			const pt = flyingPetals[i];
-			p.push();
-			p.translate(pt.x, pt.y);
-			p.rotate(p.frameCount * 0.05 + i);
-			p.fill(255, 200);
-			p.text("RIOT", 0, 0);
-			p.pop();
-			pt.x += pt.vx;
-			pt.y += pt.vy + p.sin(p.frameCount * 0.1 + i) * 0.5;
-			if (pt.x < -p.textWidth("RIOT")) flyingPetals.splice(i, 1);
+			const petal = flyingPetals[i];
+
+			// Update position
+			petal.posX += petal.driftX;
+			petal.posY += petal.driftY;
+
+			// Render
+			p.text("RIOT", petal.posX, petal.posY);
+
+			// Clean up off-screen petals
+			const isOffScreen = petal.posX < -p.textWidth("RIOT");
+			if (isOffScreen) {
+				flyingPetals.splice(i, 1);
+			}
 		}
 	};
 
@@ -157,6 +167,7 @@ const sketchLogic = (p) => {
 	};
 
 	p.windowResized = () => {
+		p.resizeCanvas(0, 0);
 		const holder = p.canvas.parentElement;
 		p.resizeCanvas(holder.clientWidth, holder.clientHeight);
 		updateLayout();
