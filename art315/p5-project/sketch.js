@@ -71,7 +71,7 @@ const sketchLogic = (p) => {
 			p.rotate(-0.2);
 			p.text(word.text, 0, 0);
 			p.pop();
-			word.progress = p.constrain(word.progress + 0.005, 0, 1);
+			word.progress = p.constrain(word.progress + 0.002, 0, 1);
 		});
 	};
 
