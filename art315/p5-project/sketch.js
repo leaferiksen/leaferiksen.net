@@ -1,108 +1,164 @@
 "use strict";
-// P5 sketch controller for use with Navigation API (some help from Gemini)
+// P5 sketch controller for use with Navigation API (made with gemini)
 let _sketchInstance = null;
 function stopSketch() {
 	_sketchInstance?.remove();
 	_sketchInstance = null;
-	console.log("P5 sketch stopped");
 }
 function startSketch() {
 	if (_sketchInstance || !document.getElementById("sketch-holder")) return;
 	_sketchInstance = new p5(sketchLogic, "sketch-holder");
-	console.log("P5 sketch started");
 }
 const sketchLogic = (p) => {
-	// fancy array figured out with gemini, angles figured out by hand
-	const animation1 = [
-		{ text: "WHEN", started: false, animationProgress: 0 },
-		{ text: "WE", started: false, animationProgress: 0 },
-		{ text: "ARE", started: false, animationProgress: 0 },
-		{ text: "GONE", started: false, animationProgress: 0 },
+	// Step data
+	const introWords = [
+		{ text: "WHEN", started: false, progress: 0 },
+		{ text: "WE", started: false, progress: 0 },
+		{ text: "ARE", started: false, progress: 0 },
+		{ text: "GONE", started: false, progress: 0 },
 	];
-	const animation2 = [
+	const treeWords = [
 		{ text: "THE", angle: -Math.PI * 0.4, started: false, progress: 0 },
 		{ text: "TREES", angle: Math.PI * 0.3, started: false, progress: 0 },
 		{ text: "  WILL", angle: -Math.PI * 0.4, started: false, progress: 0 },
 		{ text: "RIOT", angle: Math.PI * 0.4, started: false, progress: 0 },
 	];
+	let currentStep = 1; // 1: Cars, 2: Tree Growth, 3: Petals/Swaying
 	let introBaseX, introBaseY, customFont;
-	let background1, background2, background3;
+	let bgBase, bgDetailA, bgDetailB;
+	let flyingPetals = [];
+
 	p.setup = async () => {
-		// Use the parent element's size for the canvas
 		const canvas = p.createCanvas(p.canvas.parentElement.clientWidth, p.canvas.parentElement.clientHeight);
-		// Handle clicks ONLY on the canvas area (made with Gemini)
 		canvas.mouseClicked(() => {
-			const currentAnimationList = animation1.every((word) => word.started) ? animation2 : animation1;
-			const nextWordToStart = currentAnimationList.find((word) => !word.started);
-			if (nextWordToStart) nextWordToStart.started = true;
+			if (currentStep === 1) {
+				const nextWord = introWords.find((w) => !w.started);
+				if (nextWord) nextWord.started = true;
+			} else if (currentStep === 2) {
+				const nextWord = treeWords.find((w) => !w.started);
+				if (nextWord) nextWord.started = true;
+			} else if (currentStep === 3) {
+				// Spawn flower petals (shredding "RIOT")
+				for (let i = 0; i < 5; i++) {
+					flyingPetals.push({
+						x: p.width * 0.85 + p.random(-30, 30),
+						y: p.height * 0.6 + p.random(-p.height * 0.2, p.height * 0.2),
+						vx: p.random(-4, -2),
+						vy: p.random(-0.5, 0.5),
+					});
+				}
+			}
 		});
-		customFont = await p.loadFont("/art315/p5-project/assets/goswell-demo/GoswellDemoRegular.ttf");
-		background1 = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-1.png");
-		background2 = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-2.png");
-		background3 = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-3.png");
+		customFont = await p.loadFont("/art315/p5-project/assets/Permanent_Marker/PermanentMarker-Regular.ttf");
+		bgBase = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-1.png");
+		bgDetailA = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-2.png");
+		bgDetailB = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-3.png");
 		p.textFont(customFont);
+		updateLayout();
+	};
+
+	const updateLayout = () => {
 		introBaseX = p.width / 2;
 		introBaseY = p.height * 0.71;
 	};
-	p.draw = () => {
-		p.clear();
-		// Phase controller made with gemini
-		const isPhase1Complete = animation1.every((word) => word.started);
-		const backgroundFade = (p.sin(p.frameCount * 0.03) + 1) / 2;
-		// Layer 1: Base tunnel image
-		p.image(background1, 0, 0, p.width, p.height);
-		// Layer 2: Glowing details
-		p.push();
-		p.tint(255, backgroundFade * 255);
-		p.image(isPhase1Complete ? background3 : background2, 0, 0, p.width, p.height);
-		p.pop();
-		// Animation 1: Sliding Words
-		animation1.forEach((word) => {
+
+	const drawCars = () => {
+		if (currentStep > 1) return; // Stop drawing cars once we've transitioned
+		introWords.forEach((word) => {
 			if (!word.started) return;
-			const targetFontSize = p.height * 0.125;
-			p.textSize(p.lerp(targetFontSize * 0.1, targetFontSize, word.animationProgress));
+			const fontSize = p.height * 0.125;
+			p.textSize(p.lerp(fontSize * 0.1, fontSize, word.progress));
 			p.fill(255);
 			p.textAlign(p.CENTER, p.CENTER);
-			const destinationX = -p.textWidth(word.text);
-			// bezierPoints explained by gemini, I figured out the right values
-			const controlPoint1 = { x: introBaseX - p.width * 0.4, y: introBaseY + p.height * 0.05 };
-			const controlPoint2 = { x: introBaseX - p.width * 0.8, y: introBaseY + p.height * 0.4 };
-			const currentX = p.bezierPoint(introBaseX, controlPoint1.x, controlPoint2.x, destinationX, word.animationProgress);
-			const currentY = p.bezierPoint(introBaseY, controlPoint1.y, controlPoint2.y, p.height + 20, word.animationProgress);
+			const cp1 = { x: introBaseX - p.width * 0.4, y: introBaseY + p.height * 0.05 };
+			const cp2 = { x: introBaseX - p.width * 0.8, y: introBaseY + p.height * 0.4 };
+			const tx = p.bezierPoint(introBaseX, cp1.x, cp2.x, -p.textWidth(word.text), word.progress);
+			const ty = p.bezierPoint(introBaseY, cp1.y, cp2.y, p.height + 20, word.progress);
 			p.push();
-			p.translate(currentX, currentY);
+			p.translate(tx, ty);
 			p.rotate(-0.2);
 			p.text(word.text, 0, 0);
 			p.pop();
-			// constrain is super cool, I wish it was introduced earlier
-			word.animationProgress = p.constrain(word.animationProgress + 0.003, 0, 1);
+			word.progress = p.constrain(word.progress + 0.005, 0, 1);
 		});
-		// Animation 2: Tree Growth (substring trick and branching made with gemini)
-		if (isPhase1Complete) {
-			p.textSize(p.height * 0.075);
-			p.fill(255);
-			p.textAlign(p.LEFT, p.CENTER);
-			p.translate(p.width * 0.6, p.height * 0.85);
+	};
 
-			animation2.forEach((word, index) => {
-				if (!word.started) return;
-				word.progress = p.constrain(word.progress + 0.05, 0, 1);
+	const drawTree = (sway) => {
+		p.push();
+		p.textSize(p.height * 0.075);
+		p.fill(255);
+		p.textAlign(p.LEFT, p.CENTER);
+		p.translate(p.width * 0.6, p.height * 0.85);
+		treeWords.forEach((word, i) => {
+			if (!word.started) return;
+			word.progress = p.constrain(word.progress + 0.05, 0, 1);
+			let angle = word.angle;
+			if (sway) {
+				angle += p.sin(p.frameCount * 0.02 + i * 0.5) * 0.02;
+				if (word.text.includes("TREES")) {
+					angle += p.sin(p.frameCount * 0.02) * 0.05;
+				}
+			}
+			p.rotate(angle);
+			p.text(word.text.substring(0, p.floor(word.progress * word.text.length)), 0, 0);
+			const spacing = i === 1 ? 0.5 : 1.1;
+			p.translate(p.textWidth(word.text) * spacing, 0);
+		});
+		p.pop();
+	};
 
-				p.rotate(word.angle);
-				const charsToShow = p.floor(word.progress * word.text.length);
-				p.text(word.text.substring(0, charsToShow), 0, 0);
-
-				// Branching logic: "WILL" (index 2) starts halfway along "TREES" (index 1)
-				const spacingFactor = index === 1 ? 0.5 : 1.1;
-				p.translate(p.textWidth(word.text) * spacingFactor, 0);
-			});
+	const drawPetals = () => {
+		p.textSize(p.height * 0.02);
+		p.textAlign(p.CENTER, p.CENTER);
+		for (let i = flyingPetals.length - 1; i >= 0; i--) {
+			const pt = flyingPetals[i];
+			p.push();
+			p.translate(pt.x, pt.y);
+			p.rotate(p.frameCount * 0.05 + i);
+			p.fill(255, 200);
+			p.text("RIOT", 0, 0);
+			p.pop();
+			pt.x += pt.vx;
+			pt.y += pt.vy + p.sin(p.frameCount * 0.1 + i) * 0.5;
+			if (pt.x < -p.textWidth("RIOT")) flyingPetals.splice(i, 1);
 		}
 	};
+
+	p.draw = () => {
+		p.clear();
+		const pulse = (p.sin(p.frameCount * 0.03) + 1) / 2;
+		p.image(bgBase, 0, 0, p.width, p.height);
+
+		// Auto-transition logic: trigger as soon as words are visually gone (~80% progress)
+		if (currentStep === 1 && introWords.every((w) => w.started && w.progress > 0.8)) {
+			currentStep = 2;
+		} else if (currentStep === 2 && treeWords.every((w) => w.started && w.progress === 1)) {
+			currentStep = 3;
+		}
+
+		// Background Details
+		if (currentStep === 1) {
+			p.push();
+			p.tint(255, pulse * 255);
+			p.image(bgDetailA, 0, 0, p.width, p.height);
+			p.pop();
+		} else {
+			p.push();
+			// Step 2 pulses, Step 3 is more stable/alive
+			const bgAlpha = currentStep === 2 ? pulse * 255 : 200 + pulse * 55;
+			p.tint(255, bgAlpha);
+			p.image(bgDetailB, 0, 0, p.width, p.height);
+			p.pop();
+		}
+
+		drawCars();
+		if (currentStep >= 2) drawTree(currentStep === 3);
+		if (currentStep === 3) drawPetals();
+	};
+
 	p.windowResized = () => {
 		const holder = p.canvas.parentElement;
-		p.resizeCanvas(0, 0);
 		p.resizeCanvas(holder.clientWidth, holder.clientHeight);
-		introBaseX = p.width / 2;
-		introBaseY = p.height * 0.71;
+		updateLayout();
 	};
 };
