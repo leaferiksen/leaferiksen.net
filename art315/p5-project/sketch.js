@@ -28,9 +28,27 @@ const sketchLogic = (p) => {
 	let bgBase, bgDetailA, bgDetailB;
 	let flyingPetals = [];
 
+	const restart = () => {
+		currentStep = 1;
+		introWords.forEach((w) => {
+			w.started = false;
+			w.progress = 0;
+		});
+		treeWords.forEach((w) => {
+			w.started = false;
+			w.progress = 0;
+		});
+		flyingPetals = [];
+	};
+
 	p.setup = async () => {
 		const canvas = p.createCanvas(p.canvas.parentElement.clientWidth, p.canvas.parentElement.clientHeight);
 		canvas.mouseClicked(() => {
+			// Restart button hit area
+			if (p.mouseX > 15 && p.mouseX < 105 && p.mouseY > 15 && p.mouseY < 45) {
+				restart();
+				return;
+			}
 			const mx = p.mouseX / p.width;
 			const my = p.mouseY / p.height;
 			if (currentStep === 1) {
@@ -145,13 +163,25 @@ const sketchLogic = (p) => {
 		}
 	};
 
+	const drawRestartButton = () => {
+		p.push();
+		p.noStroke();
+		p.fill(255, 100);
+		p.rect(15, 15, 90, 30, 5);
+		p.fill(255);
+		p.textSize(14);
+		p.textAlign(p.CENTER, p.CENTER);
+		p.text("RESTART", 60, 30);
+		p.pop();
+	};
+
 	p.draw = () => {
 		p.clear();
-		const pulse = (p.sin(p.frameCount * 0.03) + 1) / 2;
+		const pulse = (p.sin(p.frameCount * 0.05) + 1) / 2;
 		p.image(bgBase, 0, 0, p.width, p.height);
 
-		// Auto-transition logic: trigger as soon as words are visually gone (~80% progress)
-		if (currentStep === 1 && introWords.every((w) => w.started && w.progress > 0.8)) {
+		// Auto-transition logic: after words are 60% of the way across the screen, wait for the next animation to complete, then start next step
+		if (currentStep === 1 && introWords.every((w) => w.started && w.progress > 0.6)) {
 			currentStep = 2;
 		} else if (currentStep === 2 && treeWords.every((w) => w.started && w.progress === 1)) {
 			currentStep = 3;
@@ -173,6 +203,7 @@ const sketchLogic = (p) => {
 		drawCars();
 		if (currentStep >= 2) drawTree(currentStep === 3);
 		if (currentStep === 3) drawPetals();
+		drawRestartButton();
 	};
 
 	p.windowResized = () => {
