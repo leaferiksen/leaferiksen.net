@@ -30,11 +30,7 @@ const sketchLogic = (p) => {
 
 	const restart = () => {
 		currentStep = 1;
-		introWords.forEach((w) => {
-			w.started = false;
-			w.progress = 0;
-		});
-		treeWords.forEach((w) => {
+		[...introWords, ...treeWords].forEach((w) => {
 			w.started = false;
 			w.progress = 0;
 		});
@@ -44,7 +40,7 @@ const sketchLogic = (p) => {
 	p.setup = async () => {
 		const canvas = p.createCanvas(p.canvas.parentElement.clientWidth, p.canvas.parentElement.clientHeight);
 		canvas.mouseClicked(() => {
-			// Restart button hit area
+			// Restart button hit area (15, 15, 90, 30)
 			if (p.mouseX > 15 && p.mouseX < 105 && p.mouseY > 15 && p.mouseY < 45) {
 				restart();
 				return;
@@ -188,15 +184,11 @@ const sketchLogic = (p) => {
 		}
 
 		// Background Details
-		if (currentStep === 1) {
+		const detail = currentStep === 1 ? bgDetailA : currentStep === 2 ? bgDetailB : null;
+		if (detail) {
 			p.push();
 			p.tint(255, pulse * 255);
-			p.image(bgDetailA, 0, 0, p.width, p.height);
-			p.pop();
-		} else if (currentStep === 2) {
-			p.push();
-			p.tint(255, pulse * 255);
-			p.image(bgDetailB, 0, 0, p.width, p.height);
+			p.image(detail, 0, 0, p.width, p.height);
 			p.pop();
 		}
 
