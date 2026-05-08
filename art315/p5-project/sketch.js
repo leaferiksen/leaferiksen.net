@@ -31,14 +31,25 @@ const sketchLogic = (p) => {
 	p.setup = async () => {
 		const canvas = p.createCanvas(p.canvas.parentElement.clientWidth, p.canvas.parentElement.clientHeight);
 		canvas.mouseClicked(() => {
+			const mx = p.mouseX / p.width;
+			const my = p.mouseY / p.height;
 			if (currentStep === 1) {
-				const nextWord = introWords.find((w) => !w.started);
-				if (nextWord) nextWord.started = true;
+				// Center sixth: middle half horizontally, middle third vertically
+				if (mx > 0.45 && mx < 0.6 && my > 0.5 && my < 0.75) {
+					const nextWord = introWords.find((w) => !w.started);
+					if (nextWord) nextWord.started = true;
+				}
 			} else if (currentStep === 2) {
-				const nextWord = treeWords.find((w) => !w.started);
-				if (nextWord) nextWord.started = true;
+				// Bottom center sixth: middle half horizontally, bottom third vertically
+				if (mx > 0.4 && mx < 0.7 && my > 0.75 && my < 0.95) {
+					const nextWord = treeWords.find((w) => !w.started);
+					if (nextWord) nextWord.started = true;
+				}
 			} else if (currentStep === 3) {
-				spawnPetals();
+				// Number four of five fifths horizontally and middle third vertically
+				if (mx > 0.6 && mx < 0.9 && my > 0.3 && my < 0.75) {
+					spawnPetals();
+				}
 			}
 		});
 		customFont = await p.loadFont("/art315/p5-project/assets/Permanent_Marker/PermanentMarker-Regular.ttf");
