@@ -28,7 +28,10 @@ const sketchLogic = (p) => {
 	let flyingPetals = [];
 	const restart = () => {
 		currentStep = 1;
-		[...introWords, ...treeWords].forEach((word) => ((word.started = false), (word.progress = 0)));
+		[...introWords, ...treeWords].forEach((word) => {
+			word.started = false;
+			word.progress = 0;
+		});
 		flyingPetals = [];
 	};
 	const buttons = [
@@ -40,10 +43,15 @@ const sketchLogic = (p) => {
 		canvas.mouseClicked(() => {
 			for (const button of buttons) {
 				const x = button.x();
-				if (p.mouseX > x && p.mouseX < x + button.width && p.mouseY > 15 && p.mouseY < 45) return button.action();
+				const isMouseOverButton = p.mouseX > x && p.mouseX < x + button.width && p.mouseY > 15 && p.mouseY < 45;
+
+				if (isMouseOverButton) {
+					return button.action();
+				}
 			}
-			const mx = p.mouseX / p.width,
-				my = p.mouseY / p.height;
+			const mx = p.mouseX / p.width;
+			const my = p.mouseY / p.height;
+
 			if (currentStep === 1) {
 				// Center sixth: middle half horizontally, middle third vertically
 				if (mx > 0.45 && mx < 0.6 && my > 0.5 && my < 0.75) {
@@ -112,7 +120,11 @@ const sketchLogic = (p) => {
 			}
 			p.rotate(angle);
 			p.text(word.text.substring(0, p.floor(word.progress * word.text.length)), 0, 0);
-			const spacing = i === 1 ? 0.5 : 1.1;
+			let spacing = 1.1;
+			// hack to fix alignment of "WILL"
+			if (i === 1) {
+				spacing = 0.5;
+			}
 			p.translate(p.textWidth(word.text) * spacing, 0);
 		});
 		p.pop();
@@ -164,12 +176,26 @@ const sketchLogic = (p) => {
 		const pulse = (p.sin(p.frameCount * 0.05) + 1) / 2;
 		p.image(bgBase, 0, 0, p.width, p.height);
 		// Auto-transition logic: after words are 60% of the way across the screen, wait for the next animation to complete, then start next step
-		if (currentStep === 1 && introWords.every((w) => w.started && w.progress > 0.6)) {
-			currentStep = 2;
-		} else if (currentStep === 2 && treeWords.every((w) => w.started && w.progress === 1)) {
-			currentStep = 3;
+		if (currentStep === 1) {
+			const allWordsStarted = introWords.every((w) => w.started);
+			const allWordsMovedEnough = introWords.every((w) => w.progress > 0.6);
+
+			if (allWordsStarted && allWordsMovedEnough) {
+				currentStep = 2;
+			}
+		} else if (currentStep === 2) {
+			const allTreeWordsFinished = treeWords.every((w) => w.started && w.progress === 1);
+
+			if (allTreeWordsFinished) {
+				currentStep = 3;
+			}
 		}
-		const detail = currentStep === 1 ? bgDetailA : currentStep === 2 ? bgDetailB : null;
+		let detail = null;
+		if (currentStep === 1) {
+			detail = bgDetailA;
+		} else if (currentStep === 2) {
+			detail = bgDetailB;
+		}
 		if (detail) {
 			p.push();
 			p.tint(255, pulse * 255);
@@ -177,7 +203,10 @@ const sketchLogic = (p) => {
 			p.pop();
 		}
 		drawCars();
-		if (currentStep >= 2) drawTree(currentStep === 3);
+		if (currentStep >= 2) {
+			const shouldSway = currentStep === 3;
+			drawTree(shouldSway);
+		}
 		if (currentStep === 3) drawPetals();
 		drawButtons();
 	};
