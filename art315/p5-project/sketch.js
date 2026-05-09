@@ -10,7 +10,6 @@ function startSketch() {
 	_sketchInstance = new p5(sketchLogic, "sketch-holder");
 }
 const sketchLogic = (p) => {
-	// Step data
 	const introWords = [
 		{ text: "WHEN", started: false, progress: 0 },
 		{ text: "WE", started: false, progress: 0 },
@@ -27,26 +26,24 @@ const sketchLogic = (p) => {
 	let introBaseX, introBaseY, customFont;
 	let bgBase, bgDetailA, bgDetailB;
 	let flyingPetals = [];
-
 	const restart = () => {
 		currentStep = 1;
-		[...introWords, ...treeWords].forEach((w) => {
-			w.started = false;
-			w.progress = 0;
-		});
+		[...introWords, ...treeWords].forEach((word) => ((word.started = false), (word.progress = 0)));
 		flyingPetals = [];
 	};
-
+	const buttons = [
+		{ label: "RESTART", x: () => 15, width: 90, action: restart },
+		{ label: "SAVE IMAGE", x: () => p.width - 135, width: 120, action: () => p.saveCanvas("p5-screenshot", "png") },
+	];
 	p.setup = async () => {
 		const canvas = p.createCanvas(p.canvas.parentElement.clientWidth, p.canvas.parentElement.clientHeight);
 		canvas.mouseClicked(() => {
-			// Restart button hit area (15, 15, 90, 30)
-			if (p.mouseX > 15 && p.mouseX < 105 && p.mouseY > 15 && p.mouseY < 45) {
-				restart();
-				return;
+			for (const button of buttons) {
+				const x = button.x();
+				if (p.mouseX > x && p.mouseX < x + button.width && p.mouseY > 15 && p.mouseY < 45) return button.action();
 			}
-			const mx = p.mouseX / p.width;
-			const my = p.mouseY / p.height;
+			const mx = p.mouseX / p.width,
+				my = p.mouseY / p.height;
 			if (currentStep === 1) {
 				// Center sixth: middle half horizontally, middle third vertically
 				if (mx > 0.45 && mx < 0.6 && my > 0.5 && my < 0.75) {
@@ -73,12 +70,10 @@ const sketchLogic = (p) => {
 		p.textFont(customFont);
 		updateLayout();
 	};
-
 	const updateLayout = () => {
 		introBaseX = p.width / 2;
 		introBaseY = p.height * 0.71;
 	};
-
 	const drawCars = () => {
 		if (currentStep > 1) return; // Stop drawing cars once we've transitioned
 		introWords.forEach((word) => {
@@ -99,7 +94,6 @@ const sketchLogic = (p) => {
 			word.progress = p.constrain(word.progress + 0.002, 0, 1);
 		});
 	};
-
 	const drawTree = (sway) => {
 		p.push();
 		p.textSize(p.height * 0.075);
@@ -123,7 +117,6 @@ const sketchLogic = (p) => {
 		});
 		p.pop();
 	};
-
 	const spawnPetals = () => {
 		const petalsPerClick = 5;
 		for (let i = 0; i < petalsPerClick; i++) {
@@ -135,22 +128,16 @@ const sketchLogic = (p) => {
 			});
 		}
 	};
-
 	const drawPetals = () => {
 		p.textSize(p.height * 0.02);
 		p.textAlign(p.CENTER, p.CENTER);
 		p.fill(255, 200);
-
 		for (let i = flyingPetals.length - 1; i >= 0; i--) {
 			const petal = flyingPetals[i];
-
 			// Update position
 			petal.posX += petal.driftX;
 			petal.posY += petal.driftY;
-
-			// Render
 			p.text("RIOT", petal.posX, petal.posY);
-
 			// Clean up off-screen petals
 			const isOffScreen = petal.posX < -p.textWidth("RIOT");
 			if (isOffScreen) {
@@ -158,32 +145,30 @@ const sketchLogic = (p) => {
 			}
 		}
 	};
-
-	const drawRestartButton = () => {
+	const drawButtons = () => {
 		p.push();
 		p.noStroke();
-		p.fill(255, 100);
-		p.rect(15, 15, 90, 30, 5);
-		p.fill(255);
 		p.textSize(14);
 		p.textAlign(p.CENTER, p.CENTER);
-		p.text("RESTART", 60, 30);
+		buttons.forEach((button) => {
+			const x = button.x();
+			p.fill(255, 100);
+			p.rect(x, 15, button.width, 30, 5);
+			p.fill(255);
+			p.text(button.label, x + button.width / 2, 30);
+		});
 		p.pop();
 	};
-
 	p.draw = () => {
 		p.clear();
 		const pulse = (p.sin(p.frameCount * 0.05) + 1) / 2;
 		p.image(bgBase, 0, 0, p.width, p.height);
-
 		// Auto-transition logic: after words are 60% of the way across the screen, wait for the next animation to complete, then start next step
 		if (currentStep === 1 && introWords.every((w) => w.started && w.progress > 0.6)) {
 			currentStep = 2;
 		} else if (currentStep === 2 && treeWords.every((w) => w.started && w.progress === 1)) {
 			currentStep = 3;
 		}
-
-		// Background Details
 		const detail = currentStep === 1 ? bgDetailA : currentStep === 2 ? bgDetailB : null;
 		if (detail) {
 			p.push();
@@ -191,15 +176,13 @@ const sketchLogic = (p) => {
 			p.image(detail, 0, 0, p.width, p.height);
 			p.pop();
 		}
-
 		drawCars();
 		if (currentStep >= 2) drawTree(currentStep === 3);
 		if (currentStep === 3) drawPetals();
-		drawRestartButton();
+		drawButtons();
 	};
-
 	p.windowResized = () => {
-		p.resizeCanvas(0, 0);
+		p.resizeCanvas(0, 0); // resize fails if canvas is not reset first
 		p.resizeCanvas(p.canvas.parentElement.clientWidth, p.canvas.parentElement.clientHeight);
 		updateLayout();
 	};
