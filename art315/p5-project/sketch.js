@@ -25,14 +25,14 @@ const sketchLogic = (p) => {
 	let currentStep = 1; // 1: Cars, 2: Tree Growth, 3: Petals/Swaying
 	let introBaseX, introBaseY, customFont;
 	let bgBase, bgDetailA, bgDetailB;
-	let flyingPetals = [];
+	const flyingPetals = Array.from({ length: 25 }, () => ({ progress: 1 }));
 	const restart = () => {
 		currentStep = 1;
 		[...introWords, ...treeWords].forEach((word) => {
 			word.started = false;
 			word.progress = 0;
 		});
-		flyingPetals = [];
+		flyingPetals.forEach((petal) => (petal.progress = 1));
 	};
 	const buttons = [
 		{ label: "RESTART", x: () => 15, width: 90, action: restart },
@@ -44,14 +44,12 @@ const sketchLogic = (p) => {
 			for (const button of buttons) {
 				const x = button.x();
 				const isMouseOverButton = p.mouseX > x && p.mouseX < x + button.width && p.mouseY > 15 && p.mouseY < 45;
-
 				if (isMouseOverButton) {
 					return button.action();
 				}
 			}
 			const mx = p.mouseX / p.width;
 			const my = p.mouseY / p.height;
-
 			if (currentStep === 1) {
 				// Center sixth: middle half horizontally, middle third vertically
 				if (mx > 0.45 && mx < 0.6 && my > 0.5 && my < 0.75) {
@@ -129,33 +127,33 @@ const sketchLogic = (p) => {
 		});
 		p.pop();
 	};
+	// design fully handmade, object management by gemini
 	const spawnPetals = () => {
-		const petalsPerClick = 5;
-		for (let i = 0; i < petalsPerClick; i++) {
-			flyingPetals.push({
-				posX: p.width * 0.75 + p.random(-30, 30),
-				posY: p.height * 0.5 + p.random(-p.height * 0.2, p.height * 0.2),
-				driftX: p.random(-4, -2),
-				driftY: p.random(-0.5, -0.2),
+		flyingPetals
+			.filter((p) => p.progress >= 1)
+			.slice(0, 5)
+			.forEach((petal) => {
+				Object.assign(petal, {
+					startX: p.width * 0.75 + p.random(-30, 30),
+					startY: p.height * 0.5 + p.random(-p.height * 0.2, p.height * 0.2),
+					endX: -p.textWidth("RIOT") - 100,
+					endY: p.height * p.random(0.1, 0.4),
+					speed: p.random(0.001, 0.003),
+					progress: 0,
+				});
 			});
-		}
 	};
 	const drawPetals = () => {
 		p.textSize(p.height * 0.02);
 		p.textAlign(p.CENTER, p.CENTER);
 		p.fill(255, 200);
-		for (let i = flyingPetals.length - 1; i >= 0; i--) {
-			const petal = flyingPetals[i];
-			// Update position
-			petal.posX += petal.driftX;
-			petal.posY += petal.driftY;
-			p.text("RIOT", petal.posX, petal.posY);
-			// Clean up off-screen petals
-			const isOffScreen = petal.posX < -p.textWidth("RIOT");
-			if (isOffScreen) {
-				flyingPetals.splice(i, 1);
-			}
-		}
+		flyingPetals.forEach((petal) => {
+			if (petal.progress >= 1) return;
+			petal.progress = p.constrain(petal.progress + petal.speed, 0, 1);
+			const x = p.lerp(petal.startX, petal.endX, petal.progress);
+			const y = p.lerp(petal.startY, petal.endY, petal.progress);
+			p.text("RIOT", x, y);
+		});
 	};
 	const drawButtons = () => {
 		p.push();
@@ -179,13 +177,11 @@ const sketchLogic = (p) => {
 		if (currentStep === 1) {
 			const allWordsStarted = introWords.every((w) => w.started);
 			const allWordsMovedEnough = introWords.every((w) => w.progress > 0.6);
-
 			if (allWordsStarted && allWordsMovedEnough) {
 				currentStep = 2;
 			}
 		} else if (currentStep === 2) {
 			const allTreeWordsFinished = treeWords.every((w) => w.started && w.progress === 1);
-
 			if (allTreeWordsFinished) {
 				currentStep = 3;
 			}
