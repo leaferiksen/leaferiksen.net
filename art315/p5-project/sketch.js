@@ -10,7 +10,7 @@ function startSketch() {
 	_sketchInstance = new p5(sketchLogic, "sketch-holder");
 }
 const sketchLogic = (p) => {
-	const createWords = (words, extra = {}) => words.map((text) => ({ text, started: false, progress: 0, ...extra }));
+	const createWords = (words) => words.map((text) => ({ text, started: false, progress: 0 }));
 	// fancy arrays made with gemini
 	const introWords = createWords(["WHEN", "WE", "ARE", "GONE"]);
 	const treeWords = [
@@ -48,7 +48,7 @@ const sketchLogic = (p) => {
 			}
 			const mx = p.mouseX / p.width;
 			const my = p.mouseY / p.height;
-			// limit click area roughly to where the animation is
+			// limit click targets roughly to the area of the animation
 			if (currentStep === 1) {
 				if (mx > 0.45 && mx < 0.6 && my > 0.5 && my < 0.75) {
 					const nextWord = introWords.find((w) => !w.started);
@@ -76,16 +76,17 @@ const sketchLogic = (p) => {
 		introBaseX = p.width / 2;
 		introBaseY = p.height * 0.71;
 	};
+	// mostly done by hand, but gemini handled the bezierPoint tricks
 	const drawCars = () => {
-		if (currentStep > 1) return; // Stop drawing cars once we've transitioned
+		if (currentStep > 1) return;
+		const cp1 = { x: introBaseX - p.width * 0.4, y: introBaseY + p.height * 0.05 };
+		const cp2 = { x: introBaseX - p.width * 0.8, y: introBaseY + p.height * 0.4 };
 		introWords.forEach((word) => {
 			if (!word.started) return;
 			const fontSize = p.height * 0.125;
 			p.textSize(p.lerp(fontSize * 0.1, fontSize, word.progress));
 			p.fill(255);
 			p.textAlign(p.CENTER, p.CENTER);
-			const cp1 = { x: introBaseX - p.width * 0.4, y: introBaseY + p.height * 0.05 };
-			const cp2 = { x: introBaseX - p.width * 0.8, y: introBaseY + p.height * 0.4 };
 			const tx = p.bezierPoint(introBaseX, cp1.x, cp2.x, -p.textWidth(word.text), word.progress);
 			const ty = p.bezierPoint(introBaseY, cp1.y, cp2.y, p.height + 20, word.progress);
 			p.push();
@@ -114,12 +115,7 @@ const sketchLogic = (p) => {
 			}
 			p.rotate(angle);
 			p.text(word.text.substring(0, p.floor(word.progress * word.text.length)), 0, 0);
-			let spacing = 1.1;
-			// hack to fix alignment of "WILL"
-			if (i === 1) {
-				spacing = 0.5;
-			}
-			p.translate(p.textWidth(word.text) * spacing, 0);
+			p.translate(p.textWidth(word.text) * (i === 1 ? 0.5 : 1.1), 0);
 		});
 		p.pop();
 	};
@@ -175,12 +171,7 @@ const sketchLogic = (p) => {
 		} else if (currentStep === 2 && treeWords.every((w) => w.started && w.progress === 1)) {
 			currentStep = 3;
 		}
-		let detail = null;
-		if (currentStep === 1) {
-			detail = bgDetailA;
-		} else if (currentStep === 2) {
-			detail = bgDetailB;
-		}
+		const detail = currentStep === 1 ? bgDetailA : currentStep === 2 ? bgDetailB : null;
 		if (detail) {
 			p.push();
 			p.tint(255, pulse * 255);
@@ -189,8 +180,7 @@ const sketchLogic = (p) => {
 		}
 		drawCars();
 		if (currentStep >= 2) {
-			const shouldSway = currentStep === 3;
-			drawTree(shouldSway);
+			drawTree(currentStep === 3);
 		}
 		if (currentStep === 3) drawPetals();
 		drawButtons();
