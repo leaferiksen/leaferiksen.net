@@ -10,19 +10,17 @@ function startSketch() {
 	_sketchInstance = new p5(sketchLogic, "sketch-holder");
 }
 const sketchLogic = (p) => {
-	const introWords = [
-		{ text: "WHEN", started: false, progress: 0 },
-		{ text: "WE", started: false, progress: 0 },
-		{ text: "ARE", started: false, progress: 0 },
-		{ text: "GONE", started: false, progress: 0 },
-	];
+	const createWords = (words, extra = {}) => words.map((text) => ({ text, started: false, progress: 0, ...extra }));
+	// fancy arrays made with gemini
+	const introWords = createWords(["WHEN", "WE", "ARE", "GONE"]);
 	const treeWords = [
-		{ text: "THE", angle: -Math.PI * 0.4, started: false, progress: 0 },
-		{ text: "TREES", angle: Math.PI * 0.3, started: false, progress: 0 },
-		{ text: "  WILL", angle: -Math.PI * 0.4, started: false, progress: 0 },
-		{ text: "RIOT", angle: Math.PI * 0.4, started: false, progress: 0 },
-	];
-	let currentStep = 1; // 1: Cars, 2: Tree Growth, 3: Petals/Swaying
+		{ text: "THE", angle: -Math.PI * 0.4 },
+		{ text: "TREES", angle: Math.PI * 0.3 },
+		{ text: "  WILL", angle: -Math.PI * 0.4 },
+		{ text: "RIOT", angle: Math.PI * 0.4 },
+	].map((w) => ({ ...w, started: false, progress: 0 }));
+	// 1: Cars, 2: Tree Growth, 3: Petals/Swaying
+	let currentStep = 1;
 	let introBaseX, introBaseY, customFont;
 	let bgBase, bgDetailA, bgDetailB;
 	const flyingPetals = Array.from({ length: 25 }, () => ({ progress: 1 }));
@@ -50,20 +48,18 @@ const sketchLogic = (p) => {
 			}
 			const mx = p.mouseX / p.width;
 			const my = p.mouseY / p.height;
+			// limit click area roughly to where the animation is
 			if (currentStep === 1) {
-				// Center sixth: middle half horizontally, middle third vertically
 				if (mx > 0.45 && mx < 0.6 && my > 0.5 && my < 0.75) {
 					const nextWord = introWords.find((w) => !w.started);
 					if (nextWord) nextWord.started = true;
 				}
 			} else if (currentStep === 2) {
-				// Bottom center sixth: middle half horizontally, bottom third vertically
 				if (mx > 0.4 && mx < 0.7 && my > 0.75 && my < 0.95) {
 					const nextWord = treeWords.find((w) => !w.started);
 					if (nextWord) nextWord.started = true;
 				}
 			} else if (currentStep === 3) {
-				// Number four of five fifths horizontally and middle third vertically
 				if (mx > 0.6 && mx < 0.9 && my > 0.3 && my < 0.75) {
 					spawnPetals();
 				}
@@ -173,18 +169,11 @@ const sketchLogic = (p) => {
 		p.clear();
 		const pulse = (p.sin(p.frameCount * 0.05) + 1) / 2;
 		p.image(bgBase, 0, 0, p.width, p.height);
-		// Auto-transition logic: after words are 60% of the way across the screen, wait for the next animation to complete, then start next step
-		if (currentStep === 1) {
-			const allWordsStarted = introWords.every((w) => w.started);
-			const allWordsMovedEnough = introWords.every((w) => w.progress > 0.6);
-			if (allWordsStarted && allWordsMovedEnough) {
-				currentStep = 2;
-			}
-		} else if (currentStep === 2) {
-			const allTreeWordsFinished = treeWords.every((w) => w.started && w.progress === 1);
-			if (allTreeWordsFinished) {
-				currentStep = 3;
-			}
+		// Once words are 60% of the way across the screen and the last animation completes start next step
+		if (currentStep === 1 && introWords.every((w) => w.started && w.progress > 0.6)) {
+			currentStep = 2;
+		} else if (currentStep === 2 && treeWords.every((w) => w.started && w.progress === 1)) {
+			currentStep = 3;
 		}
 		let detail = null;
 		if (currentStep === 1) {
