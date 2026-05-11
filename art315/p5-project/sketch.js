@@ -17,7 +17,6 @@ const sketchLogic = (p) => {
 		{ text: "THE", angle: -Math.PI * 0.4 },
 		{ text: "TREES", angle: Math.PI * 0.3 },
 		{ text: "  WILL", angle: -Math.PI * 0.4 },
-		{ text: "RIOT", angle: Math.PI * 0.4 },
 	].map((w) => ({ ...w, started: false, progress: 0 }));
 	// 1: Cars, 2: Tree Growth, 3: Petals/Swaying
 	let currentStep = 1;
@@ -189,5 +188,10 @@ const sketchLogic = (p) => {
 		p.resizeCanvas(0, 0); // resize fails if canvas is not reset first
 		p.resizeCanvas(p.canvas.parentElement.clientWidth, p.canvas.parentElement.clientHeight);
 		updateLayout();
+	};
+	p.keyPressed = () => {
+		if (p.key === "s" || p.key === "S") {
+			p.saveCanvas("p5-screenshot", "png");
+		}
 	};
 };
