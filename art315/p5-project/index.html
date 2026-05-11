@@ -15,8 +15,8 @@
 		<link href="https://fonts.googleapis.com/css2?family=Vibur&display=swap" rel="stylesheet" />
 	</head>
 	<body class="max-w-none bg-light-bg font-serif text-xl text-light-tx dark:bg-dark-bg dark:text-dark-tx prose-a:text-light-pu prose-a:dark:text-dark-pu">
-		<div class="container mx-auto px-10 py-10 sm:pt-20 lg:w-4/5">
-			<header class="prose-xl">
+		<div class="">
+			<header class="mx-auto prose-xl px-10 py-10 sm:pt-20 lg:w-4/5">
 				<h1 class="font-neon text-dark-neon">Leaf’s P5 Project</h1>
 				<nav id="main-nav" class="flex flex-wrap gap-5 prose-a:text-light-ma! prose-a:dark:text-dark-ma!">
 					<a href="/art315/p5-project/" data-path="view" aria-current="page" class="aria-[current=page]:text-inherit!">View</a>
@@ -26,7 +26,7 @@
 				</nav>
 			</header>
 
-			<main id="app" class="mt-10">
+			<main id="app">
 				<!-- Content injected from templates via app.js -->
 				<div class="prose-xl">
 					<p>To see this site, you need a browser version published no earlier than 2026.</p>
@@ -38,7 +38,7 @@
 		<template id="view">
 			<main id="view-main">
 				<!-- Sketch container will host the p5 canvas when this view is active -->
-				<div id="sketch-holder" class="aspect-3/2 max-h-lvh bg-cover"></div>
+				<div id="sketch-holder" class="aspect-3/2 bg-cover"></div>
 			</main>
 		</template>
 
