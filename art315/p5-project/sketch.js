@@ -52,7 +52,7 @@ const sketchLogic = (p) => {
 					if (nextWord) nextWord.started = true;
 				}
 			} else if (currentStep === 3) {
-				if (mx > 0.6 && mx < 0.9 && my > 0.3 && my < 0.75) {
+				if (mx > 0.55 && mx < 0.9 && my > 0.3 && my < 0.85) {
 					spawnPetals();
 				}
 			}
@@ -92,7 +92,8 @@ const sketchLogic = (p) => {
 	const drawTree = (sway) => {
 		p.push();
 		p.textSize(p.height * 0.075);
-		p.fill(255);
+		const alpha = sway ? p.lerp(150, 255, (p.sin(p.frameCount * 0.08) + 1) / 2) : 255;
+		p.fill(255, alpha);
 		p.textAlign(p.LEFT, p.CENTER);
 		p.translate(p.width * 0.6, p.height * 0.85);
 		treeWords.forEach((word, i) => {
