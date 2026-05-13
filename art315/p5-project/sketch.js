@@ -31,20 +31,13 @@ const sketchLogic = (p) => {
 		});
 		flyingPetals.forEach((petal) => (petal.progress = 1));
 	};
-	const buttons = [
-		{ label: "RESTART", x: () => 15, width: 90, action: restart },
-		{ label: "SAVE IMAGE", x: () => p.width - 135, width: 120, action: () => p.saveCanvas("p5-screenshot", "png") },
-	];
+	const restartButton = { label: "RESTART", x: 15, width: 90 };
 	p.setup = async () => {
 		const canvas = p.createCanvas(p.canvas.parentElement.clientWidth, p.canvas.parentElement.clientHeight);
 		canvas.mouseClicked(() => {
-			for (const button of buttons) {
-				const x = button.x();
-				const isMouseOverButton = p.mouseX > x && p.mouseX < x + button.width && p.mouseY > 15 && p.mouseY < 45;
-				if (isMouseOverButton) {
-					return button.action();
-				}
-			}
+			const isOverRestart = p.mouseX > restartButton.x && p.mouseX < restartButton.x + restartButton.width && p.mouseY > 15 && p.mouseY < 45;
+			if (isOverRestart) return restart();
+
 			const mx = p.mouseX / p.width;
 			const my = p.mouseY / p.height;
 			// limit click targets roughly to the area of the animation
@@ -146,18 +139,15 @@ const sketchLogic = (p) => {
 			p.text("RIOT", x, y);
 		});
 	};
-	const drawButtons = () => {
+	const drawRestartButton = () => {
 		p.push();
 		p.noStroke();
 		p.textSize(14);
 		p.textAlign(p.CENTER, p.CENTER);
-		buttons.forEach((button) => {
-			const x = button.x();
-			p.fill(255, 100);
-			p.rect(x, 15, button.width, 30, 5);
-			p.fill(255);
-			p.text(button.label, x + button.width / 2, 30);
-		});
+		p.fill(255, 100);
+		p.rect(restartButton.x, 15, restartButton.width, 30, 5);
+		p.fill(255);
+		p.text(restartButton.label, restartButton.x + restartButton.width / 2, 30);
 		p.pop();
 	};
 	p.draw = () => {
@@ -182,7 +172,7 @@ const sketchLogic = (p) => {
 			drawTree(currentStep === 3);
 		}
 		if (currentStep === 3) drawPetals();
-		drawButtons();
+		drawRestartButton();
 	};
 	p.windowResized = () => {
 		p.resizeCanvas(0, 0); // resize fails if canvas is not reset first
