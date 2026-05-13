@@ -68,7 +68,7 @@ const sketchLogic = (p) => {
 		introBaseX = p.width / 2;
 		introBaseY = p.height * 0.71;
 	};
-	// mostly done by hand, but gemini handled the bezierPoint tricks
+	// mostly done by hand, but gemini handled the bezierPoint and lerp tricks
 	const drawCars = () => {
 		if (currentStep > 1) return;
 		const cp1 = { x: introBaseX - p.width * 0.4, y: introBaseY + p.height * 0.05 };
