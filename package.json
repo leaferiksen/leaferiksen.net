@@ -1,16 +1,22 @@
 {
 	"dependencies": {
-		"@tailwindcss/cli": "^4.2.4",
-		"@tailwindcss/typography": "^0.5.19"
+		"@tailwindcss/cli": "^4.3.3",
+		"@tailwindcss/typography": "^0.5.20"
 	},
 	"devDependencies": {
 		"@types/p5": "^1.7.7",
-		"prettier-plugin-tailwindcss": "^0.8.0"
+		"concurrently": "^10.0.4",
+		"http-server": "^14.1.1",
+		"prettier-plugin-tailwindcss": "^0.8.1"
+	},
+	"scripts": {
+		"dev": "concurrently \"http-server -o\" \"tailwindcss -i app.css -o dist.css --watch\""
 	},
 	"prettier": {
-		"plugins": [
-			"prettier-plugin-tailwindcss"
-		],
+		"plugins": ["prettier-plugin-tailwindcss"],
 		"tailwindStylesheet": "app.css"
+	},
+	"allowScripts": {
+		"@parcel/watcher@2.5.1": true
 	}
 }
