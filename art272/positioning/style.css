@@ -13,7 +13,7 @@ html {
 	-webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font size after orientation changes in iOS. */
 	tab-size: 4; /* 3. Use a more readable tab size (opinionated). */
 	text-wrap-style: pretty;
-Doug flag	color: CanvasText;
+	color: CanvasText;
 	background-color: Canvas;
 }
 body {
@@ -22,7 +22,7 @@ body {
 }
 p {
 	position: relative;
-	top: .5em;
+	top: 0.5em;
 }
 img {
 	top: 50%;
