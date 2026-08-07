@@ -58,9 +58,9 @@ const sketchLogic = (p) => {
 			}
 		});
 		customFont = await p.loadFont("/art315/p5-project/assets/Permanent_Marker/PermanentMarker-Regular.ttf");
-		bgBase = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-1.png");
-		bgDetailA = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-2.png");
-		bgDetailB = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-3.png");
+		bgBase = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-1.jpeg");
+		bgDetailA = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-2.jpeg");
+		bgDetailB = await p.loadImage("/art315/p5-project/assets/mt-rainier-tunnel-3.jpeg");
 		p.textFont(customFont);
 		updateLayout();
 	};
