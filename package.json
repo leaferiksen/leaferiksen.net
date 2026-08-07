@@ -7,13 +7,16 @@
 		"@types/p5": "^1.7.7",
 		"concurrently": "^10.0.4",
 		"http-server": "^14.1.1",
+		"prettier": "^3.9.6",
 		"prettier-plugin-tailwindcss": "^0.8.1"
 	},
 	"scripts": {
 		"dev": "concurrently \"http-server -o\" \"tailwindcss -i app.css -o dist.css --watch\""
 	},
 	"prettier": {
-		"plugins": ["prettier-plugin-tailwindcss"],
+		"plugins": [
+			"prettier-plugin-tailwindcss"
+		],
 		"tailwindStylesheet": "app.css"
 	},
 	"allowScripts": {

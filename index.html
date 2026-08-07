@@ -19,7 +19,6 @@
 					<a href="/" data-path="about" aria-current="page" class="aria-[current=page]:text-inherit!">About Me</a>
 					<a href="?p=portfolio" data-path="portfolio" class="aria-[current=page]:text-inherit!">Portfolio</a>
 					<a href="?p=blog" data-path="blog" class="aria-[current=page]:text-inherit!">My Blog</a>
-					<a href="?p=other" data-path="other" class="aria-[current=page]:text-inherit!">Other links</a>
 				</nav>
 			</header>
 
@@ -35,7 +34,7 @@
 		<template id="about">
 			<div class="flex flex-col items-start gap-10 sm:flex-row">
 				<div class="prose-xl w-full sm:w-2/3">
-					<p>I am a designer currently studying at the University of San Francisco. I have experience prototyping apps in Figma and bringing them to life with SwiftUI, building websites in HTML, CSS and JS, and making graphics using P5.js and the Adobe and Affinity suites.</p>
+					<p>I am a designer currently studying at the University of San Francisco. I have experience prototyping apps in Figma and bringing them to life with SwiftUI, building websites in HTML, CSS and JS, and making graphics using p5.js and the Adobe and Affinity suites.</p>
 					<p>If you could use any of my skills or would like to speak with me, please take a look at <a href="assets/resume.pdf">my resume</a> and send me an <a href="mailto:lweriksen@dons.usfca.edu">email</a>!</p>
 					<p>In my free time I enjoy playing Osu!, reading visual novels, and watching mecha anime. If you are in SF and think we could be good friends, let's meet up for coffee or tea sometime!</p>
 				</div>
@@ -54,6 +53,15 @@
 		<template id="portfolio">
 			<div class="grid gap-20">
 				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">
+					<img class="max-h-100 sm:group-even:order-2" src="art315/p5-project/assets/mt-rainier-tunnel-1.png" alt="A tunnel in the side of a mountain, blurred and vectorized to like a painting" />
+					<div class="my-auto prose-xl">
+						<h2>Interactive Typography in p5.js</h2>
+						<p>Emacs | May 13th, 2026</p>
+						<p>Pushing the limits of what can I can do with text-based animation using Javascript</p>
+						<p><a href="art315/p5-project">View Interactive Animation</a></p>
+					</div>
+				</div>
+				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">
 					<img class="max-h-100 sm:group-even:order-2" src="assets/amtrak.png" alt="Screenshots of Amtrak App Prototype" />
 					<div class="my-auto prose-xl">
 						<h2>Amtrak App UX Redesign</h2>
@@ -63,7 +71,7 @@
 					</div>
 				</div>
 				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">
-					<img class="max-h-100 sm:group-even:order-2" src="assets/typography-p4-front.jpg" alt="The book cover" />
+					<img class="max-h-100 sm:group-even:order-2" src="assets/typography-p4.jpg" alt="The book cover" />
 					<div class="my-auto prose-xl">
 						<h2>Book Cover Project</h2>
 						<p>Adobe InDesign | December 10th, 2025</p>
@@ -76,7 +84,7 @@
 						<h2>Presidio Pet Cemetery Booklet</h2>
 						<p>Adobe InDesign | November 18th, 2025</p>
 						<p></p>
-						<p><a href="assets/typography-p3.pdf">Read Here (Download to view with side-by-side pages)</a></p>
+						<p><a href="assets/typography-p3.pdf">Read Full Booklet</a></p>
 					</div>
 				</div>
 				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">
@@ -167,8 +175,7 @@
 					<pre>
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
-export HOMEBREW_CASK_OPTS="--appdir=~/Applications"</pre
-					>
+export HOMEBREW_CASK_OPTS="--appdir=~/Applications"</pre>
 					<p>Just the first two lines are enough to install formulae. If you want Homebrew to handle casks, include the third line to tell Homebrew to install to the normal user's ~/Applications/ instead of /Applications/.</p>
 				</details>
 				<details id="macos-tiling">
@@ -194,15 +201,9 @@ defaults write -g "NSUserKeyEquivalents" '{
     "Top Right" = "@~^$\U2192";
     "Bottom Right" = "@~^$\U2193";
     "Return to Previous Size" = "@~^r";
-}'</pre
-					>
+}'
+					</pre>
 				</details>
-			</div>
-		</template>
-		<template id="other">
-			<div class="prose-xl flex flex-col">
-				<p><a href="art315/p5-project">P5.js Project</a></p>
-				<p><a href="art315/p5-exercises">P5.js Exercises</a></p>
 			</div>
 		</template>
 	</body>
