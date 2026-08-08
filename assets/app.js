@@ -37,3 +37,5 @@ const updateView = (url) => {
 
 	app.dataset.view !== viewId && document.startViewTransition ? document.startViewTransition(render) : render();
 };
+
+updateView(new URL(location.href));
