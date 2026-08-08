@@ -11,15 +11,13 @@
 		"prettier-plugin-tailwindcss": "^0.8.1"
 	},
 	"scripts": {
-		"start": "http-server dist.css -o",
+		"start": "http-server -o",
 		"build": "tailwindcss -i app.css -o dist.css --minify",
 		"dev": "concurrently \"http-server -o\" \"tailwindcss -i app.css -o dist.css --watch\"",
 		"format": "prettier --write \"./**/*.{html,js,css,json}\""
 	},
 	"prettier": {
-		"plugins": [
-			"prettier-plugin-tailwindcss"
-		],
+		"plugins": ["prettier-plugin-tailwindcss"],
 		"tailwindStylesheet": "app.css"
 	},
 	"allowScripts": {
