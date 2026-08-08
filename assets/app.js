@@ -37,20 +37,3 @@ const updateView = (url) => {
 
 	app.dataset.view !== viewId && document.startViewTransition ? document.startViewTransition(render) : render();
 };
-
-app.onclick = (e) => {
-	const details = e.target.closest("summary")?.parentElement;
-	if (details?.tagName === "DETAILS") {
-		e.preventDefault();
-		navigation.navigate(`?p=${app.dataset.view}${details.open ? "" : `#${details.id}`}`, { history: "replace" });
-	}
-};
-
-navigation.onnavigate = (e) => {
-	const url = new URL(e.destination.url);
-	if (url.origin === location.origin && normalizePath(url.pathname) === normalizePath(location.pathname)) {
-		e.intercept({ handler: () => updateView(url) });
-	}
-};
-
-updateView(new URL(location.href));
