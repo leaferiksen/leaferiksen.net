@@ -237,23 +237,14 @@
   .relative {
     position: relative;
   }
-  .sticky {
-    position: sticky;
-  }
   .inset-0 {
     inset: 0px;
-  }
-  .top-0 {
-    top: 0px;
   }
   .top-5 {
     top: calc(var(--spacing) * 5);
   }
   .right-5 {
     right: calc(var(--spacing) * 5);
-  }
-  .z-10 {
-    z-index: 10;
   }
   .z-50 {
     z-index: 50;
@@ -782,12 +773,6 @@
   .inline-flex {
     display: inline-flex;
   }
-  .table {
-    display: table;
-  }
-  .aspect-3\/2 {
-    aspect-ratio: 3/2;
-  }
   .h-32 {
     height: calc(var(--spacing) * 32);
   }
@@ -800,20 +785,11 @@
   .max-h-100 {
     max-height: calc(var(--spacing) * 100);
   }
-  .w-1 {
-    width: var(--spacing);
-  }
   .w-1\/2 {
     width: calc(1 / 2 * 100%);
   }
-  .w-2 {
-    width: calc(var(--spacing) * 2);
-  }
   .w-2\/3 {
     width: calc(2 / 3 * 100%);
-  }
-  .w-5 {
-    width: calc(var(--spacing) * 5);
   }
   .w-5\/6 {
     width: calc(5 / 6 * 100%);
@@ -833,14 +809,8 @@
   .max-w-screen-xl {
     max-width: var(--breakpoint-xl);
   }
-  .border-collapse {
-    border-collapse: collapse;
-  }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-  }
-  .animate-\[fadeIn_1s_ease-out_1s_forwards\] {
-    animation: fadeIn 1s ease-out 1s forwards;
   }
   .cursor-pointer {
     cursor: pointer;
@@ -850,9 +820,6 @@
   }
   .resize-none {
     resize: none;
-  }
-  .scroll-mt-24 {
-    scroll-margin-top: calc(var(--spacing) * 24);
   }
   .list-none {
     list-style-type: none;
@@ -961,9 +928,6 @@
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-white) 80%, transparent);
     }
-  }
-  .bg-cover {
-    background-size: cover;
   }
   .object-contain {
     object-fit: contain;
@@ -1096,18 +1060,6 @@
   .text-white {
     color: var(--color-white);
   }
-  .no-underline {
-    text-decoration-line: none;
-  }
-  .underline {
-    text-decoration-line: underline;
-  }
-  .underline-offset-4 {
-    text-underline-offset: 4px;
-  }
-  .opacity-0 {
-    opacity: 0%;
-  }
   .opacity-100 {
     opacity: 100%;
   }
@@ -1124,10 +1076,6 @@
   }
   .backdrop-blur-lg {
     --tw-backdrop-blur: blur(var(--blur-lg));
-    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
-    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
-  }
-  .backdrop-filter {
     -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
     backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
   }
@@ -1170,17 +1118,8 @@
   .group-even\:order-2:is(:where(.group):nth-child(even) *) {
     order: 2;
   }
-  .peer-target\/blog\:hidden:is(:where(.peer\/blog):target ~ *) {
-    display: none;
-  }
-  .peer-target\/portfolio\:hidden:is(:where(.peer\/portfolio):target ~ *) {
-    display: none;
-  }
   .peer-checked\:flex:is(:where(.peer):checked ~ *) {
     display: flex;
-  }
-  .target\:block:target {
-    display: block;
   }
   @media (hover: hover) {
     .hover\:scale-110:hover {
@@ -1201,11 +1140,6 @@
   .aria-\[current\=page\]\:text-inherit\![aria-current="page"] {
     color: inherit !important;
   }
-  @media (prefers-reduced-motion: no-preference) {
-    .motion-safe\:scroll-smooth {
-      scroll-behavior: smooth;
-    }
-  }
   @media (width >= 40rem) {
     .sm\:order-last {
       order: 9999;
@@ -1221,9 +1155,6 @@
     }
     .sm\:w-auto {
       width: auto;
-    }
-    .sm\:scroll-mt-36 {
-      scroll-margin-top: calc(var(--spacing) * 36);
     }
     .sm\:grid-cols-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1339,9 +1270,6 @@
     .lg\:w-3\/6 {
       width: calc(3 / 6 * 100%);
     }
-    .lg\:w-4\/5 {
-      width: calc(4 / 5 * 100%);
-    }
     .lg\:w-5\/6 {
       width: calc(5 / 6 * 100%);
     }
@@ -1407,18 +1335,6 @@
     .prose-a\:dark\:text-dark-pu :is(:where(a):not(:where([class~="not-prose"], [class~="not-prose"] *))) {
       color: var(--color-purple-400);
     }
-  }
-  .has-\[\#blog\:target\]\:\[\&_a\[href\=\'\#about\'\]\]\:no-underline:has(:is(#blog:target)) a[href='#about'] {
-    text-decoration-line: none;
-  }
-  .has-\[\#portfolio\:target\]\:\[\&_a\[href\=\'\#about\'\]\]\:no-underline:has(:is(#portfolio:target)) a[href='#about'] {
-    text-decoration-line: none;
-  }
-  .has-\[\#blog\:target\]\:\[\&_a\[href\=\'\#blog\'\]\]\:underline:has(:is(#blog:target)) a[href='#blog'] {
-    text-decoration-line: underline;
-  }
-  .has-\[\#portfolio\:target\]\:\[\&_a\[href\=\'\#portfolio\'\]\]\:underline:has(:is(#portfolio:target)) a[href='#portfolio'] {
-    text-decoration-line: underline;
   }
 }
 @property --tw-rotate-x {
