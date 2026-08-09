@@ -200,7 +200,7 @@
 }
 
 /* Custom Utilities */
-@utility web-button {
+@utility pixel-art {
 	image-rendering: crisp-edges;
 }
 
