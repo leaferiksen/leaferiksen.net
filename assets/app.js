@@ -13,8 +13,7 @@ navLinks.forEach((a, i) => {
 });
 const updateView = (url) => {
 	const p = url.searchParams.get("p");
-	const viewId = routes[p] ? p : defaultPath;
-	const hash = url.hash.slice(1);
+	const viewId = p in routes ? p : defaultPath;
 	const render = () => {
 		if (app.dataset.view !== viewId) {
 			if (typeof window.stopSketch === "function") window.stopSketch();
@@ -30,4 +29,9 @@ const updateView = (url) => {
 	};
 	app.dataset.view !== viewId && document.startViewTransition ? document.startViewTransition(render) : render();
 };
+navigation.addEventListener("navigate", (e) => {
+	const url = new URL(e.destination.url);
+	const samePage = url.origin === location.origin && normalizePath(url.pathname) === normalizePath(location.pathname);
+	if (e.canIntercept && !e.hashChange && e.downloadRequest === null && samePage) e.intercept({ handler: () => updateView(url) });
+});
 updateView(new URL(location.href));

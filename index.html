@@ -10,6 +10,9 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Vibur&display=swap" rel="stylesheet" />
 		<script src="assets/app.js" defer></script>
+		<script src="https://cdn.jsdelivr.net/npm/p5@2.2.2/lib/p5.js" defer></script>
+		<script src="/art315/p5-project/sketch.js" defer></script>
+		<script src="assets/app.js" defer></script>
 	</head>
 	<body class="max-w-none bg-light-bg font-serif text-xl text-light-tx dark:bg-dark-bg dark:text-dark-tx prose-a:text-light-pu prose-a:dark:text-dark-pu">
 		<div class="mx-auto px-10 py-10 sm:pt-20 lg:w-3/4">
@@ -25,8 +28,7 @@
 			<main id="app" class="mt-10">
 				<!-- Content injected from templates via app.js -->
 				<div class="prose-xl">
-					<p>To see this site, you need a browser version published no earlier than 2026.</p>
-					<p>This site uses the navigation API for routing between pages, so if you still can’t see the content, please enable Javascript.</p>
+					<p>This site uses the Navigation API for rendering pages and animations, so if you still can’t see the content, please enable Javascript.</p>
 				</div>
 			</main>
 		</div>
@@ -56,7 +58,12 @@
 						<h2>Interactive Web Typography</h2>
 						<p>p5.js | May 13th, 2026</p>
 						<p>Animating Robert Montgomery’s poetic text art <a href="https://madisongalleries.com/artworks/5536-robert-montgomery-trees-will-riot-mexico-2022/">TREES WILL RIOT</a>, which was made as part of a fundraising and awareness campaign for <a href="http://greenpeace.org">Greenpeace</a>. The background is based on <a href="https://commons.wikimedia.org/wiki/File:Mount_Rainier_National_Park_-_East_Side_Tunnel_from_the_north_03.jpg">a photo</a> by Joe Mabel</p>
-						<p><a href="art315/p5-project">View Interactive Animation</a></p>
+						<a><label for="p5-toggle">View Interactive Animation</label></a>
+						<input type="checkbox" id="p5-toggle" class="peer hidden" />
+						<div class="fixed inset-0 z-50 hidden flex-col bg-light-bg peer-checked:flex dark:bg-dark-bg" role="dialog" aria-modal="true">
+							<label for="p5-toggle" class="absolute top-5 right-5 cursor-pointer text-3xl" aria-label="Close">✕</label>
+							<div id="sketch-holder" class="h-full w-full"></div>
+						</div>
 					</div>
 				</div>
 				<div class="group grid gap-10 sm:grid-cols-2 odd:sm:justify-items-end even:sm:text-right">

@@ -9,6 +9,7 @@ function startSketch() {
 	if (_sketchInstance || !document.getElementById("sketch-holder")) return;
 	_sketchInstance = new p5(sketchLogic, "sketch-holder");
 }
+document.getElementById("p5-toggle")?.addEventListener("change", (e) => (e.target.checked ? startSketch() : stopSketch()));
 const sketchLogic = (p) => {
 	const createWords = (words) => words.map((text) => ({ text, started: false, progress: 0 }));
 	// fancy arrays made with gemini
@@ -33,7 +34,7 @@ const sketchLogic = (p) => {
 	};
 	const restartButton = { label: "RESTART", x: 15, width: 90 };
 	p.setup = async () => {
-		const canvas = p.createCanvas(p.canvas.parentElement.clientWidth, p.canvas.parentElement.clientHeight);
+		const canvas = p.createCanvas(window.innerWidth, window.innerHeight);
 		canvas.mouseClicked(() => {
 			const isOverRestart = p.mouseX > restartButton.x && p.mouseX < restartButton.x + restartButton.width && p.mouseY > 15 && p.mouseY < 45;
 			if (isOverRestart) return restart();
@@ -177,7 +178,7 @@ const sketchLogic = (p) => {
 	};
 	p.windowResized = () => {
 		p.resizeCanvas(0, 0); // resize fails if canvas is not reset first
-		p.resizeCanvas(p.canvas.parentElement.clientWidth, p.canvas.parentElement.clientHeight);
+		p.resizeCanvas(window.innerWidth, window.innerHeight);
 		updateLayout();
 	};
 	p.keyPressed = () => {
