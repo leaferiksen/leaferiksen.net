@@ -1,26 +1,8 @@
 {
-	"dependencies": {
-		"@tailwindcss/cli": "^4.3.3",
-		"@tailwindcss/typography": "^0.5.20"
-	},
-	"devDependencies": {
-		"@types/p5": "^1.7.7",
-		"concurrently": "^10.0.4",
-		"http-server": "^14.1.1",
-		"prettier": "^3.9.6",
-		"prettier-plugin-tailwindcss": "^0.8.1"
-	},
-	"scripts": {
-		"start": "http-server -o",
-		"build": "tailwindcss -i app.css -o dist.css --minify",
-		"dev": "concurrently \"http-server -o\" \"tailwindcss -i app.css -o dist.css --watch\"",
-		"format": "prettier --write \"./**/*.{html,js,css,json}\""
-	},
-	"prettier": {
-		"plugins": ["prettier-plugin-tailwindcss"],
-		"tailwindStylesheet": "app.css"
-	},
-	"allowScripts": {
-		"@parcel/watcher@2.5.1": true
-	}
+  "dependencies": {
+    "http-server": "^14.1.1"
+  },
+  "scripts": {
+    "start": "http-server -o"
+  }
 }

@@ -1,0 +1,28 @@
+[
+  {
+    "pfp": "leaf.jpg",
+    "pfpAlt": "A young, smiling, white man with long, light brown hair, wearing large, thin blue glasses and a blue plaid shirt.",
+    "pronouns": "he/him",
+    "links": [
+        {"label": "📄 Resume",   "url": "https://leaferiksen.net/assets/resume.pdf"},
+        {"label": "🤝 LinkedIn", "url": "https://www.linkedin.com/in/leaferiksen/"},
+        {"label": "📭 Email Me", "url": "mailto:leaferiksen@gmail.com"}
+    ],
+    "blurb": "Interface and layout design @ USFCA.",
+    "skills": [
+        "Interactive prototyping in Figma",
+        "Apps for iOS, watchOS, and macOS",
+        "Accessible and engaging web experiences",
+        "Animated interactive graphics in p5.js",
+        "Print layouts in Adobe and Affinity"
+    ],
+    "biography": [
+      "Hi, Leaf Eriksen here!",
+      "I am a designer currently studying at the University of San Francisco. I care deeply about raising the standard for style, structure and accessibility in user interface and layout design. I see this work as a responsibility as someone who cares deeply about the future of the open web, native application frameworks, books, posters, and signage.",
+      "I have experience prototyping apps in Figma and bringing them to life with SwiftUI, and building websites in HTML, CSS and JS. I also enjoy making animated interactive graphics with p5.js and building layouts for print in the Adobe and Affinity suites.",
+      "I am currently working as an iMac Lab Assistant and Design Tutor for USFCA’s Art & Architecture department, and as an intern at OnCourt Live, a college tennis software startup.",
+      "In my free time I enjoy playing Minecraft and Osu!, reading visual novels, and watching mecha anime. If you are in SF and think we could be good friends, let's meet up for coffee or tea sometime!",
+      "If you want to make something awesome with me, please reach out! I can work with you in SF during the school year and Seattle during summer and winter break."
+    ]
+  }
+]
